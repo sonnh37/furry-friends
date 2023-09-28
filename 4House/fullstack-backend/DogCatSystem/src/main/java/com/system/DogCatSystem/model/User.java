@@ -9,9 +9,10 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long userId;
-    private String password;
+    private Long userid;
     private String email;
+    private String password;
+
     private String firstName;
     private String lastName;
     private String phone;
@@ -93,10 +94,10 @@ public class User {
     }
 
     public Long getUserId() {
-        return userId;
+        return userid;
     }
 
     public void setUserId(Long userId) {
-        this.userId = userId;
+        this.userid = userId;
     }
 }
