@@ -7,29 +7,7 @@ function Home() {
     <div className="container">
       <div className="box_1">
         <div>
-          Wellcome to Dog&Cat Platform
-        </div>
-      </div>
-      <div className="box_2">
-        <div>
-          <span className='box_span'>Chó</span>là một loài động vật thuộc họ Canidae và loài Canis lupus familiaris, có nguồn gốc từ loài sói hoang dã. Chúng là một trong những loài động vật thân thiện và thân thuộc nhất với con người và đã được nuôi dưỡng và tạo thành một phần quan trọng trong cuộc sống và văn hóa của chúng ta.
-
-          <br /> Chó có sự đa dạng về kích thước, hình dáng và màu lông do quá trình lai tạo kéo dài hàng ngàn năm để tạo ra các giống chó khác nhau. Chúng có thể làm công việc đa dạng như canh gác, săn bắn, kéo xe, giúp việc, và nhiều công việc khác. Chó cũng thường được nuôi làm thú cưng để làm bạn đồng hành, bảo vệ và cung cấp niềm vui cho con người.
-
-          <br />Chó có tầm nhìn và khả năng mũi rất tốt, và chúng có khả năng phát hiện mùi và âm thanh mà con người không thể cảm nhận được. chúng là những sinh vật xã hội và thường xây dựng mối quan hệ đặc biệt với chủ nhân của chúng. Chó được tạo ra và nuôi dưỡng trên khắp thế giới và có hàng trăm giống khác nhau với đặc điểm riêng biệt.
-        </div>
-        <img src={img1} />
-      </div>
-      <div className="box_3">
-        <img src={img2} />
-        <div>
-          <span className='box_span'>Mèo</span> là một loài động vật thuộc họ Felidae và loài Felis catus. Mèo là một loài động vật có nguồn gốc từ loài mèo hoang dã và đã được nuôi dưỡng và tạo thành một phần quan trọng trong cuộc sống và văn hóa của con người.
-
-          <br />  Mèo thường có kích thước nhỏ đến trung bình, với thân hình linh hoạt, tai nhọn và lưỡi dài có khả năng liếm lông của họ. Họ thường có bộ lông mềm mịn và có nhiều màu sắc và hoa văn khác nhau. Mèo có tầm nhìn sắc nét và khả năng nghe rất tốt, giúp họ săn bắn và bắt mồi hiệu quả trong tự nhiên.
-
-          <br /> Mèo thường được nuôi làm thú cưng để làm bạn đồng hành, cung cấp niềm vui cho gia đình và giữ sự cân bằng trong cuộc sống hàng ngày của con người. Họ thường thể hiện tính cách độc lập và có thể trở thành thành viên quan trọng trong gia đình. Mèo cũng nổi tiếng với khả năng tự làm sạch lông bằng cách liếm.
-
-          <br /> Trên khắp thế giới, có hàng loạt các giống mèo khác nhau với đặc điểm riêng biệt về màu sắc, kích thước và tính cách. Mèo có vai trò quan trọng trong nhiều tín ngưỡng tôn thờ và thần thoại, và họ đã xuất hiện trong nhiều tác phẩm văn hóa, nghệ thuật và văn học khác nhau.
+          Welcome to Dog&Cat Platform
         </div>
       </div>
       <div className="box_4">
@@ -40,8 +18,25 @@ function Home() {
           <br />Tại đây, bạn sẽ tìm thấy những câu chuyện thú vị về chó và mèo, cách chăm sóc và nuôi dưỡng họ, cũng như những thông tin hữu ích về giống loài, tình yêu thương, và cuộc sống hàng ngày của họ. Chúng tôi cũng sẽ cung cấp lời khuyên hữu ích cho những người mới bắt đầu hoặc những ai muốn tìm hiểu thêm về thế giới đáng yêu của chó và mèo.
 
           <br />Hãy cùng nhau khám phá và chia sẻ niềm đam mê với chó và mèo tại trang blog này. Chúng tôi hy vọng rằng trang web này sẽ trở thành một nguồn thông tin hữu ích và một nơi thú vị để kết nối với cộng đồng yêu thú cưng trên khắp thế giới. Cảm ơn bạn đã ghé thăm và chúng ta hãy cùng chia sẻ tình yêu đối với những người bạn bốn chân này!</div>
-        <a href='' className='test'>Tìm hiểu thêm về web của chúng tôi!!</a>
+
       </div>
+      <div className="box_2">
+        <div>
+        <span className='box_span'>Một số điều về loài chó có thể bạn chưa biết hoặc đã biết</span>
+          <br/>Chó được gọi là "người bạn thân thiết của con người" do khả năng hỗ trợ và bảo vệ chủ nhân của họ
+          <br />Chó có thể có hơn 300 dạng khác nhau, từ các giống nhỏ như Chihuahua đến các giống lớn như Newfoundland.
+        </div>
+        <img src={img1} />
+      </div>
+      <div className="box_3">
+        <img src={img2} />
+        <div>
+        <span className='box_span'>Một số điều về loài mèo có thể bạn chưa biết hoặc đã biết</span>
+          <br/>Mèo có khả năng nhảy cao hơn nhiều lần so với chiều cao của họ và có thể đạt được độ cao tới 6 lần chiều cao của họ.
+          <br />Mèo có thể phát ra hơn 100 loại âm thanh khác nhau, trong khi chó thường chỉ có khoảng 10 loại âm thanh.
+        </div>
+      </div>
+      <a href='' className='test'>Nhấn vào đây để biết thêm nhiều điều thú vị hơn của hai anh bạn ở trên nào!</a>
 
     </div>
 

@@ -10,8 +10,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-image: url('../img/bg1.png');
-    background-size: cover;
+    background-image: url('../img/header.jfif');
+    background-size: contain;
     height: 200px; 
 }
 @-webkit-keyframes m {
@@ -43,7 +43,7 @@
     animation: m 1500ms infinite;
 }
 .box_span{
-    font-size: 50px;
+    font-size: 20px;
     font-weight: 600;
     color: black;
 }
@@ -52,13 +52,14 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-image: url('../img/bg2.png');
-    background-size: 80%;
+    background-image: url('../img/dog.jfif  ');
+    background-size: contain;
     height: 500px;
 }
 .box_2 div {
-    width: 50%; 
+    width: 55%; 
     font-size: 15px;
+    text-align: center;
     color: black;
     
 }
@@ -72,18 +73,19 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-image: url('../img/bg3.png');
-    background-size: cover;
+    background-image: url('../img/catt.jfif');
+    background-size: contain;
     height: 500px
 }
 .box_3 div {
-    width: 50%; 
+    width: 55%; 
     font-size: 15px;
     color: black;
     
 }
 .box_3 img {
     width: 20%;
+    text-align: justify;
     border-radius: 50%;
     box-shadow: 8px 8px 10px 8px #FAE392;
 }
@@ -131,6 +133,7 @@
 } 
 .test {
         margin-top: 30px;
+        margin-bottom: 30px;
         font-size:20px;
         font-weight:bold;
         text-decoration: none;
