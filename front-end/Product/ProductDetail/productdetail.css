@@ -1,0 +1,164 @@
+.container{
+  width: 100%;
+
+  padding: 0;
+  margin-top: 10%;
+  background-color: rgb(211, 214, 218);
+  font-family: Helvetica,Arial,Roboto,sans-serif;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #222;
+}
+.rowbase{
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  min-height: 50vh;
+}
+.box{
+  display: flex;
+ 
+  
+  
+}
+.box1{
+  width: 65%;
+margin-right: 10px;
+  margin-bottom: 50px;
+}
+.box1-1{
+  text-align: left;
+  width: 90%;
+  max-width: 780px;
+  margin: 10px 0;
+  padding: 15px;
+  color: #222;
+  font: normal normal normal 1rem/1.6 Nunito Sans, Helvetica, Arial, sans-serif;
+  background-color: white;
+}
+
+.box2{
+height: 100px;
+  padding-left: 20px;
+padding-top: 20px;
+  width: 35%;
+display: flex;
+}
+
+.box2-1{
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ 
+}
+.top-box2{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 3px;
+
+}
+.top-box2 button{
+  color: #ffba00;
+  border-radius: 10px ;
+  border-color: #ffba00;
+  background-color: white;
+}
+.below-box2{
+ 
+  width: 100%;
+padding-left: 10%;
+}
+.below-box2 button{
+width: 90%;
+height: 30px;
+border-radius: 10px;
+background-color: #589f39 ;
+color: white;
+margin: auto;
+} 
+ .headerbox1{
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.price{
+  font-size: 12px;
+    color: #c90927;
+    font-weight: 700;
+}
+.address {
+  font-size: 12px;
+}
+.date{
+  font-size: 12px;
+}
+.info-detail{
+  font-size: 12px;
+}
+.info-box2{
+  padding-top: 10px;
+  text-align: justify;
+  margin-bottom: 10px;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+.detail{
+  display: flex;
+  width: 100%;
+  justify-content:space-around ;
+}
+.box-body1{
+padding: 5px;
+  display: flex;
+  flex-direction: column; /* Hiển thị phần trên và dưới theo chiều dọc */
+  height: 100%; 
+background-color: white; 
+}
+.top-body2{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+  padding-top: 0;
+}
+.listing-box {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các bài đăng bên trong box xuống hàng khi không đủ chiều rộng */
+}
+
+.listing {
+  width: 25%; 
+  padding: 10px;
+  box-sizing: border-box; 
+  border: 1px solid #ddd;
+  text-decoration: none;
+  color: black;
+}
+.listing img {
+
+  height: 100px;
+  width: 100px;
+}
+.post{
+  width: 100%;
+  display: flex;
+justify-content: center;
+
+}
+
+.listing h3 {
+  font-size: 18px;
+}
+
+.listing p {
+  font-size: 16px;
+
+}
