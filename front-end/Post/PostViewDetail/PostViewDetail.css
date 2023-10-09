@@ -1,0 +1,83 @@
+
+
+.html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.body{
+  width:85%;
+  margin: auto;
+  background-color: #e9e5e5;
+}
+.body a{
+  text-decoration: none;
+  
+}
+.body-blog1{
+  border-radius: 10px;
+  border: 1px solid;
+width: 50%;
+height: 100%;
+background: white;
+margin: auto;
+display: flex;
+flex-direction: column;
+margin-top: 50px;
+margin-bottom: 50px;
+color: black;
+}
+.body-blog1-detail{
+  padding-top: 10px;
+  padding-left: 10px;
+  width: 100%;
+height: 30%;
+color: black;
+}
+
+.name{
+font-size: 18px;
+color: black;
+font-weight: 1000;
+}
+
+
+.body-blog1-title{
+width: 100%;
+max-width: 635px;
+
+}
+.body-blog1-img{
+  width: 100%;
+  height: 50%;
+}
+.body-blog1-img img{
+  width: 100%;
+  height: 100%;
+}
+.body-blog1-button{
+width: 100%;
+height: 6%;
+display: flex;
+}
+.body-blog1-button-likeButton{
+width: 50%;
+height: 100%;
+cursor: pointer;
+}
+.body-blog1-button-commentButton{
+width: 50%;
+height: 100%;
+cursor: pointer;
+}
+.body-blog1-ortherComments-theComment-detail{
+  height: 20%;
+  margin-top: 0%;
+}
+.body-blog1-ortherComments-userName-detail{
+  margin-bottom: 0%;
+}
+.body-blog-1-otherComments{
+  color: black;
+}
+.body-blog1-describe{
+  width: 97%;
+}
