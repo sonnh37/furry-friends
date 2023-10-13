@@ -21,6 +21,7 @@ public class UserController {
         String name = userService.addUser(userDTO);
         return name;
     }
+
     @PostMapping(path = "/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO)
     {
