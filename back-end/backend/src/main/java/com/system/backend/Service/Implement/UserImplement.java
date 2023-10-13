@@ -23,18 +23,18 @@ public class UserImplement implements UserService {
     private PasswordEncoder passwordEncoder;
     @Override
     public String addUser(UserDTO userDTO) {
-        User user = new User(userDTO.getUserId(),
-                userDTO.getEmail(),
+        User user = new User(userDTO.getUserID(),
+                userDTO.getRole(),
                 this.passwordEncoder.encode(userDTO.getPassword()
                 ),
+                userDTO.getPassword(),
+                userDTO.getEmail(),
                 userDTO.getFirstName(),
                 userDTO.getLastName(),
                 userDTO.getPhone(),
-                userDTO.getAge(),
                 userDTO.getAddress(),
                 userDTO.getBirth(),
-                userDTO.getSex(),
-                userDTO.getRole()
+                userDTO.getSex()
         );
         userRepo.save(user);
         return user.getFirstName();

@@ -18,8 +18,8 @@ public class UserController {
     @PostMapping(path = "/save")
     public String saveUser(@RequestBody UserDTO userDTO)
     {
-        String id = userService.addUser(userDTO);
-        return id;
+        String name = userService.addUser(userDTO);
+        return name;
     }
     @PostMapping(path = "/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO)

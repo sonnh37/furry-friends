@@ -1,49 +1,59 @@
 package com.system.backend.Dto;
 
+import com.system.backend.Enity.Role;
+
 public class UserDTO {
-    private Long userId;
-    private String email;
+    private Integer userID;
+    private int role;
+    private String account;
     private String password;
+    private String email;
     private String firstName;
     private String lastName;
     private String phone;
-    private int age;
     private String address;
     private String birth;
     private String sex;
-    private String role;
 
     public UserDTO() {
     }
 
-    public UserDTO(Long userId, String email, String password, String firstName, String lastName, String phone, int age, String address, String birth, String sex, String role) {
-        this.userId = userId;
-        this.email = email;
+    public UserDTO(Integer userID, int role, String account, String password, String email, String firstName, String lastName, String phone, String address, String birth, String sex) {
+        this.userID = userID;
+        this.role = role;
+        this.account = account;
         this.password = password;
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.age = age;
         this.address = address;
         this.birth = birth;
         this.sex = sex;
+    }
+
+    public Integer getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
         this.role = role;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getPassword() {
@@ -52,6 +62,14 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -78,14 +96,6 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -108,13 +118,5 @@ public class UserDTO {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }

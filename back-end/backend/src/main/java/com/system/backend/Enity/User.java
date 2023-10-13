@@ -1,76 +1,91 @@
 package com.system.backend.Enity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name = "[user]")
 public class User {
+
     @Id
-    @Column(name="user_id", length = 45)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
-    @Column(name="email", length = 45, unique = true)
-    private String email;
-    @Column(name="password", length = 255)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "[user_id]", nullable = false)
+    private Integer userID;
+
+    @ManyToOne
+    @JoinColumn(name = "[role_id]", referencedColumnName = "[role_id]", nullable = false)
+    private Role role;
+
+    @Column(name = "[account]")
+    private String account;
+
+    @Column(name = "[password]")
     private String password;
-    @Column(name="first_name", columnDefinition = "nvarchar(255)")
+
+    @Column(name = "[email]", nullable = false )
+    private String email;
+
+    @Column(name = "[first_name]")
     private String firstName;
 
-    @Column(name="last_name", columnDefinition = "nvarchar(255)")
+    @Column(name = "[last_name]")
     private String lastName;
-    @Column(name="phone", length = 12)
-    private String phone;
-    @Column(name="age")
-    private int age;
-    @Column(name="address", columnDefinition = "nvarchar(255)")
-    private String address;
-    @Column(name="birth")
-    private String birth;
-    @Column(name="sex", length = 12)
-    private String sex;
-    @Column(name="role", length = 255)
-    private String role;
 
+    @Column(name = "[phone]", nullable = false)
+    private String phone;
+
+    @Column(name = "[address]", nullable = false)
+    private String address;
+
+    @Column(name = "[birth]")
+    private String birth;
+
+    @Column(name = "[sex]")
+    private String sex;
+
+    // getters and setters
 
     public User() {
     }
 
-    public User(Long userId, String email, String password, String firstName, String lastName, String phone, int age, String address, String birth, String sex, String role) {
-        this.userId = userId;
-        this.email = email;
+
+    public User(Integer userID, Role role, String account, String password, String email, String firstName, String lastName, String phone, String address, String birth, String sex) {
+        this.userID = userID;
+        this.role = role;
+        this.account = account;
         this.password = password;
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.age = age;
         this.address = address;
         this.birth = birth;
         this.sex = sex;
+    }
+
+    public Integer getId() {
+        return userID;
+    }
+
+    public void setId(Integer userID) {
+        this.userID = userID;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public int getAge() {
-        return age;
+    public String getAccount() {
+        return account;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getPassword() {
@@ -79,6 +94,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -127,13 +150,5 @@ public class User {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }
