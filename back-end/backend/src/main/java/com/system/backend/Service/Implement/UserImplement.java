@@ -1,7 +1,9 @@
 package com.system.backend.Service.Implement;
 
 import com.system.backend.Dto.LoginDTO;
+import com.system.backend.Dto.RoleDTO;
 import com.system.backend.Dto.UserDTO;
+import com.system.backend.Enity.Role;
 import com.system.backend.Enity.User;
 import com.system.backend.Repository.UserRepo;
 import com.system.backend.Service.UserService;
@@ -20,22 +22,25 @@ public class UserImplement implements UserService {
     private UserRepo userRepo;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     public String addUser(UserDTO userDTO) {
-        User user = new User(userDTO.getUserID(),
-                userDTO.getRole(),
-                this.passwordEncoder.encode(userDTO.getPassword()
-                ),
-                userDTO.getPassword(),
+        User user = new User(userDTO.getUser_id(),
+                userRepo.findByRoleId(userDTO.getRole_id()),
+                userDTO.getAccount(),
+                this.passwordEncoder.encode(userDTO.getPassword()),
                 userDTO.getEmail(),
-                userDTO.getFirstName(),
-                userDTO.getLastName(),
+                userDTO.getFirst_name(),
+                userDTO.getLast_name(),
                 userDTO.getPhone(),
                 userDTO.getAddress(),
                 userDTO.getBirth(),
                 userDTO.getSex()
         );
+        System.out.println(userDTO.getFirst_name());
+        System.out.println(this.passwordEncoder.encode(userDTO.getPassword()
+        ));
         userRepo.save(user);
         return user.getFirstName();
 
@@ -65,4 +70,19 @@ public class UserImplement implements UserService {
             return new LoginMessage("Email not exits", false);
         }
     }
+
+    @Override
+    public String deleteUser(Integer user_id) {
+        String mess = "";
+        User user = userRepo.findByUserID(user_id);
+        if(user != null){
+            userRepo.delete(user);
+            mess = "deleted";
+        } else{
+            mess = "not exist";
+        }
+        return mess;
+    }
+
+
 }

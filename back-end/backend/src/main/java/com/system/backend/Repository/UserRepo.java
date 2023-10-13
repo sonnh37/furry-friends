@@ -1,9 +1,11 @@
 package com.system.backend.Repository;
 
+import com.system.backend.Enity.Role;
 import com.system.backend.Enity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -13,6 +15,9 @@ import java.util.Optional;
 public interface UserRepo extends JpaRepository<User, Integer> {
     Optional<User> findOneByEmailAndPassword(String email, String password);
     User findByEmail(String email);
-    @Query("SELECT u FROM User u JOIN u.role r WHERE r.roleId = :roleId")
-    List<User> findByRoleId(@Param("roleId") int roleId);
+    @Query("SELECT r FROM Role r WHERE r.roleID = :role_id")
+    Role findByRoleId(@Param("role_id") int role_id);
+    User findByUserID(Integer userId);
+
+
 }

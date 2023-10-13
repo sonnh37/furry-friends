@@ -3,13 +3,13 @@ package com.system.backend.Dto;
 import com.system.backend.Enity.Role;
 
 public class UserDTO {
-    private Integer userID;
-    private int role;
+    private Integer user_id;
+    private Integer role_id;
     private String account;
     private String password;
     private String email;
-    private String firstName;
-    private String lastName;
+    private String first_name;
+    private String last_name;
     private String phone;
     private String address;
     private String birth;
@@ -18,34 +18,20 @@ public class UserDTO {
     public UserDTO() {
     }
 
-    public UserDTO(Integer userID, int role, String account, String password, String email, String firstName, String lastName, String phone, String address, String birth, String sex) {
-        this.userID = userID;
-        this.role = role;
-        this.account = account;
-        this.password = password;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.address = address;
-        this.birth = birth;
-        this.sex = sex;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public Integer getUserID() {
-        return userID;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public Integer getRole_id() {
+        return role_id;
     }
 
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
+    public void setRole_id(Integer role_id) {
+        this.role_id = role_id;
     }
 
     public String getAccount() {
@@ -72,20 +58,20 @@ public class UserDTO {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getPhone() {

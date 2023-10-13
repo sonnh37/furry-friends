@@ -10,11 +10,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "[user_id]", nullable = false)
+    @Column(name = "[user_id]")
     private Integer userID;
 
     @ManyToOne
-    @JoinColumn(name = "[role_id]", referencedColumnName = "[role_id]", nullable = false)
+    @JoinColumn(name = "[role_id]", referencedColumnName = "[role_id]")
     private Role role;
 
     @Column(name = "[account]")
@@ -23,7 +23,7 @@ public class User {
     @Column(name = "[password]")
     private String password;
 
-    @Column(name = "[email]", nullable = false )
+    @Column(name = "[email]" )
     private String email;
 
     @Column(name = "[first_name]")
@@ -32,10 +32,10 @@ public class User {
     @Column(name = "[last_name]")
     private String lastName;
 
-    @Column(name = "[phone]", nullable = false)
+    @Column(name = "[phone]")
     private String phone;
 
-    @Column(name = "[address]", nullable = false)
+    @Column(name = "[address]")
     private String address;
 
     @Column(name = "[birth]")

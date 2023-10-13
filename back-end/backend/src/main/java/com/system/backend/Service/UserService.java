@@ -7,4 +7,6 @@ import com.system.backend.payload.response.LoginMessage;
 public interface UserService {
     String addUser(UserDTO userDTO);
     LoginMessage loginUser(LoginDTO loginDTO);
+
+    String deleteUser(Integer user_id);
 }
