@@ -3,6 +3,7 @@ package com.system.backend.Service.Implement;
 import com.system.backend.Dto.ProductDTO;
 import com.system.backend.Dto.UserDTO;
 import com.system.backend.Enity.Product;
+import com.system.backend.Enity.User;
 import com.system.backend.Repository.ProductRepo;
 import com.system.backend.Repository.UserRepo;
 import com.system.backend.Service.ProductService;
@@ -19,10 +20,12 @@ public class ProductImplement implements ProductService {
     private UserRepo userRepo;
     @Override
     public String insertProduct(Integer user_id, ProductDTO productDTO) {
-        Product pExist = productRepo.findProductByProduct_id(user_id);
-        if( pExist == null){
+        // khong truyen tham so product_id
+        String mess = "";
+        User u = userRepo.findByUser_id(user_id);
+        if (u != null) {
             Product p = new Product(null,
-                    userRepo.findByUser_id(user_id),
+                    u,
                     productDTO.getProduct_name(),
                     productDTO.getPrice(),
                     productDTO.getImage(),
@@ -32,24 +35,102 @@ public class ProductImplement implements ProductService {
                     productDTO.getType()
             );
             productRepo.save(p);
+            mess = "Them san pham thanh cong";
         } else{
-            return "San pham da ton tai";
+            mess = "Nguoi dung khong ton tai";
         }
-        return "Them san pham thanh cong";
+
+
+        return mess;
     }
+    public Product isExistProduct(Integer product_id){
+        // check sản phẩm có tồn tại trong database khong
+        Product p;
+        Product pExist = productRepo.findProductByProduct_id(product_id);
+        if( pExist != null){ // khong
+            p = pExist;
+        } else{
+            p = null;
+        }
+        return p;
+    }
+    public User isHasProductOfUser(Integer user_id){
+        User u;
+        // check sản phẩm có phải của user_id hay không
+        User user = userRepo.findByUser_id(user_id);
+        if(user != null){
+            u = user;
+        } else{
+            u = null;
+        }
+
+        return u;
+    }
+
 
     @Override
     public String deleteProduct(Integer user_id, Integer product_id) {
-        return null;
+        String mess = "";
+        Product pExist = this.isExistProduct(product_id);
+        if (pExist != null) {
+            User uExist = this.isHasProductOfUser(user_id);
+            if (uExist != null) {
+                productRepo.delete(pExist);
+
+                mess = "deleted";
+            } else {
+                mess = "user not exist";
+
+            }
+        } else{
+            mess = "product not exist";
+        }
+        return mess;
+    }
+    public void updateProductDetail(Integer user_id,Integer product_id, ProductDTO productDTO){
+        Product p = new Product(
+                product_id,userRepo.findByUser_id(user_id),
+                productDTO.getProduct_name(),
+                productDTO.getPrice(),
+                productDTO.getImage(),
+                productDTO.getDescription(),
+                productDTO.getDate(),
+                productDTO.getDate(),
+                productDTO.getPhone()
+        );
+        productRepo.save(p);
     }
 
     @Override
-    public String updateProduct(Integer user_id, UserDTO userDTO) {
-        return null;
+    public String updateProduct(Integer user_id,Integer product_id, ProductDTO productDTO) {
+        String mess = "";
+        Product pExist = this.isExistProduct(product_id);
+        if (pExist != null) {
+            User uExist = this.isHasProductOfUser(user_id);
+            if (uExist != null) {
+                // cap nhat
+                this.updateProductDetail(user_id,product_id,productDTO);
+
+                mess = "updated";
+            } else {
+                mess = "user not exist";
+
+            }
+        } else{
+            mess = "product not exist";
+        }
+        return mess;
     }
 
     @Override
     public List<Product> getProducts(Integer user_id) {
-        return null;
+        List<Product> list;
+        User uExist = this.isHasProductOfUser(user_id);
+        if (uExist != null) {
+            list = productRepo.findAll();
+        } else {
+            list = null;
+        }
+        return list;
     }
 }

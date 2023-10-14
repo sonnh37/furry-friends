@@ -12,7 +12,7 @@ public interface ProductService {
     String insertProduct(Integer user_id, ProductDTO productDTO);
 
     String deleteProduct(Integer user_id, Integer product_id);
-    String updateProduct(Integer user_id, UserDTO userDTO);
+    String updateProduct(Integer user_id,Integer product_id, ProductDTO productDTO);
     List<Product> getProducts(Integer user_id);
 }
 
