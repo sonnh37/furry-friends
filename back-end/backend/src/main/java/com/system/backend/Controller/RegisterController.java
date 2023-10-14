@@ -14,6 +14,7 @@ public class RegisterController {
     @PostMapping(path = "/register")
     public String saveUser(@RequestBody UserDTO userDTO)
     {
+        System.out.println(userDTO.getPassword() +", " +userDTO.getAccount());
         return userService.addUser(userDTO);
     }
 }

@@ -16,7 +16,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     Optional<User> findUserByAccountAndPassword(String account, String password);
     User findUserByAccount(String account);
     @Query("SELECT r FROM Role r WHERE r.role_id = :role_id")
-    Role findByRoleId(@Param("role_id") int role_id);
+    Role findByRoleId(@Param("role_id") Integer role_id);
     @Query("SELECT r FROM User r WHERE r.user_id = :user_id")
     User findByUser_id(@Param("user_id")Integer user_id);
 

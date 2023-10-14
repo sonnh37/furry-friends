@@ -19,7 +19,7 @@ public class UserImplement implements UserService {
     private UserRepo userRepo;
 
     @Autowired
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public String addUser(UserDTO userDTO) {

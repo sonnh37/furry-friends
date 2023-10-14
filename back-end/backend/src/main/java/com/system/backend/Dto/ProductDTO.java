@@ -1,49 +1,32 @@
-package com.system.backend.Enity;
-import javax.persistence.*;
-@Entity
-@Table(name = "[product]")
-public class Product {
+package com.system.backend.Dto;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "[product_id]")
+
+
+public class ProductDTO {
     private Integer product_id;
 
-    @ManyToOne
-    @JoinColumn(name = "[user_id]", referencedColumnName = "[user_id]")
-    private User user;
+    private Integer user_id;
 
-    @Column(name = "[product_name]")
     private String product_name;
 
-    @Column(name = "[price]")
     private Integer price;
 
-    @Column(name = "[image]")
     private String image;
 
-    @Column(name = "[description]")
     private String description;
 
-    @Column(name = "[date]")
     private String date;
 
-    @Column(name = "[phone]")
     private String phone;
 
-    @Column(name = "[type]")
     private String type;
 
-    public Product() {
+    public ProductDTO() {
     }
 
-
-    // getters and setters
-
-
-    public Product(Integer product_id, User user, String product_name, Integer price, String image, String description, String date, String phone, String type) {
+    public ProductDTO(Integer product_id, Integer user_id, String product_name, Integer price, String image, String description, String date, String phone, String type) {
         this.product_id = product_id;
-        this.user = user;
+        this.user_id = user_id;
         this.product_name = product_name;
         this.price = price;
         this.image = image;
@@ -61,6 +44,14 @@ public class Product {
         this.product_id = product_id;
     }
 
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
     public String getProduct_name() {
         return product_name;
     }
@@ -68,16 +59,6 @@ public class Product {
     public void setProduct_name(String product_name) {
         this.product_name = product_name;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-
 
     public Integer getPrice() {
         return price;
