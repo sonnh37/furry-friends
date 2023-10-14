@@ -1,23 +1,23 @@
 package com.system.backend.Dto;
 
 public class LoginDTO {
-    private String email;
+    private String account;
     private String password;
 
     public LoginDTO() {
     }
 
-    public LoginDTO(String email, String password) {
-        this.email = email;
+    public LoginDTO(String account, String password) {
+        this.account = account;
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getAccount() {
+        return account;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getPassword() {

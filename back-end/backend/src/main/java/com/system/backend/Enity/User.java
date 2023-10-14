@@ -11,7 +11,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "[user_id]")
-    private Integer userID;
+    private Integer user_id;
 
     @ManyToOne
     @JoinColumn(name = "[role_id]", referencedColumnName = "[role_id]")
@@ -27,10 +27,10 @@ public class User {
     private String email;
 
     @Column(name = "[first_name]")
-    private String firstName;
+    private String first_name;
 
     @Column(name = "[last_name]")
-    private String lastName;
+    private String last_name;
 
     @Column(name = "[phone]")
     private String phone;
@@ -50,26 +50,26 @@ public class User {
     }
 
 
-    public User(Integer userID, Role role, String account, String password, String email, String firstName, String lastName, String phone, String address, String birth, String sex) {
-        this.userID = userID;
+    public User(Integer user_id, Role role, String account, String password, String email, String first_name, String last_name, String phone, String address, String birth, String sex) {
+        this.user_id = user_id;
         this.role = role;
         this.account = account;
         this.password = password;
         this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.phone = phone;
         this.address = address;
         this.birth = birth;
         this.sex = sex;
     }
 
-    public Integer getId() {
-        return userID;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setId(Integer userID) {
-        this.userID = userID;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public Role getRole() {
@@ -104,20 +104,20 @@ public class User {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getPhone() {

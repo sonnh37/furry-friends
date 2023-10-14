@@ -9,4 +9,5 @@ public interface UserService {
     LoginMessage loginUser(LoginDTO loginDTO);
 
     String deleteUser(Integer user_id);
+    String updateUser(Integer user_id, UserDTO userDTO);
 }

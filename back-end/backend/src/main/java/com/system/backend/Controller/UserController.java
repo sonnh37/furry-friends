@@ -20,6 +20,12 @@ public class UserController {
         String message = userService.deleteUser(id);
         return message;
     }
+    @PutMapping("/{id}")
+    public String updateUser(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
+        String message = userService.updateUser(id, userDTO);
+        return message;
+    }
+
 
 
 
