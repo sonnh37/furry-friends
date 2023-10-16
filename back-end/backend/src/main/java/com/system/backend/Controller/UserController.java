@@ -3,11 +3,14 @@ package com.system.backend.Controller;
 
 import com.system.backend.Dto.LoginDTO;
 import com.system.backend.Dto.UserDTO;
+import com.system.backend.Enity.User;
 import com.system.backend.Service.UserService;
 import com.system.backend.payload.response.LoginMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -25,8 +28,10 @@ public class UserController {
         String message = userService.updateUser(id, userDTO);
         return message;
     }
-
-
-
+    @GetMapping
+    public ResponseEntity<List<User>> getUsers() {
+        List<User> list = userService.getUser();
+        return ResponseEntity.ok(list);
+    }
 
 }

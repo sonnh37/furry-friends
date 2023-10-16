@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -75,6 +76,12 @@ public class UserImplement implements UserService {
     }
 
     @Override
+    public List<User> getUser() {
+        List<User> list = userRepo.findAll();
+        return list;
+    }
+
+    @Override
     public String deleteUser(Integer user_id) {
         String mess = "";
         User user = userRepo.findByUser_id(user_id);
@@ -100,6 +107,9 @@ public class UserImplement implements UserService {
         }
         return mess;
     }
+
+
+
     public String updateUserDetail(Integer user_id, UserDTO userDTO) {
         User userUpdate = new User();
         userUpdate.setUser_id(user_id);
