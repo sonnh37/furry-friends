@@ -82,9 +82,9 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String deleteUser(String account) {
+    public String deleteUser(Integer user_id) {
         String mess = "";
-        User user = userRepo.findUserByAccount(account);
+        User user = userRepo.findByUser_id(user_id);
         if(user != null){
             userRepo.delete(user);
             mess = "deleted";

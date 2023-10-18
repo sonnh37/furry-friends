@@ -11,7 +11,7 @@ public interface UserService {
     String addUser(UserDTO userDTO);
     LoginMessage loginUser(LoginDTO loginDTO);
     List<User> getUser();
-    String deleteUser(String account);
+    String deleteUser(Integer user_id);
     String updateUser(String account, UserDTO userDTO);
     String checkUserPassword(String password, String account);
     String setUserPassword(String password, String account);

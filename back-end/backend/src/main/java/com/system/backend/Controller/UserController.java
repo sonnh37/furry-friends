@@ -17,9 +17,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
-    @DeleteMapping
-    public String deleteUser(@RequestBody String account) {
-        String message = userService.deleteUser(account);
+    @DeleteMapping("/{user_id}")
+    public String deleteUser(@PathVariable Integer user_id) {
+        String message = userService.deleteUser(user_id);
         return message;
     }
     @PutMapping
