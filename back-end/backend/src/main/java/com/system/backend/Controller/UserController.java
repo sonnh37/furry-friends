@@ -1,11 +1,10 @@
 package com.system.backend.Controller;
 
 
-import com.system.backend.Dto.LoginDTO;
-import com.system.backend.Dto.UserDTO;
+import com.system.backend.Dto.PasswordUserRequest;
+import com.system.backend.Dto.UpdateUserRequest;
 import com.system.backend.Enity.User;
 import com.system.backend.Service.UserService;
-import com.system.backend.payload.response.LoginMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +17,14 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Integer id) {
-        String message = userService.deleteUser(id);
+    @DeleteMapping
+    public String deleteUser(@RequestBody String account) {
+        String message = userService.deleteUser(account);
         return message;
     }
-    @PutMapping("/{id}")
-    public String updateUser(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
-        String message = userService.updateUser(id, userDTO);
+    @PutMapping
+    public String updateUserDetail(@RequestBody UpdateUserRequest updateUserRequest) {
+        String message = userService.updateUser(updateUserRequest.getAccount(), updateUserRequest.getUserDTO());
         return message;
     }
     @GetMapping
@@ -33,5 +32,19 @@ public class UserController {
         List<User> list = userService.getUser();
         return ResponseEntity.ok(list);
     }
+
+    @PostMapping
+    public String checkUserPassword(@RequestBody PasswordUserRequest checkPasswordUserRequest) {
+        String message = userService.checkUserPassword(checkPasswordUserRequest.getPassword()
+                , checkPasswordUserRequest.getAccount());
+        return message;
+    }
+    @PutMapping(path = "/setpass")
+    public String setUserPassword(@RequestBody PasswordUserRequest setPasswordUserRequest) {
+        String message = userService.setUserPassword(setPasswordUserRequest.getPassword()
+                , setPasswordUserRequest.getAccount());
+        return message;
+    }
+
 
 }

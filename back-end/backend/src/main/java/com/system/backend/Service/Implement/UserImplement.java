@@ -82,9 +82,9 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String deleteUser(Integer user_id) {
+    public String deleteUser(String account) {
         String mess = "";
-        User user = userRepo.findByUser_id(user_id);
+        User user = userRepo.findUserByAccount(account);
         if(user != null){
             userRepo.delete(user);
             mess = "deleted";
@@ -95,36 +95,69 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String updateUser(Integer user_id, UserDTO userDTO) {
+    public String updateUser(String account, UserDTO userDTO) {
         String mess = "";
-        User user = userRepo.findByUser_id(user_id);
+        User user = userRepo.findUserByAccount(account);
         // nếu như tồn tại cái cũ thì check và update cái mới userDTO
         if(user != null){
-            String newFirstNameUser = this.updateUserDetail(user_id, userDTO);
-            mess = "updated: " + newFirstNameUser;
+            mess = this.updateUserDetail(userDTO, user);
         } else{
             mess = "not exist";
         }
         return mess;
     }
 
+    @Override
+    public String checkUserPassword(String password, String account) {
+        User user = userRepo.findUserByAccount(account);
+        String mess ="";
+        if(user!= null){
+            List<User> list = this.getUser();
+            // check pass vs pass cua list
+            for (User u: list) {
+                if(passwordEncoder.matches(password,u.getPassword())){
+                    mess = "password match";
+                } else{
+                    mess = "password not match";
+                }
+            }
+        } else{
+            mess = "Account not exist";
+        }
+        return mess;
+    }
+
+    @Override
+    public String setUserPassword(String password, String account) {
+        User user = userRepo.findUserByAccount(account);
+        String mess ="";
+        if(user!= null){
+            String encodedPassword = user.getPassword();
+            // check có trùng mật khẩu cũ không: khong, thi set
+            if(!this.passwordEncoder.matches(password,encodedPassword)){
+                user.setPassword(this.passwordEncoder.encode(password));
+                userRepo.save(user);
+                mess = "Set success!";
+            } else{
+                mess = "New password duplicate old password!";
+            }
+        } else{
+            mess = "Account not exist";
+        }
+        return mess;
+    }
 
 
-    public String updateUserDetail(Integer user_id, UserDTO userDTO) {
-        User userUpdate = new User();
-        userUpdate.setUser_id(user_id);
-        userUpdate.setRole(userRepo.findByRoleId(userDTO.getRole_id()));
-        userUpdate.setAccount(userDTO.getAccount());
-        userUpdate.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
-        userUpdate.setEmail(userDTO.getEmail());
-        userUpdate.setFirst_name(userDTO.getFirst_name());
-        userUpdate.setLast_name(userDTO.getLast_name());
-        userUpdate.setPhone(userDTO.getPhone());
-        userUpdate.setAddress(userDTO.getAddress());
-        userUpdate.setBirth(userDTO.getBirth());
-        userUpdate.setSex(userDTO.getSex());
-        userRepo.save(userUpdate);
-        return userUpdate.getFirst_name();
+    public String updateUserDetail(UserDTO userDTO, User userOld) {
+        userOld.setEmail(userDTO.getEmail());
+        userOld.setAddress(userDTO.getAddress());
+        userOld.setBirth(userDTO.getBirth());
+        userOld.setFirst_name(userDTO.getFirst_name());
+        userOld.setLast_name(userDTO.getLast_name());
+        userOld.setPhone(userDTO.getPhone());
+        userOld.setSex(userDTO.getSex());
+        userRepo.save(userOld);
+        return "updated: " + userOld.getAccount();
 
     }
 
