@@ -1,4 +1,4 @@
-package com.system.backend.Controller;
+package com.system.backend.Controller.Product;
 
 import com.system.backend.Dto.LoginDTO;
 import com.system.backend.Dto.ProductDTO;

@@ -1,4 +1,4 @@
-package com.system.backend.Controller;
+package com.system.backend.Controller.Post;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

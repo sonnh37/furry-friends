@@ -76,9 +76,15 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public List<User> getUser() {
+    public List<User> getUsers() {
         List<User> list = userRepo.findAll();
         return list;
+    }
+
+    @Override
+    public User getUser(Integer user_id) {
+        User user = userRepo.findByUser_id(user_id);
+        return user;
     }
 
     @Override
@@ -112,7 +118,7 @@ public class UserImplement implements UserService {
         User user = userRepo.findUserByAccount(account);
         String mess ="";
         if(user!= null){
-            List<User> list = this.getUser();
+            List<User> list = this.getUsers();
             // check pass vs pass cua list
             for (User u: list) {
                 if(passwordEncoder.matches(password,u.getPassword())){

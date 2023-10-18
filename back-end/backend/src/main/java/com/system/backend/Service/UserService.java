@@ -10,7 +10,8 @@ import java.util.List;
 public interface UserService {
     String addUser(UserDTO userDTO);
     LoginMessage loginUser(LoginDTO loginDTO);
-    List<User> getUser();
+    List<User> getUsers();
+    User getUser(Integer user_id);
     String deleteUser(Integer user_id);
     String updateUser(String account, UserDTO userDTO);
     String checkUserPassword(String password, String account);

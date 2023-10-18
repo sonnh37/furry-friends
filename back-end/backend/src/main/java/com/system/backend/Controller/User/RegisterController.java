@@ -1,4 +1,4 @@
-package com.system.backend.Controller;
+package com.system.backend.Controller.User;
 
 import com.system.backend.Dto.UserDTO;
 import com.system.backend.Service.UserService;
