@@ -1,6 +1,4 @@
-package com.system.backend.Enity;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+package com.system.backend.Entity;
 
 import javax.persistence.*;
 

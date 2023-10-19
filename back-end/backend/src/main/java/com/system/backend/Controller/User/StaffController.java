@@ -1,9 +1,9 @@
 package com.system.backend.Controller.User;
 
 
-import com.system.backend.Dto.PasswordUserRequest;
 import com.system.backend.Dto.UpdateUserRequest;
-import com.system.backend.Enity.User;
+import com.system.backend.Dto.UserDTO;
+import com.system.backend.Entity.User;
 import com.system.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +22,9 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
         String message = userService.deleteUser(user_id);
         return message;
     }
-    @PutMapping
-    public String updateUserDetail(@RequestBody UpdateUserRequest updateUserRequest) {
-        String message = userService.updateUser(updateUserRequest.getAccount(), updateUserRequest.getUserDTO());
+    @PutMapping("/{user_id}")
+    public String updateUserDetail(@PathVariable Integer user_id,@RequestBody UserDTO userDTO) {
+        String message = userService.updateUser(user_id, userDTO);
         return message;
     }
     @GetMapping

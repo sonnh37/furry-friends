@@ -1,7 +1,7 @@
 package com.system.backend.Repository;
 
-import com.system.backend.Enity.Role;
-import com.system.backend.Enity.User;
+import com.system.backend.Entity.Role;
+import com.system.backend.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;

@@ -2,12 +2,11 @@ package com.system.backend.Service.Implement;
 
 import com.system.backend.Dto.LoginDTO;
 import com.system.backend.Dto.UserDTO;
-import com.system.backend.Enity.User;
+import com.system.backend.Entity.User;
 import com.system.backend.Repository.UserRepo;
 import com.system.backend.Service.UserService;
 import com.system.backend.payload.response.LoginMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -101,9 +100,9 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String updateUser(String account, UserDTO userDTO) {
+    public String updateUser(Integer user_id, UserDTO userDTO) {
         String mess = "";
-        User user = userRepo.findUserByAccount(account);
+        User user = userRepo.findByUser_id(user_id);
         // nếu như tồn tại cái cũ thì check và update cái mới userDTO
         if(user != null){
             mess = this.updateUserDetail(userDTO, user);

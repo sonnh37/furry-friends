@@ -1,10 +1,7 @@
 package com.system.backend.Service;
 
-import com.system.backend.Dto.LoginDTO;
 import com.system.backend.Dto.ProductDTO;
-import com.system.backend.Dto.UserDTO;
-import com.system.backend.Enity.Product;
-import com.system.backend.payload.response.LoginMessage;
+import com.system.backend.Entity.Product;
 
 import java.util.List;
 

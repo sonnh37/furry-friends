@@ -1,9 +1,8 @@
 package com.system.backend.Service.Implement;
 
 import com.system.backend.Dto.ProductDTO;
-import com.system.backend.Dto.UserDTO;
-import com.system.backend.Enity.Product;
-import com.system.backend.Enity.User;
+import com.system.backend.Entity.Product;
+import com.system.backend.Entity.User;
 import com.system.backend.Repository.ProductRepo;
 import com.system.backend.Repository.UserRepo;
 import com.system.backend.Service.ProductService;

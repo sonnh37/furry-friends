@@ -1,11 +1,8 @@
 package com.system.backend.Controller.Product;
 
-import com.system.backend.Dto.LoginDTO;
 import com.system.backend.Dto.ProductDTO;
-import com.system.backend.Enity.Product;
+import com.system.backend.Entity.Product;
 import com.system.backend.Service.ProductService;
-import com.system.backend.Service.UserService;
-import com.system.backend.payload.response.LoginMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

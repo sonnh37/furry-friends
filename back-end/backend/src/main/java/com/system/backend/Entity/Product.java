@@ -1,4 +1,4 @@
-package com.system.backend.Enity;
+package com.system.backend.Entity;
 import javax.persistence.*;
 @Entity
 @Table(name = "[product]")

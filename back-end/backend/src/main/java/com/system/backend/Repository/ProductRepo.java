@@ -1,6 +1,6 @@
 package com.system.backend.Repository;
 
-import com.system.backend.Enity.Product;
+import com.system.backend.Entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;

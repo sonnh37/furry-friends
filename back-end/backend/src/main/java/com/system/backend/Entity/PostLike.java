@@ -1,15 +1,15 @@
-package com.system.backend.Enity;
+package com.system.backend.Entity;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "[post_comment]")
-public class PostComment {
+@Table(name = "[post_like]")
+public class PostLike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "[comment_id]", nullable = false)
-    private Integer commentID;
+    @Column(name = "[like_id]", nullable = false)
+    private Integer likeID;
 
     @ManyToOne
     @JoinColumn(name = "[post_id]", nullable = false, referencedColumnName = "[post_id]")
@@ -19,11 +19,8 @@ public class PostComment {
     @JoinColumn(name = "[user_id]", nullable = false, referencedColumnName = "[user_id]")
     private User user;
 
-    @Column(name = "[comment]")
-    private String comment;
-
-    @Column(name = "[publish_date_comment]")
-    private String publishDateComment;
+    @Column(name = "[status]")
+    private Boolean status;
 
     // getters and setters
 }

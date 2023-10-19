@@ -1,9 +1,6 @@
-package com.system.backend.Enity;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+package com.system.backend.Entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "[role]")

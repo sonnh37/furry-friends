@@ -1,7 +1,5 @@
 package com.system.backend.Dto;
 
-import com.system.backend.Enity.Role;
-
 public class UserDTO {
     private Integer user_id;
     private Integer role_id;
