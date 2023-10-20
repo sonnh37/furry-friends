@@ -1,22 +1,40 @@
 package com.system.backend.Controller.User;
 
-import com.system.backend.Dto.LoginDTO;
+import com.system.backend.Dto.User.UserAuthRequestDTO;
 import com.system.backend.Service.UserService;
 import com.system.backend.payload.response.LoginMessage;
+import com.system.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
-@RequestMapping("api/v1")
+@RequestMapping("/api/v1")
 public class LoginController {
     @Autowired
+    private JwtUtil jwtUtil;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
     private UserService userService;
-    @PostMapping(path = "/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO)
-    {
-        LoginMessage loginResponse = userService.loginUser(loginDTO);
-        return ResponseEntity.ok(loginResponse);
+    @PostMapping("/login")
+    public ResponseEntity<?> generateToken(@RequestBody UserAuthRequestDTO authRequest) throws Exception {
+        LoginMessage loginResponse = userService.loginUser(authRequest);
+        System.out.println(loginResponse.getStatus());
+        if(loginResponse.getStatus()){
+            try {
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(authRequest.getAccount(),
+                                authRequest.getPassword())
+                );
+            } catch (Exception ex) {
+                throw new Exception("inavalid account/password");
+            }
+            return ResponseEntity.ok(jwtUtil.generateToken(authRequest.getAccount())); // true-token
+        }
+        return ResponseEntity.ok(loginResponse.getMessage());// false - message
     }
 }

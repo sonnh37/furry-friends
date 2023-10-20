@@ -1,6 +1,6 @@
 package com.system.backend.Controller.Product;
 
-import com.system.backend.Dto.ProductDTO;
+import com.system.backend.Dto.Product.ProductDTO;
 import com.system.backend.Entity.Product;
 import com.system.backend.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
-@RequestMapping("api/v1/user/")
+@RequestMapping("/api/v1/user/")
 public class ProductController {
     @Autowired
     private ProductService productService;

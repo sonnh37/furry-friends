@@ -1,6 +1,6 @@
 package com.system.backend.Service.Implement;
 
-import com.system.backend.Dto.ProductDTO;
+import com.system.backend.Dto.Product.ProductDTO;
 import com.system.backend.Entity.Product;
 import com.system.backend.Entity.User;
 import com.system.backend.Repository.ProductRepo;
@@ -53,7 +53,7 @@ public class ProductImplement implements ProductService {
         }
         return p;
     }
-    public User isHasProductOfUser(Integer user_id){
+    public User getProductExistFromUser(Integer user_id){
         User u;
         // check sản phẩm có phải của user_id hay không
         User user = userRepo.findByUser_id(user_id);
@@ -62,7 +62,6 @@ public class ProductImplement implements ProductService {
         } else{
             u = null;
         }
-
         return u;
     }
 
@@ -72,7 +71,7 @@ public class ProductImplement implements ProductService {
         String mess = "";
         Product pExist = this.isExistProduct(product_id);
         if (pExist != null) {
-            User uExist = this.isHasProductOfUser(user_id);
+            User uExist = this.getProductExistFromUser(user_id);
             if (uExist != null) {
                 productRepo.delete(pExist);
 
@@ -94,8 +93,9 @@ public class ProductImplement implements ProductService {
                 productDTO.getImage(),
                 productDTO.getDescription(),
                 productDTO.getDate(),
-                productDTO.getDate(),
-                productDTO.getPhone()
+                productDTO.getPhone(),
+                productDTO.getType()
+
         );
         productRepo.save(p);
     }
@@ -105,7 +105,7 @@ public class ProductImplement implements ProductService {
         String mess = "";
         Product pExist = this.isExistProduct(product_id);
         if (pExist != null) {
-            User uExist = this.isHasProductOfUser(user_id);
+            User uExist = this.getProductExistFromUser(user_id);
             if (uExist != null) {
                 // cap nhat
                 this.updateProductDetail(user_id,product_id,productDTO);
@@ -124,9 +124,9 @@ public class ProductImplement implements ProductService {
     @Override
     public List<Product> getProducts(Integer user_id) {
         List<Product> list;
-        User uExist = this.isHasProductOfUser(user_id);
+        User uExist = this.getProductExistFromUser(user_id);
         if (uExist != null) {
-            list = productRepo.findAll();
+            list = productRepo.findProductsByUser_id(user_id);
         } else {
             list = null;
         }

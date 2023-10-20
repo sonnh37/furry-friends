@@ -1,7 +1,7 @@
 package com.system.backend.Service.Implement;
-
-import com.system.backend.Dto.LoginDTO;
-import com.system.backend.Dto.UserDTO;
+import com.system.backend.Dto.User.UserAuthRequestDTO;
+import com.system.backend.Dto.User.UserRegisterRequestDTO;
+import com.system.backend.Dto.User.UserUpdateRequestDTO;
 import com.system.backend.Entity.User;
 import com.system.backend.Repository.UserRepo;
 import com.system.backend.Service.UserService;
@@ -22,36 +22,35 @@ public class UserImplement implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public String addUser(UserDTO userDTO) {
-        User userExist = userRepo.findUserByAccount(userDTO.getAccount()); //
+    public String addUser(UserRegisterRequestDTO userUpdateDTO) {
+        User userExist = userRepo.findUserByAccount(userUpdateDTO.getAccount()); //
         if(userExist == null){ // add new
             userExist = new User(null,
-                    userRepo.findByRoleId(userDTO.getRole_id()),
-                    userDTO.getAccount(),
-                    this.passwordEncoder.encode(userDTO.getPassword()),
-                    userDTO.getEmail(),
-                    userDTO.getFirst_name(),
-                    userDTO.getLast_name(),
-                    userDTO.getPhone(),
-                    userDTO.getAddress(),
-                    userDTO.getBirth(),
-                    userDTO.getSex()
+                    userRepo.findByRoleId(userUpdateDTO.getRole_id()),
+                    userUpdateDTO.getAccount(),
+                    this.passwordEncoder.encode(userUpdateDTO.getPassword()),
+                    userUpdateDTO.getEmail(),
+                    userUpdateDTO.getFirst_name(),
+                    userUpdateDTO.getLast_name(),
+                    userUpdateDTO.getPhone(),
+                    userUpdateDTO.getAddress(),
+                    userUpdateDTO.getBirth(),
+                    userUpdateDTO.getSex()
             );
             userRepo.save(userExist);
         } else{
             return "tai khoan da ton tai!";
         }
-        System.out.println(userDTO.getFirst_name());
-        System.out.println(this.passwordEncoder.encode(userDTO.getPassword()
+        System.out.println(userUpdateDTO.getFirst_name());
+        System.out.println(this.passwordEncoder.encode(userUpdateDTO.getPassword()
         ));
 
         return userExist.getFirst_name();
 
     }
 
-    UserDTO userDTO;
     @Override
-    public LoginMessage  loginUser(LoginDTO loginDTO) {
+    public LoginMessage loginUser(UserAuthRequestDTO loginDTO) {
         String msg = "";
         User user = userRepo.findUserByAccount(loginDTO.getAccount());
         if (user != null) {
@@ -100,12 +99,12 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String updateUser(Integer user_id, UserDTO userDTO) {
+    public String updateUser(Integer user_id, UserUpdateRequestDTO userUpdateDTO) {
         String mess = "";
         User user = userRepo.findByUser_id(user_id);
-        // nếu như tồn tại cái cũ thì check và update cái mới userDTO
+        // nếu như tồn tại cái cũ thì check và update cái mới userUpdateDTO
         if(user != null){
-            mess = this.updateUserDetail(userDTO, user);
+            mess = this.updateUserDetail(userUpdateDTO, user);
         } else{
             mess = "not exist";
         }
@@ -153,14 +152,14 @@ public class UserImplement implements UserService {
     }
 
 
-    public String updateUserDetail(UserDTO userDTO, User userOld) {
-        userOld.setEmail(userDTO.getEmail());
-        userOld.setAddress(userDTO.getAddress());
-        userOld.setBirth(userDTO.getBirth());
-        userOld.setFirst_name(userDTO.getFirst_name());
-        userOld.setLast_name(userDTO.getLast_name());
-        userOld.setPhone(userDTO.getPhone());
-        userOld.setSex(userDTO.getSex());
+    public String updateUserDetail(UserUpdateRequestDTO userUpdateDTO, User userOld) {
+        userOld.setEmail(userUpdateDTO.getEmail());
+        userOld.setAddress(userUpdateDTO.getAddress());
+        userOld.setBirth(userUpdateDTO.getBirth());
+        userOld.setFirst_name(userUpdateDTO.getFirst_name());
+        userOld.setLast_name(userUpdateDTO.getLast_name());
+        userOld.setPhone(userUpdateDTO.getPhone());
+        userOld.setSex(userUpdateDTO.getSex());
         userRepo.save(userOld);
         return "updated: " + userOld.getAccount();
 

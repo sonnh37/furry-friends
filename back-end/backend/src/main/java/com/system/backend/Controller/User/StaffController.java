@@ -1,8 +1,6 @@
 package com.system.backend.Controller.User;
 
-
-import com.system.backend.Dto.UpdateUserRequest;
-import com.system.backend.Dto.UserDTO;
+import com.system.backend.Dto.User.UserUpdateRequestDTO;
 import com.system.backend.Entity.User;
 import com.system.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
-@RequestMapping("api/v1/user/staff")
+@RequestMapping("/api/v1/user/staff")
 public class StaffController { //member(view users(getUsers), delete, update),product, post
     @Autowired
     private UserService userService;
@@ -23,8 +21,8 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
         return message;
     }
     @PutMapping("/{user_id}")
-    public String updateUserDetail(@PathVariable Integer user_id,@RequestBody UserDTO userDTO) {
-        String message = userService.updateUser(user_id, userDTO);
+    public String updateUserDetail(@PathVariable Integer user_id,@RequestBody UserUpdateRequestDTO userUpdateDTO) {
+        String message = userService.updateUser(user_id, userUpdateDTO);
         return message;
     }
     @GetMapping

@@ -1,6 +1,6 @@
 package com.system.backend.Service;
 
-import com.system.backend.Dto.ProductDTO;
+import com.system.backend.Dto.Product.ProductDTO;
 import com.system.backend.Entity.Product;
 
 import java.util.List;

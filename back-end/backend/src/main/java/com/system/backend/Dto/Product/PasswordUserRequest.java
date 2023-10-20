@@ -1,4 +1,4 @@
-package com.system.backend.Dto;
+package com.system.backend.Dto.Product;
 
 public class PasswordUserRequest {
     private String account;
