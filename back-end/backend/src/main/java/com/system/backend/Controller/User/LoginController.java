@@ -25,15 +25,8 @@ public class LoginController {
         LoginMessage loginResponse = userService.loginUser(authRequest);
         System.out.println(loginResponse.getStatus());
         if(loginResponse.getStatus()){
-            try {
-                authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(authRequest.getAccount(),
-                                authRequest.getPassword())
-                );
-            } catch (Exception ex) {
-                throw new Exception("inavalid account/password");
-            }
-            return ResponseEntity.ok(jwtUtil.generateToken(authRequest.getAccount())); // true-token
+
+            return ResponseEntity.ok(userService.createToken(authRequest));  // true-token
         }
         return ResponseEntity.ok(loginResponse.getMessage());// false - message
     }

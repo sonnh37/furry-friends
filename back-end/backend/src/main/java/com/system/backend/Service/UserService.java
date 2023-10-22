@@ -11,6 +11,7 @@ import java.util.List;
 public interface UserService {
     String addUser(UserRegisterRequestDTO userRegisterRequestDTO);
     LoginMessage loginUser(UserAuthRequestDTO userAuthRequestDTO);
+    public String createToken(UserAuthRequestDTO authRequest) throws Exception;
     List<User> getUsers();
     User getUser(Integer user_id);
     String deleteUser(Integer user_id);

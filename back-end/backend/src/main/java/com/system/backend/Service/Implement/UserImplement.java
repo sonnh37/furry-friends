@@ -2,11 +2,18 @@ package com.system.backend.Service.Implement;
 import com.system.backend.Dto.User.UserAuthRequestDTO;
 import com.system.backend.Dto.User.UserRegisterRequestDTO;
 import com.system.backend.Dto.User.UserUpdateRequestDTO;
+import com.system.backend.Entity.Token;
+import com.system.backend.Entity.TokenType;
 import com.system.backend.Entity.User;
+import com.system.backend.Repository.TokenRepository;
 import com.system.backend.Repository.UserRepo;
 import com.system.backend.Service.UserService;
 import com.system.backend.payload.response.LoginMessage;
+import com.system.backend.util.JwtUtil;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +26,37 @@ public class UserImplement implements UserService {
     private UserRepo userRepo;
 
     @Autowired
+    private JwtUtil jwtUtil;
+    @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private TokenRepository tokenRepository;
 
+    @Override
+    public String createToken(UserAuthRequestDTO authRequest) throws Exception  {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getAccount(),
+                            authRequest.getPassword())
+            );
+        } catch (Exception ex) {
+            throw new Exception("inavalid account/password");
+        }
+        // get user ( sure co)
+        User user = userRepo.findUserByAccount(authRequest.getAccount());
+        System.out.println(user.getUser_id() + user.getAccount());
+        //  create Token
+        String jwtToken = jwtUtil.generateToken(authRequest.getAccount());
+        System.out.println(jwtToken);
+
+        // revoke các token khác của user đã đăng nhập trc đó
+        revokeAllUserTokens(user);
+        // save token
+        saveUserToken(user, jwtToken);
+        return jwtToken; // true-token
+    }
     @Override
     public String addUser(UserRegisterRequestDTO userUpdateDTO) {
         User userExist = userRepo.findUserByAccount(userUpdateDTO.getAccount()); //
@@ -47,6 +83,26 @@ public class UserImplement implements UserService {
 
         return userExist.getFirst_name();
 
+    }
+    private void revokeAllUserTokens(User user) {
+        List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getUser_id());
+        if (validUserTokens.isEmpty())
+            return;
+        validUserTokens.forEach(token -> {
+            token.setExpired(true);
+            token.setRevoked(true);
+        });
+        tokenRepository.saveAll(validUserTokens);
+    }
+    private void saveUserToken(User user, String jwtToken) {
+        var token = Token.builder()
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .user(user)
+                .build();
+        tokenRepository.save(token);
     }
 
     @Override
