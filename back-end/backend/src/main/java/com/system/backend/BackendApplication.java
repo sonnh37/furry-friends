@@ -1,18 +1,8 @@
 package com.system.backend;
 
-import com.system.backend.Entity.Role;
-import com.system.backend.Entity.User;
-import com.system.backend.Repository.RoleRepository;
-import com.system.backend.Repository.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class BackendApplication {

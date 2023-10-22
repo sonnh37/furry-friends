@@ -1,6 +1,6 @@
 package com.system.backend.Controller.Product;
 
-import com.system.backend.Dto.Product.ProductDTO;
+import com.system.backend.Dto.Product.ProductRequest;
 import com.system.backend.Entity.Product;
 import com.system.backend.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     @PostMapping("{user_id}/products")
-    public String insertProduct(@PathVariable Integer user_id,@RequestBody ProductDTO productDTO)
+    public String insertProduct(@PathVariable Integer user_id,@RequestBody ProductRequest productRequest)
     {
-        String mess = productService.insertProduct(user_id, productDTO);
+        String mess = productService.insertProduct(user_id, productRequest);
         return mess;
     }
     @DeleteMapping("{user_id}/products/{product_id}")
@@ -28,9 +28,9 @@ public class ProductController {
         return mess;
     }
     @PutMapping("{user_id}/products/{product_id}")
-    public String updateProduct(@PathVariable Integer user_id,@PathVariable Integer product_id,@RequestBody ProductDTO productDTO)
+    public String updateProduct(@PathVariable Integer user_id,@PathVariable Integer product_id,@RequestBody ProductRequest productRequest)
     {
-        String mess = productService.updateProduct(user_id,product_id,productDTO);
+        String mess = productService.updateProduct(user_id,product_id, productRequest);
         return mess;
     }
     @GetMapping("{user_id}/products")

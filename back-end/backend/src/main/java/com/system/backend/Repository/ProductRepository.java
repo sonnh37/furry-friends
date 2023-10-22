@@ -12,7 +12,7 @@ import java.util.List;
 
 @EnableJpaRepositories
 @Repository
-public interface ProductRepo extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("SELECT p FROM Product p WHERE p.product_id = :product_id")
     Product findProductByProduct_id(@Param("product_id") Integer product_id);

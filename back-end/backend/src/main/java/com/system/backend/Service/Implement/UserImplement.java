@@ -1,14 +1,11 @@
 package com.system.backend.Service.Implement;
-import com.system.backend.Dto.User.UserAuthRequestDTO;
-import com.system.backend.Dto.User.UserRegisterRequestDTO;
-import com.system.backend.Dto.User.UserUpdateRequestDTO;
+import com.system.backend.Dto.User.*;
 import com.system.backend.Entity.Token;
 import com.system.backend.Entity.TokenType;
 import com.system.backend.Entity.User;
 import com.system.backend.Repository.TokenRepository;
-import com.system.backend.Repository.UserRepo;
+import com.system.backend.Repository.UserRepository;
 import com.system.backend.Service.UserService;
-import com.system.backend.payload.response.LoginMessage;
 import com.system.backend.util.JwtUtil;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +14,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserImplement implements UserService {
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepository;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -35,7 +33,7 @@ public class UserImplement implements UserService {
     private TokenRepository tokenRepository;
 
     @Override
-    public String createToken(UserAuthRequestDTO authRequest) throws Exception  {
+    public String createToken(UserAuthRequest authRequest) throws Exception  {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getAccount(),
@@ -45,7 +43,7 @@ public class UserImplement implements UserService {
             throw new Exception("inavalid account/password");
         }
         // get user ( sure co)
-        User user = userRepo.findUserByAccount(authRequest.getAccount());
+        User user = userRepository.findUserByAccount(authRequest.getAccount());
         System.out.println(user.getUser_id() + user.getAccount());
         //  create Token
         String jwtToken = jwtUtil.generateToken(authRequest.getAccount());
@@ -58,30 +56,26 @@ public class UserImplement implements UserService {
         return jwtToken; // true-token
     }
     @Override
-    public String addUser(UserRegisterRequestDTO userUpdateDTO) {
-        User userExist = userRepo.findUserByAccount(userUpdateDTO.getAccount()); //
+    public String addUser(UserRegisterRequest userRegisterRequest) {
+        User userExist = userRepository.findUserByAccount(userRegisterRequest.getAccount());
         if(userExist == null){ // add new
-            userExist = new User(null,
-                    userRepo.findByRoleId(userUpdateDTO.getRole_id()),
-                    userUpdateDTO.getAccount(),
-                    this.passwordEncoder.encode(userUpdateDTO.getPassword()),
-                    userUpdateDTO.getEmail(),
-                    userUpdateDTO.getFirst_name(),
-                    userUpdateDTO.getLast_name(),
-                    userUpdateDTO.getPhone(),
-                    userUpdateDTO.getAddress(),
-                    userUpdateDTO.getBirth(),
-                    userUpdateDTO.getSex()
-            );
-            userRepo.save(userExist);
+            userExist = User.builder()
+                    .role(userRepository.findByRoleId(userRegisterRequest.getRole_id()))
+                    .password(this.passwordEncoder.encode(userRegisterRequest.getPassword()))
+                    .email(userRegisterRequest.getEmail())
+                    .phone(userRegisterRequest.getPhone())
+                    .sex(userRegisterRequest.getSex())
+                    .birth(userRegisterRequest.getBirth())
+                    .last_name(userRegisterRequest.getLast_name())
+                    .first_name(userRegisterRequest.getFirst_name())
+                    .account(userRegisterRequest.getAccount())
+                    .address(userRegisterRequest.getAddress())
+                    .build();
+            userRepository.save(userExist);
         } else{
             return "tai khoan da ton tai!";
         }
-        System.out.println(userUpdateDTO.getFirst_name());
-        System.out.println(this.passwordEncoder.encode(userUpdateDTO.getPassword()
-        ));
-
-        return userExist.getFirst_name();
+        return userRepository.findUserByAccount(userExist.getAccount()).getUser_id().toString();
 
     }
     private void revokeAllUserTokens(User user) {
@@ -106,47 +100,65 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public LoginMessage loginUser(UserAuthRequestDTO loginDTO) {
+    public LoginMessage loginUser(UserAuthRequest loginDTO) {
         String msg = "";
-        User user = userRepo.findUserByAccount(loginDTO.getAccount());
+        User user = userRepository.findUserByAccount(loginDTO.getAccount());
         if (user != null) {
             String password = loginDTO.getPassword();
             String encodedPassword = user.getPassword();
             //check pass from user and encoded Password system
-            Boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
+            boolean isPwdRight = passwordEncoder.matches(password, encodedPassword);
             if (isPwdRight) {
-                Optional<User> employee = userRepo.findUserByAccountAndPassword(loginDTO.getAccount(), encodedPassword);
+                Optional<User> employee = userRepository.findUserByAccountAndPassword(loginDTO.getAccount(), encodedPassword);
                 if (employee.isPresent()) {
-                    return new LoginMessage("Login Success", true);
+                    return LoginMessage.builder().message("Login Success").status(true).build();
                 } else {
-                    return new LoginMessage("Login Failed", false);
+                    return LoginMessage.builder().message("Login Fail").status(false).build();
                 }
             } else {
-                return new LoginMessage("password Not Match", false);
+                return LoginMessage.builder().message("Password not match").status(false).build();
             }
         }else {
-            return new LoginMessage("Account not exits", false);
+            return LoginMessage.builder().message("Account not exist").status(false).build();
         }
     }
 
     @Override
-    public List<User> getUsers() {
-        List<User> list = userRepo.findAll();
-        return list;
+    public List<UserResponse> getAllUsers() {
+        List<User> list = userRepository.findAll();
+        List<UserResponse> listResponse = new ArrayList<>();
+        for (User u: list) {
+            listResponse.add(convertUserToUserResponse(u));
+        }
+        return listResponse;
     }
 
+    public UserResponse convertUserToUserResponse(User user){
+        return UserResponse.builder()
+                .user_id(user.getUser_id())
+                .role_id(user.getRole().getRole_id())
+                .email(user.getEmail())
+                .phone(user.getPhone())
+                .sex(user.getSex())
+                .birth(user.getBirth())
+                .last_name(user.getLast_name())
+                .first_name(user.getFirst_name())
+                .account(user.getAccount())
+                .address(user.getAddress())
+                .build();
+    }
     @Override
-    public User getUser(Integer user_id) {
-        User user = userRepo.findByUser_id(user_id);
-        return user;
+    public UserResponse getUser(Integer user_id) {
+        User user = userRepository.findByUser_id(user_id);
+        return convertUserToUserResponse(user);
     }
 
     @Override
     public String deleteUser(Integer user_id) {
         String mess = "";
-        User user = userRepo.findByUser_id(user_id);
+        User user = userRepository.findByUser_id(user_id);
         if(user != null){
-            userRepo.delete(user);
+            userRepository.delete(user);
             mess = "deleted";
         } else{
             mess = "not exist";
@@ -155,9 +167,9 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String updateUser(Integer user_id, UserUpdateRequestDTO userUpdateDTO) {
+    public String updateUser(Integer user_id, UserUpdateRequest userUpdateDTO) {
         String mess = "";
-        User user = userRepo.findByUser_id(user_id);
+        User user = userRepository.findByUser_id(user_id);
         // nếu như tồn tại cái cũ thì check và update cái mới userUpdateDTO
         if(user != null){
             mess = this.updateUserDetail(userUpdateDTO, user);
@@ -169,10 +181,10 @@ public class UserImplement implements UserService {
 
     @Override
     public String checkUserPassword(String password, String account) {
-        User user = userRepo.findUserByAccount(account);
+        User user = userRepository.findUserByAccount(account);
         String mess ="";
         if(user!= null){
-            List<User> list = this.getUsers();
+            List<User> list = userRepository.findAll();
             // check pass vs pass cua list
             for (User u: list) {
                 if(passwordEncoder.matches(password,u.getPassword())){
@@ -189,14 +201,14 @@ public class UserImplement implements UserService {
 
     @Override
     public String setUserPassword(String password, String account) {
-        User user = userRepo.findUserByAccount(account);
+        User user = userRepository.findUserByAccount(account);
         String mess ="";
         if(user!= null){
             String encodedPassword = user.getPassword();
             // check có trùng mật khẩu cũ không: khong, thi set
             if(!this.passwordEncoder.matches(password,encodedPassword)){
                 user.setPassword(this.passwordEncoder.encode(password));
-                userRepo.save(user);
+                userRepository.save(user);
                 mess = "Set success!";
             } else{
                 mess = "New password duplicate old password!";
@@ -208,17 +220,16 @@ public class UserImplement implements UserService {
     }
 
 
-    public String updateUserDetail(UserUpdateRequestDTO userUpdateDTO, User userOld) {
-        userOld.setEmail(userUpdateDTO.getEmail());
-        userOld.setAddress(userUpdateDTO.getAddress());
-        userOld.setBirth(userUpdateDTO.getBirth());
-        userOld.setFirst_name(userUpdateDTO.getFirst_name());
-        userOld.setLast_name(userUpdateDTO.getLast_name());
-        userOld.setPhone(userUpdateDTO.getPhone());
-        userOld.setSex(userUpdateDTO.getSex());
-        userRepo.save(userOld);
-        return "updated: " + userOld.getAccount();
-
+    public String updateUserDetail(UserUpdateRequest userUpdateDTO, User user) {
+        user.setEmail(userUpdateDTO.getEmail());
+        user.setAddress(userUpdateDTO.getAddress());
+        user.setBirth(userUpdateDTO.getBirth());
+        user.setFirst_name(userUpdateDTO.getFirst_name());
+        user.setLast_name(userUpdateDTO.getLast_name());
+        user.setPhone(userUpdateDTO.getPhone());
+        user.setSex(userUpdateDTO.getSex());
+        userRepository.save(user);
+        return "updated: " + user.getAccount();
     }
 
 }

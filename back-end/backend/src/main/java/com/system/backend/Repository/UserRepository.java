@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @EnableJpaRepositories
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     Optional<User> findUserByAccountAndPassword(String account, String password);
     User findUserByAccount(String account);
     @Query("SELECT r FROM Role r WHERE r.role_id = :role_id")

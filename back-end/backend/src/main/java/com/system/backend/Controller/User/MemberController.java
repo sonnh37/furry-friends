@@ -1,7 +1,7 @@
 package com.system.backend.Controller.User;
 
-import com.system.backend.Dto.Product.PasswordUserRequest;
-import com.system.backend.Dto.User.UserUpdateRequestDTO;
+import com.system.backend.Dto.User.UserCheckPasswordRequest;
+import com.system.backend.Dto.User.UserUpdateRequest;
 import com.system.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,20 +17,20 @@ public class MemberController {
 
     //update
     @PostMapping
-    public String checkUserPassword(@RequestBody UserUpdateRequestDTO userUpdateRequestDTO) {
-        String message = userService.checkUserPassword(userUpdateRequestDTO.getPassword()
-                , userUpdateRequestDTO.getAccount());
+    public String checkUserPassword(@RequestBody UserCheckPasswordRequest userCheckPasswordRequest) {
+        String message = userService.checkUserPassword(userCheckPasswordRequest.getPassword()
+                , userCheckPasswordRequest.getAccount());
         return message;
     }
     @PutMapping("/setpass")
-    public String setUserPassword(@RequestBody UserUpdateRequestDTO userUpdateRequestDTO) {
-        String message = userService.setUserPassword(userUpdateRequestDTO.getPassword()
-                , userUpdateRequestDTO.getAccount());
+    public String setUserPassword(@RequestBody UserCheckPasswordRequest userCheckPasswordRequest) {
+        String message = userService.setUserPassword(userCheckPasswordRequest.getPassword()
+                , userCheckPasswordRequest.getAccount());
         return message;
     }
     @PutMapping("/{user_id}")
-    public String updateUserDetail(@PathVariable Integer user_id,@RequestBody UserUpdateRequestDTO userUpdateRequestDTO) {
-        String message = userService.updateUser(user_id, userUpdateRequestDTO);
+    public String updateUserDetail(@PathVariable Integer user_id,@RequestBody UserUpdateRequest userUpdateRequest) {
+        String message = userService.updateUser(user_id, userUpdateRequest);
         return message;
     }
     // end-update

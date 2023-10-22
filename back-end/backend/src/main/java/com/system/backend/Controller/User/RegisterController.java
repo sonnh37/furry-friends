@@ -1,6 +1,6 @@
 package com.system.backend.Controller.User;
 
-import com.system.backend.Dto.User.UserRegisterRequestDTO;
+import com.system.backend.Dto.User.UserRegisterRequest;
 import com.system.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,8 @@ public class RegisterController {
     @Autowired
     private UserService userService;
     @PostMapping(path = "/register")
-    public String saveUser(@RequestBody UserRegisterRequestDTO user)
+    public String saveUser(@RequestBody UserRegisterRequest user)
     {
-        System.out.println(user.getPassword() +", " + user.getAccount());
         return userService.addUser(user);
     }
 }

@@ -1,13 +1,12 @@
 package com.system.backend.Controller.User;
 
-import com.system.backend.Dto.User.UserAuthRequestDTO;
+import com.system.backend.Dto.User.UserAuthRequest;
 import com.system.backend.Service.UserService;
-import com.system.backend.payload.response.LoginMessage;
+import com.system.backend.Dto.User.LoginMessage;
 import com.system.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,9 +20,8 @@ public class LoginController {
     @Autowired
     private UserService userService;
     @PostMapping("/login")
-    public ResponseEntity<?> generateToken(@RequestBody UserAuthRequestDTO authRequest) throws Exception {
+    public ResponseEntity<?> generateToken(@RequestBody UserAuthRequest authRequest) throws Exception {
         LoginMessage loginResponse = userService.loginUser(authRequest);
-        System.out.println(loginResponse.getStatus());
         if(loginResponse.getStatus()){
 
             return ResponseEntity.ok(userService.createToken(authRequest));  // true-token
