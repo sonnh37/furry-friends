@@ -1,4 +1,4 @@
-# DogAndCatFlatform
+# DogAndCatPlatform
 
 Certainly! Here's the introduction to the "Dog and Cat Platform" software in English:
 
