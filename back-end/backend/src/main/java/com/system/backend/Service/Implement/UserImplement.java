@@ -60,7 +60,7 @@ public class UserImplement implements UserService {
         User userExist = userRepository.findUserByAccount(userRegisterRequest.getAccount());
         if(userExist == null){ // add new
             userExist = User.builder()
-                    .role(userRepository.findByRoleId(userRegisterRequest.getRole_id()))
+                    .role(userRepository.findByRoleId(1))
                     .password(this.passwordEncoder.encode(userRegisterRequest.getPassword()))
                     .email(userRegisterRequest.getEmail())
                     .phone(userRegisterRequest.getPhone())
@@ -136,7 +136,7 @@ public class UserImplement implements UserService {
     public UserResponse convertUserToUserResponse(User user){
         return UserResponse.builder()
                 .user_id(user.getUser_id())
-                .role_id(user.getRole().getRole_id())
+                .role_id(1)
                 .email(user.getEmail())
                 .phone(user.getPhone())
                 .sex(user.getSex())
