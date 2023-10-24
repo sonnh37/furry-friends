@@ -36,16 +36,16 @@ public class ProductController {
         String mess = productService.updateProduct(productRequest.getAccount(),product_id, productRequest);
         return mess;
     }
-    @GetMapping
-    public ResponseEntity<List<ProductResponse>> getAllProducts(@RequestBody ProductRequest productRequest)
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ProductResponse>> getAllProducts()
     {
-        List<ProductResponse> list = productService.getAllProducts(productRequest.getAccount());
+        List<ProductResponse> list = productService.getAllProducts();
         return ResponseEntity.ok(list);
     }
-    @GetMapping("/{product_id}")
-    public ResponseEntity<ProductResponse> getProduct(@PathVariable Integer product_id)
+    @GetMapping("/{account}")
+    public ResponseEntity<List<ProductResponse>> getProduct(@PathVariable String account)
     {
-        ProductResponse product = productService.getProduct(product_id);
-        return ResponseEntity.ok(product);
+        List<ProductResponse> listFromUser = productService.getProduct(account);
+        return ResponseEntity.ok(listFromUser);
     }
 }

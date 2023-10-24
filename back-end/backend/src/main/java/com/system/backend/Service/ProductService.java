@@ -14,7 +14,7 @@ public interface ProductService {
     String insertProduct(String account, ProductRequest productRequest);
     String deleteProduct(String account, Integer product_id);
     String updateProduct(String account, Integer product_id, ProductRequest productRequest);
-    List<ProductResponse> getAllProducts(String account);
-    ProductResponse getProduct(Integer product_id);
+    List<ProductResponse> getAllProducts();
+    List<ProductResponse> getProduct(String account);
 }
 

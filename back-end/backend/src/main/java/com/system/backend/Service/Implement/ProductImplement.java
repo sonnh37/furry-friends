@@ -119,25 +119,37 @@ public class ProductImplement implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> getAllProducts(String account) {
+    public List<ProductResponse> getAllProducts() {
         List<Product> list = new ArrayList<>();
         List<ProductResponse> listConvert = new ArrayList<>();
-        User uExist = this.getProductExistFromUser(account);
-        if (uExist != null) {
-            list = productRepository.findProductsByUser_id(uExist.getUser_id());
-            for (Product p:
-                 list) {
-                listConvert.add(convertProdductToProductResponse(p));
-            }
+        list = productRepository.findAll();
+        for (Product p:
+             list) {
+            listConvert.add(convertProdductToProductResponse(p));
         }
         return listConvert;
     }
 
     @Override
-    public ProductResponse getProduct(Integer product_id) {
-        Product p = isExistProduct(product_id);
-        return convertProdductToProductResponse(p);
+    public List<ProductResponse> getProduct(String account) {
+        List<Product> list = new ArrayList<>();
+        List<ProductResponse> listConvert = new ArrayList<>();
+       User u = getProductExistFromUser(account);
+       if(u!=null){
+           list = productRepository.findProductsByUser_id(u.getUser_id());
+           for (Product p:
+                   list) {
+               listConvert.add(convertProdductToProductResponse(p));
+           }
+       }
+       return listConvert;
     }
+
+//    @Override
+//    public ProductResponse getProduct(Integer product_id) {
+//        Product p = isExistProduct(product_id);
+//        return convertProdductToProductResponse(p);
+//    }
 
     public ProductResponse convertProdductToProductResponse(Product product){
         if(product == null){
