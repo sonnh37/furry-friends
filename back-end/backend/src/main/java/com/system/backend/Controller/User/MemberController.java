@@ -1,9 +1,12 @@
 package com.system.backend.Controller.User;
 
+import com.system.backend.Dto.User.UserAuthRequest;
 import com.system.backend.Dto.User.UserCheckPasswordRequest;
+import com.system.backend.Dto.User.UserResponse;
 import com.system.backend.Dto.User.UserUpdateRequest;
 import com.system.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,10 +31,17 @@ public class MemberController {
                 , userCheckPasswordRequest.getAccount());
         return message;
     }
-    @PutMapping("/{user_id}")
-    public String updateUserDetail(@PathVariable Integer user_id,@RequestBody UserUpdateRequest userUpdateRequest) {
-        String message = userService.updateUser(user_id, userUpdateRequest);
+    // update inf by account
+    @PutMapping
+    public String updateUserDetail(@RequestBody UserUpdateRequest userUpdateRequest) {
+        String message = userService.updateUser(userUpdateRequest);
         return message;
+    }
+    //get information user by account
+    @GetMapping("/singleuser")
+    public ResponseEntity<UserResponse> getUser(@RequestBody UserAuthRequest userAuthRequest) {
+        UserResponse user = userService.getUser(userAuthRequest);
+        return ResponseEntity.ok(user);
     }
     // end-update
 }

@@ -10,8 +10,10 @@ public interface UserService {
     public String createToken(UserAuthRequest authRequest) throws Exception;
     List<UserResponse> getAllUsers();
     UserResponse getUser(Integer user_id);
+    UserResponse getUser(UserAuthRequest account);
     String deleteUser(Integer user_id);
     String updateUser(Integer user_id, UserUpdateRequest userUpdateDTO);
+    String updateUser(UserUpdateRequest userUpdateDTO);
     String checkUserPassword(String password, String account);
     String setUserPassword(String password, String account);
 }

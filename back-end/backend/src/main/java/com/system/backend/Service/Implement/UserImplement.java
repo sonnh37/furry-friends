@@ -154,6 +154,12 @@ public class UserImplement implements UserService {
     }
 
     @Override
+    public UserResponse getUser(UserAuthRequest userAuthRequest) {
+        User user = userRepository.findUserByAccount(userAuthRequest.getAccount());
+        return convertUserToUserResponse(user);
+    }
+
+    @Override
     public String deleteUser(Integer user_id) {
         String mess = "";
         User user = userRepository.findByUser_id(user_id);
@@ -170,6 +176,19 @@ public class UserImplement implements UserService {
     public String updateUser(Integer user_id, UserUpdateRequest userUpdateDTO) {
         String mess = "";
         User user = userRepository.findByUser_id(user_id);
+        // nếu như tồn tại cái cũ thì check và update cái mới userUpdateDTO
+        if(user != null){
+            mess = this.updateUserDetail(userUpdateDTO, user);
+        } else{
+            mess = "not exist";
+        }
+        return mess;
+    }
+
+    @Override
+    public String updateUser(UserUpdateRequest userUpdateDTO) {
+        String mess = "";
+        User user = userRepository.findUserByAccount(userUpdateDTO.getAccount());
         // nếu như tồn tại cái cũ thì check và update cái mới userUpdateDTO
         if(user != null){
             mess = this.updateUserDetail(userUpdateDTO, user);
