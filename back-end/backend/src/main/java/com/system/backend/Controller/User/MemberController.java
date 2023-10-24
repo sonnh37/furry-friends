@@ -32,9 +32,9 @@ public class MemberController {
         return message;
     }
     //get information user by account
-    @GetMapping("/singleuser")
-    public ResponseEntity<UserResponse> getUser(@RequestBody AccountRequest accountRequest) {
-        UserResponse user = userService.getUser(accountRequest.getAccount());
+    @GetMapping("/singleuser/{account}")
+    public ResponseEntity<UserResponse> getUser(@PathVariable String account) {
+        UserResponse user = userService.getUser(account);
         return ResponseEntity.ok(user);
     }
     // end-update
