@@ -119,13 +119,18 @@ public class ProductImplement implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProducts(String account) {
+    public List<ProductResponse> getAllProducts(String account) {
         List<Product> list = new ArrayList<>();
+        List<ProductResponse> listConvert = new ArrayList<>();
         User uExist = this.getProductExistFromUser(account);
         if (uExist != null) {
             list = productRepository.findProductsByUser_id(uExist.getUser_id());
+            for (Product p:
+                 list) {
+                listConvert.add(convertProdductToProductResponse(p));
+            }
         }
-        return list;
+        return listConvert;
     }
 
     @Override

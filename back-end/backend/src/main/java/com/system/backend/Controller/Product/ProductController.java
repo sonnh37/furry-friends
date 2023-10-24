@@ -37,9 +37,9 @@ public class ProductController {
         return mess;
     }
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts(@RequestBody ProductRequest productRequest)
+    public ResponseEntity<List<ProductResponse>> getAllProducts(@RequestBody ProductRequest productRequest)
     {
-        List<Product> list = productService.getAllProducts(productRequest.getAccount());
+        List<ProductResponse> list = productService.getAllProducts(productRequest.getAccount());
         return ResponseEntity.ok(list);
     }
     @GetMapping("/{product_id}")
