@@ -24,13 +24,13 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
     }
     //update detail
     @PutMapping("/{user_id}")
-    public String updateUserDetail(@PathVariable Integer user_id,@RequestBody UserUpdateRequest userUpdateDTO) {
+    public String updateDetailUser(@PathVariable Integer user_id,@RequestBody UserUpdateRequest userUpdateDTO) {
         String message = userService.updateUser(user_id, userUpdateDTO);
         return message;
     }
     //get allUsers
     @GetMapping
-    public ResponseEntity<List<UserResponse>> getUsers() {
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
         List<UserResponse> list = userService.getAllUsers();
         return ResponseEntity.ok(list);
     }

@@ -150,12 +150,18 @@ public class UserImplement implements UserService {
     @Override
     public UserResponse getUser(Integer user_id) {
         User user = userRepository.findByUser_id(user_id);
+        if(user == null){
+            user = new User();
+        }
         return convertUserToUserResponse(user);
     }
 
     @Override
-    public UserResponse getUser(UserAuthRequest userAuthRequest) {
-        User user = userRepository.findUserByAccount(userAuthRequest.getAccount());
+    public UserResponse getUser(String account) {
+        User user = userRepository.findUserByAccount(account);
+        if(user == null){
+            user = new User();
+        }
         return convertUserToUserResponse(user);
     }
 
