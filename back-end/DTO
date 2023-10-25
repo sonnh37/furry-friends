@@ -1,0 +1,19 @@
+Product:
+
+//allListFromUser - /{account}
+@PathVariable
+-> request @PathVariable string account 
+-> response product_id, user_id, product_name, price, image, description, date, phone, type
+
+//allList - /getAll
+-> request rỗng
+-> response product_id, user_id, product_name, price, image, description, date, phone, type
+
+//update - /{account}-{product_id}
+-> request @PathVariable string account - integer product_id, @RequestBody- Product product (product_name, price, image, description, date, phone, type)
+-> response mess: "Cap nhat thanh cong" | "product not exist"
+
+//delete - /{account}-{product_id}
+-> request @PathVariable string account - integer product_id
+-> response mess: "Xoa thanh cong" | "product not exist"
+                        
