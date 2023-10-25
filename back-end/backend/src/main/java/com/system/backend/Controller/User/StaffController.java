@@ -24,7 +24,8 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
     }
     //update detail
     @PutMapping("/{user_id}")
-    public String updateDetailUser(@PathVariable Integer user_id,@RequestBody UserUpdateRequest userUpdateDTO) {
+    public String updateDetailUser(@PathVariable Integer user_id,
+                                   @RequestBody UserUpdateRequest userUpdateDTO) {
         String message = userService.updateUser(user_id, userUpdateDTO);
         return message;
     }
