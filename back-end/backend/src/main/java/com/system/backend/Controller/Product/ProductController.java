@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/v1/user/products")
 public class ProductController {
     @Autowired
+    //djt
     private ProductService productService;
     @PostMapping("/{account}")
     public String insertProduct(@PathVariable String account,
