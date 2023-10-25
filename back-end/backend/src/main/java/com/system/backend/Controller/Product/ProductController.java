@@ -48,7 +48,7 @@ public class ProductController {
         return ResponseEntity.ok(list);
     }
     @GetMapping("/{account}")
-    public ResponseEntity<List<ProductResponse>> getProduct(@PathVariable String account)
+    public ResponseEntity<List<ProductResponse>> getAllProductFromUser(@PathVariable String account)
     {
         List<ProductResponse> listFromUser = productService.getProduct(account);
         return ResponseEntity.ok(listFromUser);
