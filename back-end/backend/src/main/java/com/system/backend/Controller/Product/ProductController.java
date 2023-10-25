@@ -6,6 +6,7 @@ import com.system.backend.Dto.User.AccountRequest;
 import com.system.backend.Entity.Product;
 import com.system.backend.Entity.User;
 import com.system.backend.Service.ProductService;
+import com.system.backend.util.Link;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,27 +14,27 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
-@RequestMapping("/api/v1/user/products")
+@CrossOrigin(Link.CORS)
+@RequestMapping(Link.API_ROOT + Link.USER.PRODUCT)
 public class ProductController {
     @Autowired
     //djt mem ay
     private ProductService productService;
-    @PostMapping("/{account}")
-    public String insertProduct(@PathVariable String account,
-                                @RequestBody ProductRequest productRequest)
+
+    @GetMapping(Link.USER.PRODUCTCRUD.GETALLL)
+    public ResponseEntity<List<ProductResponse>> getAllProducts()
     {
-        String mess = productService.insertProduct(account,productRequest);
-        return mess;
+        List<ProductResponse> list = productService.getAllProducts();
+        return ResponseEntity.ok(list);
     }
-    @DeleteMapping("/{account}-{product_id}")
-    public String deleteProduct(@PathVariable String account,
-                                @PathVariable Integer product_id)
+    @GetMapping(Link.USER.PRODUCTCRUD.GET)
+    public ResponseEntity<List<ProductResponse>> getAllProductFromUser(@PathVariable String account)
     {
-        String mess = productService.deleteProduct(account, product_id);
-        return mess;
+        List<ProductResponse> listFromUser = productService.getProduct(account);
+        return ResponseEntity.ok(listFromUser);
     }
-    @PutMapping("/{account}-{product_id}")
+
+    @PutMapping(Link.USER.PRODUCTCRUD.PUT)
     public String updateProduct(@PathVariable String account,
                                 @PathVariable Integer product_id,
                                 @RequestBody ProductRequest productRequest)
@@ -41,16 +42,20 @@ public class ProductController {
         String mess = productService.updateProduct(account,product_id, productRequest);
         return mess;
     }
-    @GetMapping("/getAll")
-    public ResponseEntity<List<ProductResponse>> getAllProducts()
+
+    @DeleteMapping(Link.USER.PRODUCTCRUD.DELETE)
+    public String deleteProduct(@PathVariable String account,
+                                @PathVariable Integer product_id)
     {
-        List<ProductResponse> list = productService.getAllProducts();
-        return ResponseEntity.ok(list);
+        String mess = productService.deleteProduct(account, product_id);
+        return mess;
     }
-    @GetMapping("/{account}")
-    public ResponseEntity<List<ProductResponse>> getAllProductFromUser(@PathVariable String account)
+
+    @PostMapping(Link.USER.PRODUCTCRUD.POST)
+    public String insertProduct(@PathVariable String account,
+                                @RequestBody ProductRequest productRequest)
     {
-        List<ProductResponse> listFromUser = productService.getProduct(account);
-        return ResponseEntity.ok(listFromUser);
+        String mess = productService.insertProduct(account,productRequest);
+        return mess;
     }
 }
