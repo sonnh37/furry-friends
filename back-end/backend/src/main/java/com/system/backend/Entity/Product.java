@@ -42,4 +42,7 @@ public class Product {
 
     @Column(name = "[type]")
     private String type;
+
+    @Column(name = "address")
+    private String address;
 }

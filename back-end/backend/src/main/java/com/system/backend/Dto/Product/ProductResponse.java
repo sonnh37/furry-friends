@@ -19,4 +19,5 @@ public class ProductResponse {
     private String date;
     private String phone;
     private String type;
+    private String address;
 }

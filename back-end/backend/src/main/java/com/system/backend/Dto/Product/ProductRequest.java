@@ -16,4 +16,5 @@ public class ProductRequest {
     private String date;
     private String phone;
     private String type;
+    private String address;
 }
