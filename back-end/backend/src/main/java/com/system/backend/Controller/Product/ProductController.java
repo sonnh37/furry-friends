@@ -18,22 +18,27 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
-    @PostMapping
-    public String insertProduct(@RequestBody ProductRequest productRequest)
+    @PostMapping("/{account}")
+    public String insertProduct(@PathVariable String account,
+                                @RequestBody ProductRequest productRequest)
     {
-        String mess = productService.insertProduct(productRequest.getAccount(),productRequest);
+        String mess = productService.insertProduct(account,productRequest);
         return mess;
     }
-    @DeleteMapping("/{product_id}")
-    public String deleteProduct(@PathVariable Integer product_id, @RequestBody ProductRequest productRequest)
+    @DeleteMapping("/{account}-{product_id}")
+    public String deleteProduct(@PathVariable String account,
+                                @PathVariable Integer product_id,
+                                @RequestBody ProductRequest productRequest)
     {
-        String mess = productService.deleteProduct(productRequest.getAccount(), product_id);
+        String mess = productService.deleteProduct(account, product_id);
         return mess;
     }
-    @PutMapping("/{product_id}")
-    public String updateProduct(@PathVariable Integer product_id,@RequestBody ProductRequest productRequest)
+    @PutMapping("/{account}-{product_id}")
+    public String updateProduct(@PathVariable String account,
+                                @PathVariable Integer product_id,
+                                @RequestBody ProductRequest productRequest)
     {
-        String mess = productService.updateProduct(productRequest.getAccount(),product_id, productRequest);
+        String mess = productService.updateProduct(account,product_id, productRequest);
         return mess;
     }
     @GetMapping("/getAll")

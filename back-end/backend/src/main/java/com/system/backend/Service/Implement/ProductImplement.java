@@ -69,18 +69,22 @@ public class ProductImplement implements ProductService {
     }
 
 
+    private Product getProductHasFromUser(String account, Integer product_id){
+        User user = userRepository.findUserByAccount(account);
+        Product product = null;
+        if(user != null){
+            product = productRepository.findProductsByUser_idAndProduct_id(product_id, user.getUser_id());
+        }
+        return product;
+    }
     @Override
     public String deleteProduct(String account, Integer product_id) {
         String mess = "";
-        Product pExist = this.isExistProduct(product_id);
+
+        Product pExist = this.getProductHasFromUser(account, product_id);
         if (pExist != null) {
-            User uExist = this.getProductExistFromUser(account);
-            if (uExist != null) {
-                productRepository.delete(pExist);
-                mess = "deleted";
-            } else {
-                mess = "user not exist";
-            }
+            productRepository.delete(pExist);
+            mess = "Xoa thanh cong";
         } else{
             mess = "product not exist";
         }
@@ -100,18 +104,10 @@ public class ProductImplement implements ProductService {
     @Override
     public String updateProduct(String account, Integer product_id, ProductRequest productRequest) {
         String mess = "";
-        Product pExist = this.isExistProduct(product_id);
+        Product pExist = this.getProductHasFromUser(account, product_id);
         if (pExist != null) {
-            User uExist = this.getProductExistFromUser(account);
-            if (uExist != null) {
-                // cap nhat
-                this.updateProductDetail(pExist, productRequest);
-
-                mess = "updated";
-            } else {
-                mess = "user not exist";
-
-            }
+            updateProductDetail(pExist, productRequest);
+            mess = "Cap nhat thanh cong";
         } else{
             mess = "product not exist";
         }
