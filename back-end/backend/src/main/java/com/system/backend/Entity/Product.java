@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,9 +30,6 @@ public class Product {
     @Column(name = "[price]")
     private Float price;
 
-    @Column(name = "[image]")
-    private String image;
-
     @Column(name = "[description]")
     private String description;
 
@@ -48,4 +47,7 @@ public class Product {
 
     @Column(name = "status")
     private boolean status;
+
+    @OneToMany(mappedBy = "product")
+    private List<Img_Product> img_productList;
 }

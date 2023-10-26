@@ -12,12 +12,20 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "[image]")
-public class Image {
-
+@Table(name = "[img_Product]")
+public class Img_Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Integer image_id;
+
+    @ManyToOne
+    @JoinColumn(name = "[product_id]", referencedColumnName = "[product_id]")
+    private Product product;
+
+    @Lob
+    @Column(name = "src" )
+    private String src;
 
 
 }

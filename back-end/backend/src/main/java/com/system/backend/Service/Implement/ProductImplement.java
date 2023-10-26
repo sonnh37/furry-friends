@@ -2,9 +2,10 @@ package com.system.backend.Service.Implement;
 
 import com.system.backend.Dto.Product.ProductRequest;
 import com.system.backend.Dto.Product.ProductResponse;
-import com.system.backend.Dto.User.UserResponse;
+import com.system.backend.Entity.Img_Product;
 import com.system.backend.Entity.Product;
 import com.system.backend.Entity.User;
+import com.system.backend.Repository.ImgProductRepository;
 import com.system.backend.Repository.ProductRepository;
 import com.system.backend.Repository.UserRepository;
 import com.system.backend.Service.ProductService;
@@ -20,6 +21,8 @@ public class ProductImplement implements ProductService {
     private ProductRepository productRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ImgProductRepository imgProductRepository;
     @Override
     public String insertProduct(String account, ProductRequest productRequest) {
         // khong truyen tham so product_id
@@ -30,7 +33,6 @@ public class ProductImplement implements ProductService {
                     .user(u)
                     .product_name(productRequest.getProduct_name())
                     .price(productRequest.getPrice())
-                    .image(productRequest.getImage())
                     .description(productRequest.getDescription())
                     .date(productRequest.getDate())
                     .phone(productRequest.getPhone())
@@ -38,8 +40,23 @@ public class ProductImplement implements ProductService {
                     .address(productRequest.getAddress())
                     .status(true)
                     .build();
-            productRepository.save(p);
-            mess = "Them san pham thanh cong";
+            if(p!=null){
+                productRepository.save(p);
+                mess = "Them san pham thanh cong";
+                if(productRequest.getImg_productList().size() > 0) {
+                    for (String image : productRequest.getImg_productList()) {
+                        Img_Product img = Img_Product.builder()
+                                .product(p)
+                                .src(image)
+                                .build();
+                        imgProductRepository.save(img);
+                    }
+                }
+
+            } else{
+                mess = "Nguoi dung chua nhap du lieu";
+            }
+
         } else{
             mess = "Nguoi dung khong ton tai";
         }
@@ -95,14 +112,32 @@ public class ProductImplement implements ProductService {
     public void updateProductDetail(Product pExist, ProductRequest productRequest){
         pExist.setProduct_name(productRequest.getProduct_name());
         pExist.setPrice(productRequest.getPrice());
-        pExist.setImage(productRequest.getImage());
         pExist.setDescription(productRequest.getDescription());
         pExist.setDate(productRequest.getDate());
         pExist.setPhone(productRequest.getPhone());
         pExist.setTitle(productRequest.getTitle());
         pExist.setAddress(productRequest.getAddress());
         pExist.setStatus(true);
+
         productRepository.save(pExist);
+
+        if(productRequest.getImg_productList().size() > 0) { // save vao table Img_Product
+            // remove cu
+            imgProductRepository.deleteAllByProduct_id(pExist.getProduct_id());
+            //add cai moi
+            for (String image : productRequest.getImg_productList()) {
+                Img_Product img = Img_Product.builder()
+                        .product(pExist)
+                        .src(image)
+                        .build();
+                imgProductRepository.save(img);
+            }
+        } else{
+            imgProductRepository.deleteAllByProduct_id(pExist.getProduct_id());
+        }
+
+
+
     }
 
     @Override
@@ -155,12 +190,18 @@ public class ProductImplement implements ProductService {
         if(product == null){
             return ProductResponse.builder().build();
         }
+        List<String> img_stringList = new ArrayList<>();
+        if(product.getImg_productList().size() > 0){
+            for (Img_Product img_product: product.getImg_productList()){
+                img_stringList.add(img_product.getSrc());
+            }
+        }
         return ProductResponse.builder()
                 .product_id(product.getProduct_id())
                 .user_id(product.getUser().getUser_id())
                 .product_name(product.getProduct_name())
                 .price(product.getPrice())
-                .image(product.getImage())
+                .img_stringList(img_stringList)
                 .description(product.getDescription())
                 .date(product.getDate())
                 .phone(product.getPhone())
