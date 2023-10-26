@@ -21,14 +21,14 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
     //get one user
     @GetMapping(Link.USER.STAFFCRUD.GET)
     public ResponseEntity<UserResponse> getUser(@PathVariable Integer user_id) {
-        UserResponse user = userService.getUser(user_id);
+        UserResponse user = userService.getMemberById(user_id);
         return ResponseEntity.ok(user);
     }
 
     //get allUsers
     @GetMapping
-    public ResponseEntity<List<UserResponse>> getAllUsers() {
-        List<UserResponse> list = userService.getAllUsers();
+    public ResponseEntity<List<UserResponse>> getAllMember() {
+        List<UserResponse> list = userService.getAllMember();
         return ResponseEntity.ok(list);
     }
 
@@ -36,14 +36,14 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
     @PutMapping(Link.USER.STAFFCRUD.PUT)
     public String updateDetailUser(@PathVariable Integer user_id,
                                    @RequestBody UserUpdateRequest userUpdateDTO) {
-        String message = userService.updateUser(user_id, userUpdateDTO);
+        String message = userService.updateMemberById(user_id, userUpdateDTO);
         return message;
     }
 
     //dellete
     @DeleteMapping(Link.USER.STAFFCRUD.DELETE)
     public String deleteUser(@PathVariable Integer user_id) {
-        String message = userService.deleteUser(user_id);
+        String message = userService.deleteMemberById(user_id);
         return message;
     }
 

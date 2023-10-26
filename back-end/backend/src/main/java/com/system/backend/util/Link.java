@@ -23,6 +23,14 @@ public class Link {
             public static final String DELETE = "/{user_id}";
             //public static final String POST = "/users";
         }
+        public static final String ADMIN = "/user/admin";
+        public static class ADMINCRUD{
+
+            public static final String GET = "/singleuser/{account}";
+            public static final String GETALL = "/setpass";
+            public static final String DELETE = "/users";
+            public static final String POST = "/users";
+        }
         public static final String PRODUCT = "/user/products";
 
         public static class PRODUCTCRUD{

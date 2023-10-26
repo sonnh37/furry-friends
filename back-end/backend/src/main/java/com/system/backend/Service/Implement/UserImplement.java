@@ -78,6 +78,30 @@ public class UserImplement implements UserService {
         return userRepository.findUserByAccount(userExist.getAccount()).getUser_id().toString();
 
     }
+
+    @Override
+    public String addStaff(UserRegisterRequest userRegisterRequest) {
+        User userExist = userRepository.findUserByAccount(userRegisterRequest.getAccount());
+        if(userExist == null){ // add new
+            userExist = User.builder()
+                    .role(userRepository.findByRoleId(2))
+                    .password(this.passwordEncoder.encode(userRegisterRequest.getPassword()))
+                    .email(userRegisterRequest.getEmail())
+                    .phone(userRegisterRequest.getPhone())
+                    .sex(userRegisterRequest.getSex())
+                    .birth(userRegisterRequest.getBirth())
+                    .last_name(userRegisterRequest.getLast_name())
+                    .first_name(userRegisterRequest.getFirst_name())
+                    .account(userRegisterRequest.getAccount())
+                    .address(userRegisterRequest.getAddress())
+                    .build();
+            userRepository.save(userExist);
+        } else{
+            return "tai khoan da ton tai!";
+        }
+        return userRepository.findUserByAccount(userExist.getAccount()).getUser_id().toString();
+    }
+
     private void revokeAllUserTokens(User user) {
         List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getUser_id());
         if (validUserTokens.isEmpty())
@@ -124,19 +148,36 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public List<UserResponse> getAllUsers() {
+    public List<UserResponse> getAllMember() {
         List<User> list = userRepository.findAll();
         List<UserResponse> listResponse = new ArrayList<>();
+
         for (User u: list) {
-            listResponse.add(convertUserToUserResponse(u));
+            if(u.getRole().getRole_name().equalsIgnoreCase("member")){
+                listResponse.add(convertUserToUserResponse(u, 1));
+            }
+
+        }
+        return listResponse;
+    }
+    @Override
+    public List<UserResponse> getAllStaff() {
+        List<User> list = userRepository.findAll();
+        List<UserResponse> listResponse = new ArrayList<>();
+
+        for (User u: list) {
+            if(u.getRole().getRole_name().equalsIgnoreCase("staff")){
+                listResponse.add(convertUserToUserResponse(u, 2));
+            }
+
         }
         return listResponse;
     }
 
-    public UserResponse convertUserToUserResponse(User user){
+    public UserResponse convertUserToUserResponse(User user, Integer role_id){
         return UserResponse.builder()
                 .user_id(user.getUser_id())
-                .role_id(1)
+                .role_id(role_id)
                 .email(user.getEmail())
                 .phone(user.getPhone())
                 .sex(user.getSex())
@@ -148,25 +189,25 @@ public class UserImplement implements UserService {
                 .build();
     }
     @Override
-    public UserResponse getUser(Integer user_id) {
+    public UserResponse getMemberById(Integer user_id) {
         User user = userRepository.findByUser_id(user_id);
         if(user == null){
             user = new User();
         }
-        return convertUserToUserResponse(user);
+        return convertUserToUserResponse(user, 1);
     }
 
     @Override
-    public UserResponse getUser(String account) {
+    public UserResponse getMemberByAccount(String account) {
         User user = userRepository.findUserByAccount(account);
         if(user == null){
             user = new User();
         }
-        return convertUserToUserResponse(user);
+        return convertUserToUserResponse(user, 1);
     }
 
     @Override
-    public String deleteUser(Integer user_id) {
+    public String deleteMemberById(Integer user_id) {
         String mess = "";
         User user = userRepository.findByUser_id(user_id);
         if(user != null){
@@ -179,7 +220,7 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String updateUser(Integer user_id, UserUpdateRequest userUpdateDTO) {
+    public String updateMemberById(Integer user_id, UserUpdateRequest userUpdateDTO) {
         String mess = "";
         User user = userRepository.findByUser_id(user_id);
         // nếu như tồn tại cái cũ thì check và update cái mới userUpdateDTO
@@ -192,7 +233,7 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String updateUser(UserUpdateRequest userUpdateDTO) {
+    public String updateMember(UserUpdateRequest userUpdateDTO) {
         String mess = "";
         User user = userRepository.findUserByAccount(userUpdateDTO.getAccount());
         // nếu như tồn tại cái cũ thì check và update cái mới userUpdateDTO
@@ -205,7 +246,7 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String checkUserPassword(String password, String account) {
+    public String checkMemberPassword(String password, String account) {
         User user = userRepository.findUserByAccount(account);
         String mess ="";
         if(user!= null){
@@ -225,7 +266,7 @@ public class UserImplement implements UserService {
     }
 
     @Override
-    public String setUserPassword(String password, String account) {
+    public String setMemberPassword(String password, String account) {
         User user = userRepository.findUserByAccount(account);
         String mess ="";
         if(user!= null){

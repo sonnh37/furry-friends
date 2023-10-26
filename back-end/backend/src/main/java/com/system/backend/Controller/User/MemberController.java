@@ -17,27 +17,27 @@ public class MemberController {
     //get information user by account
     @GetMapping(Link.USER.MEMBERCRUD.GET)
     public ResponseEntity<UserResponse> getUser(@PathVariable String account) {
-        UserResponse user = userService.getUser(account);
+        UserResponse user = userService.getMemberByAccount(account);
         return ResponseEntity.ok(user);
     }
 
     // update inf by account
     @PutMapping(Link.USER.MEMBERCRUD.PUT)
     public String setPasswordUser(@RequestBody UserCheckPasswordRequest userCheckPasswordRequest) {
-        String message = userService.setUserPassword(userCheckPasswordRequest.getPassword()
+        String message = userService.setMemberPassword(userCheckPasswordRequest.getPassword()
                 , userCheckPasswordRequest.getAccount());
         return message;
     }
 
     @PutMapping
     public String updateDetailUser(@RequestBody UserUpdateRequest userUpdateRequest) {
-        String message = userService.updateUser(userUpdateRequest);
+        String message = userService.updateMember(userUpdateRequest);
         return message;
     }
     //check to update
     @PostMapping
     public String checkPasswordUser(@RequestBody UserCheckPasswordRequest userCheckPasswordRequest) {
-        String message = userService.checkUserPassword(userCheckPasswordRequest.getPassword()
+        String message = userService.checkMemberPassword(userCheckPasswordRequest.getPassword()
                 , userCheckPasswordRequest.getAccount());
         return message;
     }
