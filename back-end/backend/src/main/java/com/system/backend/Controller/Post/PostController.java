@@ -9,4 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(Link.CORS)
 @RequestMapping(Link.API_ROOT)
 public class PostController {
+
 }

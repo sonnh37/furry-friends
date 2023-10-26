@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductRequest {
     private String product_name;
-    private Integer price;
+    private Float price;
     private String image;
     private String description;
     private String date;
     private String phone;
-    private String type;
+    private String title;
     private String address;
+    private boolean status;
 }

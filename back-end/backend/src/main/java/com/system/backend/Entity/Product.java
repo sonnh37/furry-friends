@@ -26,7 +26,7 @@ public class Product {
     private String product_name;
 
     @Column(name = "[price]")
-    private Integer price;
+    private Float price;
 
     @Column(name = "[image]")
     private String image;
@@ -40,9 +40,12 @@ public class Product {
     @Column(name = "[phone]")
     private String phone;
 
-    @Column(name = "[type]")
-    private String type;
+    @Column(name = "[title]")
+    private String title;
 
     @Column(name = "address")
     private String address;
+
+    @Column(name = "status")
+    private boolean status;
 }

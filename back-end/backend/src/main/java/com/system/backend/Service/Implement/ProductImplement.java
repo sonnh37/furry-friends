@@ -34,8 +34,9 @@ public class ProductImplement implements ProductService {
                     .description(productRequest.getDescription())
                     .date(productRequest.getDate())
                     .phone(productRequest.getPhone())
-                    .type(productRequest.getType())
+                    .title(productRequest.getTitle())
                     .address(productRequest.getAddress())
+                    .status(true)
                     .build();
             productRepository.save(p);
             mess = "Them san pham thanh cong";
@@ -98,8 +99,9 @@ public class ProductImplement implements ProductService {
         pExist.setDescription(productRequest.getDescription());
         pExist.setDate(productRequest.getDate());
         pExist.setPhone(productRequest.getPhone());
-        pExist.setType(productRequest.getType());
+        pExist.setTitle(productRequest.getTitle());
         pExist.setAddress(productRequest.getAddress());
+        pExist.setStatus(true);
         productRepository.save(pExist);
     }
 
@@ -162,8 +164,9 @@ public class ProductImplement implements ProductService {
                 .description(product.getDescription())
                 .date(product.getDate())
                 .phone(product.getPhone())
-                .type(product.getType())
+                .type(product.getTitle())
                 .address(product.getAddress())
+                .status(product.isStatus())
                 .build();
     }
 }
