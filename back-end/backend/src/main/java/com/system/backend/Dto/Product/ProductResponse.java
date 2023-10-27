@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Lob;
 import java.util.List;
 
 @Data
@@ -16,6 +17,7 @@ public class ProductResponse {
     private Integer user_id;
     private String product_name;
     private Float price;
+    @Lob
     private List<String> img_productList;
     private String description;
     private String date;
