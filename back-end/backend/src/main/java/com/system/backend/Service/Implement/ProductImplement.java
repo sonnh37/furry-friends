@@ -102,6 +102,7 @@ public class ProductImplement implements ProductService {
 
         Product pExist = this.getProductHasFromUser(account, product_id);
         if (pExist != null) {
+            imgProductRepository.deleteAllByProduct_id(pExist.getProduct_id());
             productRepository.delete(pExist);
             mess = "Xoa thanh cong";
         } else{

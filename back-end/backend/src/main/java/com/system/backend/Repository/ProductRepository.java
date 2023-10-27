@@ -21,4 +21,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p WHERE p.user.user_id = :user_id AND p.product_id = :product_id")
     Product findProductsByUser_idAndProduct_id(@Param("product_id") Integer product_id,
                                                      @Param("user_id") Integer user_id);
+
+
+
 }
