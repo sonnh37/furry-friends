@@ -3,6 +3,7 @@ package com.system.backend.Service;
 import com.system.backend.Dto.Product.ProductRequest;
 import com.system.backend.Dto.Product.ProductResponse;
 import com.system.backend.Entity.Product;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

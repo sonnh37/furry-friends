@@ -10,6 +10,7 @@ import com.system.backend.util.Link;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -51,11 +52,18 @@ public class ProductController {
         return mess;
     }
 
+//    @PostMapping(Link.USER.PRODUCTCRUD.POST)
+//    public String insertProduct(@PathVariable String account,
+//                                @RequestBody ProductRequest productRequest)
+//    {
+//        String mess = productService.insertProduct(account,productRequest);
+//        return mess;
+//    }
     @PostMapping(Link.USER.PRODUCTCRUD.POST)
-    public String insertProduct(@PathVariable String account,
-                                @RequestBody ProductRequest productRequest)
-    {
+    public String addProduct(
+            @PathVariable String account, @RequestBody ProductRequest productRequest){
         String mess = productService.insertProduct(account,productRequest);
         return mess;
     }
+
 }
