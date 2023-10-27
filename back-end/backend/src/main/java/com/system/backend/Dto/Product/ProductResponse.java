@@ -16,7 +16,7 @@ public class ProductResponse {
     private Integer user_id;
     private String product_name;
     private Float price;
-    private List<String> img_stringList;
+    private List<String> img_productList;
     private String description;
     private String date;
     private String phone;

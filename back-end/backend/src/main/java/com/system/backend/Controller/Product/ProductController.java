@@ -52,13 +52,6 @@ public class ProductController {
         return mess;
     }
 
-//    @PostMapping(Link.USER.PRODUCTCRUD.POST)
-//    public String insertProduct(@PathVariable String account,
-//                                @RequestBody ProductRequest productRequest)
-//    {
-//        String mess = productService.insertProduct(account,productRequest);
-//        return mess;
-//    }
     @PostMapping(Link.USER.PRODUCTCRUD.POST)
     public String addProduct(
             @PathVariable String account, @RequestBody ProductRequest productRequest){
