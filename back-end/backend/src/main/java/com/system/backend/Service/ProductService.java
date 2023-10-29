@@ -13,6 +13,7 @@ public interface ProductService {
     String updateProduct(String account, Integer product_id, ProductRequest productRequest);
     List<ProductResponse> getAllProducts();
     List<ProductResponse> getProducts(String account);
-    ProductResponse getProduct(String account, Integer product_id);
+    ProductResponse getProductFromUser(String account, Integer product_id);
+    ProductResponse getProduct(Integer product_id);
 }
 

@@ -183,16 +183,24 @@ public class ProductImplement implements ProductService {
     }
 
     @Override
-    public ProductResponse getProduct(String account, Integer product_id) {
+    public ProductResponse getProductFromUser(String account, Integer product_id) {
         ProductResponse productResponse = new ProductResponse();
         User user = getProductExistFromUser(account);
-        System.out.println(user.getAccount());
         if(user != null){
             Product product = productRepository.findProductByProduct_id(product_id);
-            System.out.println(product.getProduct_name());
             if(product != null){
                 productResponse = convertProdductToProductResponse(product);
             }
+        }
+        return productResponse;
+    }
+
+    @Override
+    public ProductResponse getProduct(Integer product_id) {
+        Product product = productRepository.findProductByProduct_id(product_id);
+        ProductResponse productResponse = new ProductResponse();
+        if(product != null){
+            productResponse = convertProdductToProductResponse(product);
         }
         return productResponse;
     }

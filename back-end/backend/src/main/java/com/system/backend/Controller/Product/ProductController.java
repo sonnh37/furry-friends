@@ -35,11 +35,9 @@ public class ProductController {
         return ResponseEntity.ok(listFromUser);
     }
     @GetMapping(Link.USER.PRODUCTCRUD.GET)
-    public ResponseEntity<ProductResponse> getProductFromUser(@PathVariable String account,
-                                                              @PathVariable Integer product_id
-    )
+    public ResponseEntity<ProductResponse> getProductFromUser( @PathVariable Integer product_id )
     {
-        ProductResponse productResponse = productService.getProduct(account, product_id);
+        ProductResponse productResponse = productService.getProduct(product_id);
         return ResponseEntity.ok(productResponse);
     }
 
