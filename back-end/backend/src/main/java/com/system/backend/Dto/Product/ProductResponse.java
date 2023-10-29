@@ -22,7 +22,7 @@ public class ProductResponse {
     private String description;
     private String date;
     private String phone;
-    private String type;
+    private String title;
     private String address;
     private boolean status;
 }

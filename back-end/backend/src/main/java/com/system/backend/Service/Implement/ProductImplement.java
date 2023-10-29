@@ -231,7 +231,7 @@ public class ProductImplement implements ProductService {
                 .description(product.getDescription())
                 .date(product.getDate())
                 .phone(product.getPhone())
-                .type(product.getTitle())
+                .title(product.getTitle())
                 .address(product.getAddress())
                 .status(product.isStatus())
                 .build();
