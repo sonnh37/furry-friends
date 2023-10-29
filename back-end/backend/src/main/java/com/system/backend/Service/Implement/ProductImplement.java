@@ -126,7 +126,7 @@ public class ProductImplement implements ProductService {
         pExist.setProduct_name(productRequest.getProduct_name());
         pExist.setPrice(productRequest.getPrice());
         pExist.setDescription(productRequest.getDescription());
-        pExist.setDate(productRequest.getDate());
+        pExist.setDate(getDateNow());
         pExist.setPhone(productRequest.getPhone());
         pExist.setTitle(productRequest.getTitle());
         pExist.setAddress(productRequest.getAddress());
