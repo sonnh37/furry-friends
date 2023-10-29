@@ -11,7 +11,10 @@ import com.system.backend.Repository.UserRepository;
 import com.system.backend.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Service
 public class ProductImplement implements ProductService {
@@ -22,9 +25,17 @@ public class ProductImplement implements ProductService {
     private UserRepository userRepository;
     @Autowired
     private ImgProductRepository imgProductRepository;
-    // Hàm để chuyển inputStream thành src string (ví dụ)
+    public String getDateNow() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String strDate = formatter.format(date);
+        return strDate;
+    }
     @Override
     public String insertProduct(String account, ProductRequest productRequest) {
+
+        //xu li date
+        productRequest.setDate(getDateNow());
 
         // khong truyen tham so product_id
         String mess = "";
