@@ -168,7 +168,7 @@ public class ProductImplement implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> getProduct(String account) {
+    public List<ProductResponse> getProducts(String account) {
         List<Product> list = new ArrayList<>();
         List<ProductResponse> listConvert = new ArrayList<>();
        User u = getProductExistFromUser(account);
@@ -180,6 +180,21 @@ public class ProductImplement implements ProductService {
            }
        }
        return listConvert;
+    }
+
+    @Override
+    public ProductResponse getProduct(String account, Integer product_id) {
+        ProductResponse productResponse = new ProductResponse();
+        User user = getProductExistFromUser(account);
+        System.out.println(user.getAccount());
+        if(user != null){
+            Product product = productRepository.findProductByProduct_id(product_id);
+            System.out.println(product.getProduct_name());
+            if(product != null){
+                productResponse = convertProdductToProductResponse(product);
+            }
+        }
+        return productResponse;
     }
 
 //    @Override

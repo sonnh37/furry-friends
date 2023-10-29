@@ -35,7 +35,8 @@ public class Link {
 
         public static class PRODUCTCRUD{
             public static final String GETALLL = "/getAll";
-            public static final String GET = "/{account}";
+            public static final String GET = "/one/{account}-{product_id}";
+            public static final String GETALLFROMUSER = "/{account}";
             public static final String PUT = "/{account}-{product_id}";
             public static final String DELETE = "/{account}-{product_id}";
             public static final String POST = "/{account}";

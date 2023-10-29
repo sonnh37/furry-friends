@@ -28,11 +28,19 @@ public class ProductController {
         List<ProductResponse> list = productService.getAllProducts();
         return ResponseEntity.ok(list);
     }
-    @GetMapping(Link.USER.PRODUCTCRUD.GET)
+    @GetMapping(Link.USER.PRODUCTCRUD.GETALLFROMUSER)
     public ResponseEntity<List<ProductResponse>> getAllProductFromUser(@PathVariable String account)
     {
-        List<ProductResponse> listFromUser = productService.getProduct(account);
+        List<ProductResponse> listFromUser = productService.getProducts(account);
         return ResponseEntity.ok(listFromUser);
+    }
+    @GetMapping(Link.USER.PRODUCTCRUD.GET)
+    public ResponseEntity<ProductResponse> getProductFromUser(@PathVariable String account,
+                                                              @PathVariable Integer product_id
+    )
+    {
+        ProductResponse productResponse = productService.getProduct(account, product_id);
+        return ResponseEntity.ok(productResponse);
     }
 
     @PutMapping(Link.USER.PRODUCTCRUD.PUT)
