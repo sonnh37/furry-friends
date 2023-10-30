@@ -44,6 +44,17 @@ public class Link {
             public static final String DELETE = "/{account}-{product_id}";
             public static final String POST = "/{account}";
         }
+        public static final String POSTUP = "/user/posts";
+
+        public static class POSTCRUD{
+            public static final String GETALLL = "/getAll";
+            public static final String GET = "/one/{product_id}";
+            public static final String GETONEFROMUSER = "/one/{account}-{product_id}";
+            public static final String GETALLFROMUSER = "/{account}";
+            public static final String PUT = "/{account}-{product_id}";
+            public static final String DELETE = "/{account}-{product_id}";
+            public static final String POST = "/{account}";
+        }
 
 
     }

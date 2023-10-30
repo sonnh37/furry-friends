@@ -1,8 +1,18 @@
 package com.system.backend.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
+
 @Table(name = "[post_detail]")
 public class PostDetail {
 
@@ -27,8 +37,6 @@ public class PostDetail {
     @Column(name = "[image]")
     private String image;
 
-    @Column(name = "[comment]")
-    private String comment;
 
     @Column(name = "[total_like]")
     private Integer totalLike;
