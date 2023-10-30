@@ -1,7 +1,9 @@
 package com.system.backend.Service.Implement;
 
 import com.system.backend.Dto.Post.PostRequest;
+import com.system.backend.Dto.Post.PostResponse;
 import com.system.backend.Dto.Product.ProductRequest;
+import com.system.backend.Dto.Product.ProductResponse;
 import com.system.backend.Entity.*;
 import com.system.backend.Repository.PostDetailRepository;
 import com.system.backend.Repository.PostManagementRepository;
@@ -12,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PostImplement implements PostService {
@@ -63,5 +67,42 @@ public class PostImplement implements PostService {
 
 
         return mess;
+    }
+
+    @Override
+    public PostResponse getPost(Integer post_id) {
+        PostDetail postDetail = postDetailRepository.findPostByPost_Id(post_id);
+        PostResponse postResponse = new PostResponse();
+        if(postDetail != null){
+            postResponse = convertPostToPostResponse(postDetail);
+        }
+        return postResponse;
+    }
+
+    @Override
+    public List<PostResponse> getAllPosts() {
+        List<PostDetail> list = new ArrayList<>();
+        List<PostResponse> listConvert = new ArrayList<>();
+        list = postDetailRepository.findAll();
+        for (PostDetail p:
+                list) {
+            listConvert.add(convertPostToPostResponse(p));
+        }
+        return listConvert;
+    }
+    public PostResponse convertPostToPostResponse(PostDetail postDetail){
+        if(postDetail == null){
+            return PostResponse.builder().build();
+        }
+        // convert List<Img_Product> to List<String>
+
+        return PostResponse.builder()
+                .user_id(postDetail.getUser().getUser_id())
+                .user_name(postDetail.getUser().getFirst_name() + " " + postDetail.getUser().getLast_name())
+                .title(postDetail.getTitle())
+                .content(postDetail.getContent())
+                .publishdate(postDetail.getPublishDate())
+                .img(postDetail.getImage())
+                .build();
     }
 }

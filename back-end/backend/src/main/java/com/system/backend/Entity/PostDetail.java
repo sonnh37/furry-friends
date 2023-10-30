@@ -19,7 +19,7 @@ public class PostDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "[post_id]", nullable = false)
-    private Integer postID;
+    private Integer post_id;
 
     @ManyToOne
     @JoinColumn(name = "[user_id]", nullable = false, referencedColumnName = "[user_id]")
