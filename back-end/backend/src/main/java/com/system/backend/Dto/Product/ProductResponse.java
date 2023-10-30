@@ -15,6 +15,7 @@ import java.util.List;
 public class ProductResponse {
     private Integer product_id;
     private Integer user_id;
+    private String user_name;
     private String product_name;
     private Float price;
     @Lob
