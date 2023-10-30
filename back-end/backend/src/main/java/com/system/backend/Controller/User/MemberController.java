@@ -20,6 +20,11 @@ public class MemberController {
         UserResponse user = userService.getMemberByAccount(account);
         return ResponseEntity.ok(user);
     }
+    @GetMapping(Link.USER.MEMBERCRUD.GETONEALLROLE)
+    public ResponseEntity<UserResponse> getUserAllRole(@PathVariable String account) {
+        UserResponse user = userService.getMemberByAccountAllRole(account);
+        return ResponseEntity.ok(user);
+    }
 
     // update inf by account
     @PutMapping(Link.USER.MEMBERCRUD.PUT)

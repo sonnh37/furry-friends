@@ -199,11 +199,23 @@ public class UserImplement implements UserService {
 
     @Override
     public UserResponse getMemberByAccount(String account) {
+        UserResponse userResponse = new UserResponse();
         User user = userRepository.findUserByAccount(account);
         if(user == null){
             user = new User();
         }
-        return convertUserToUserResponse(user, 1);
+        if(user.getRole().getRole_id() == 1){
+            userResponse = convertUserToUserResponse(user, user.getRole().getRole_id());
+        }
+        return userResponse;
+    }
+    @Override
+    public UserResponse getMemberByAccountAllRole(String account) {
+        User user = userRepository.findUserByAccount(account);
+        if(user == null){
+            user = new User();
+        }
+        return convertUserToUserResponse(user, user.getRole().getRole_id());
     }
 
     @Override

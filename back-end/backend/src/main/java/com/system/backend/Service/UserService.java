@@ -11,6 +11,7 @@ public interface UserService {
     String createToken(UserAuthRequest authRequest) throws Exception;
     // member
     UserResponse getMemberByAccount(String account);
+    UserResponse getMemberByAccountAllRole(String account);
     String updateMember(UserUpdateRequest userUpdateDTO);
     String checkMemberPassword(String password, String account);
     String setMemberPassword(String password, String account);

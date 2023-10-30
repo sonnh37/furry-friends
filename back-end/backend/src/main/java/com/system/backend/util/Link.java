@@ -7,9 +7,11 @@ public class Link {
     public static final String REGISTER = "/register";
     public static class USER{
         public static final String MEMBER = "/user/member";
+
         public static class MEMBERCRUD{
 
             public static final String GET = "/singleuser/{account}";
+            public static final String GETONEALLROLE = "/singleuser/allrole/{account}";
             public static final String PUT = "/setpass";
             public static final String DELETE = "/users";
             public static final String POST = "/users";
