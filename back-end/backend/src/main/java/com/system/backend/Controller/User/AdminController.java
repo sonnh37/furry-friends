@@ -26,4 +26,9 @@ public class AdminController {
     {
         return userService.addStaff(userRegisterRequest);
     }
+    @PostMapping(Link.USER.ADMINCRUD.POSTADMIN)
+    public String AddAdmin(@RequestBody UserRegisterRequest userRegisterRequest)
+    {
+        return userService.addAdmin(userRegisterRequest);
+    }
 }

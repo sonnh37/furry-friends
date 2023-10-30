@@ -31,7 +31,7 @@ public class Link {
             public static final String GET = "/singleuser/{account}";
             public static final String GETALL = "/setpass";
             public static final String DELETE = "/users";
-            public static final String POST = "/users";
+            public static final String POSTADMIN = "/addadmin";
         }
         public static final String PRODUCT = "/user/products";
 

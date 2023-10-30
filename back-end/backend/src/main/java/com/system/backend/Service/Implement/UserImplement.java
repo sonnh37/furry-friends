@@ -101,6 +101,28 @@ public class UserImplement implements UserService {
         }
         return userRepository.findUserByAccount(userExist.getAccount()).getUser_id().toString();
     }
+    @Override
+    public String addAdmin(UserRegisterRequest userRegisterRequest) {
+        User userExist = userRepository.findUserByAccount(userRegisterRequest.getAccount());
+        if(userExist == null){ // add new
+            userExist = User.builder()
+                    .role(userRepository.findByRoleId(3))
+                    .password(this.passwordEncoder.encode(userRegisterRequest.getPassword()))
+                    .email(userRegisterRequest.getEmail())
+                    .phone(userRegisterRequest.getPhone())
+                    .sex(userRegisterRequest.getSex())
+                    .birth(userRegisterRequest.getBirth())
+                    .last_name(userRegisterRequest.getLast_name())
+                    .first_name(userRegisterRequest.getFirst_name())
+                    .account(userRegisterRequest.getAccount())
+                    .address(userRegisterRequest.getAddress())
+                    .build();
+            userRepository.save(userExist);
+        } else{
+            return "tai khoan da ton tai!";
+        }
+        return userRepository.findUserByAccount(userExist.getAccount()).getUser_id().toString();
+    }
 
     private void revokeAllUserTokens(User user) {
         List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getUser_id());

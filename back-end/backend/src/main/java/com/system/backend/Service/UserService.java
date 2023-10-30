@@ -26,6 +26,7 @@ public interface UserService {
     //admin
     List<UserResponse> getAllStaff();
     String addStaff(UserRegisterRequest userRegisterRequest);
+    String addAdmin(UserRegisterRequest userRegisterRequest);
 
 
 }
