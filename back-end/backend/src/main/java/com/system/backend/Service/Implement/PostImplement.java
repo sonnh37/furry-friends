@@ -46,7 +46,7 @@ public class PostImplement implements PostService {
                     .title(postRequest.getTitle())
                     .content(postRequest.getContent())
                     .publishDate(postRequest.getPublishdate())
-                    .image(postRequest.getImg())
+                    .image(postRequest.getImage())
                     .build();
             PostManagement postManagement = PostManagement.builder()
                     .user(u)
@@ -108,7 +108,7 @@ public class PostImplement implements PostService {
         pExist.setTitle(postRequest.getTitle());
         pExist.setContent(postRequest.getContent());
         pExist.setPublishDate(getDateNow());
-        pExist.setImage(postRequest.getImg());
+        pExist.setImage(postRequest.getImage());
 
         postDetailRepository.save(pExist);
     }

@@ -19,5 +19,5 @@ public class PostRequest {
     private String content;
     private String publishdate;
     @Lob
-    private String img;
+    private String image;
 }
