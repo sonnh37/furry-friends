@@ -19,6 +19,8 @@ import java.util.List;
 public interface PostDetailRepository extends JpaRepository<PostDetail, Integer> {
     @Query("SELECT p FROM PostDetail p WHERE p.post_id = :post_id")
     PostDetail findPostByPost_Id(@Param("post_id") Integer post_id);
+    @Query("SELECT p FROM PostDetail p WHERE p.user.account = :account")
+    List<PostDetail> findPostByAccount(@Param("account") String account);
     @Query("SELECT p FROM Product p WHERE p.user.user_id = :user_id")
     List<Product> findProductsByUser_id(@Param("user_id") Integer user_id);
     @Query("SELECT p FROM PostDetail p WHERE p.user.user_id = :user_id AND p.post_id = :post_id")
@@ -27,4 +29,7 @@ public interface PostDetailRepository extends JpaRepository<PostDetail, Integer>
     @Modifying
     @Query("DELETE FROM PostDetail post WHERE post.post_id  = :post_id")
     void deletePostDetailByPost_id(@Param("post_id") Integer post_id);
+    @Modifying
+    @Query("DELETE FROM PostDetail post WHERE post.user.user_id  = :user_id")
+    void deletePostDetailByUser_id(@Param("user_id") Integer user_id);
 }

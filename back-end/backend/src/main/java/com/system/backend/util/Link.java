@@ -48,10 +48,27 @@ public class Link {
 
         public static class POSTCRUD{
             public static final String GETALLL = "/getALL";
+            public static final String GETALLLBYACCOUNT = "/getALL/{account}";
             public static final String GET = "/one/{post_id}";
             public static final String PUT = "/{account}-{post_id}";
             public static final String DELETE = "/{account}-{post_id}";
             public static final String POST = "/{account}";
+        }
+        public static final String  POSTLIKE = "/user/likes";
+        public static class POST_LIKE_CRUD{
+            public static final String GETALLL = "/getAll";
+            public static final String GET = "/one/{post_id}";
+            public static final String PUT = "/{account}-{post_id}";
+            public static final String DELETE = "/{account}-{post_id}";
+            public static final String POST = "/{account}-{post_id}";
+        }
+        public static final String  POSTCOMMENT = "/user/comments";
+        public static class POST_CMT_CRUD{
+            public static final String GETALLL = "/getALL/{post_id}";
+            public static final String GET = "/one/{post_id}";
+            public static final String PUT = "/{account}-{post_id}";
+            public static final String DELETE = "/{account}-{post_id}";
+            public static final String POST = "/{account}-{post_id}";
         }
 
 

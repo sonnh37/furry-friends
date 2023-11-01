@@ -1,26 +1,20 @@
-package com.system.backend.Dto.Post;
+package com.system.backend.Dto.PostComment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Lob;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PostResponse {
+public class PostCommentResponse {
+    private Integer comment_id;
     private Integer post_id;
     private Integer user_id;
     private String user_name;
-    private String title;
-    private String content;
-    private String publishdate;
-    private Integer total_like;
-    private Integer total_comment;
-    @Lob
-    private String image;
     private String account;
+    private String comment;
+    private String publish_date_comment;
 }

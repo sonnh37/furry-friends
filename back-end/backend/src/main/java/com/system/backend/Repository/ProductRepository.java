@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @EnableJpaRepositories
+@Transactional
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 

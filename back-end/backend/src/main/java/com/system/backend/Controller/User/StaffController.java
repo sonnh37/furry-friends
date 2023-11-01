@@ -2,7 +2,10 @@ package com.system.backend.Controller.User;
 
 import com.system.backend.Dto.User.UserResponse;
 import com.system.backend.Dto.User.UserUpdateRequest;
+import com.system.backend.Entity.PostManagement;
 import com.system.backend.Entity.User;
+import com.system.backend.Service.PostManagementService;
+import com.system.backend.Service.PostService;
 import com.system.backend.Service.UserService;
 import com.system.backend.util.Link;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,10 @@ import java.util.List;
 public class StaffController { //member(view users(getUsers), delete, update),product, post
     @Autowired
     private UserService userService;
+    @Autowired
+    private PostService postService;
+    @Autowired
+    private PostManagementService postManagementService;
 
     //get one user
     @GetMapping(Link.USER.STAFFCRUD.GET)
@@ -43,7 +50,30 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
     //dellete
     @DeleteMapping(Link.USER.STAFFCRUD.DELETE)
     public String deleteUser(@PathVariable Integer user_id) {
-        String message = userService.deleteMemberById(user_id);
+        String message = "";
+        // co bai post, xoa post trc xoa user
+        List<PostManagement> postManagement = postManagementService.getPostManagementByUser_id(user_id);
+        if(postManagement != null){
+            UserResponse user = userService.getMemberById(user_id);
+            if(user.getAccount() != null){
+                String mess = "";
+                for(PostManagement postManagement1: postManagement){
+                    mess = postService.deleteDataByStaff(postManagement1.getPostDetail().getPost_id());
+                }
+                //String mess = postService.clearDataFromUser(user.getAccount());
+                if(mess == "Xoa thanh cong"){
+                    message = userService.deleteMemberById(user_id);
+                } else{
+                    message = "xoa post that bai";
+                }
+            } else{
+                message = "account loi";
+            }
+        } else {
+            message = userService.deleteMemberById(user_id);
+        }
+
+
         return message;
     }
 

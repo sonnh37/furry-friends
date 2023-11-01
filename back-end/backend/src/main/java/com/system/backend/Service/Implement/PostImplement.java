@@ -5,10 +5,7 @@ import com.system.backend.Dto.Post.PostResponse;
 import com.system.backend.Dto.Product.ProductRequest;
 import com.system.backend.Dto.Product.ProductResponse;
 import com.system.backend.Entity.*;
-import com.system.backend.Repository.PostDetailRepository;
-import com.system.backend.Repository.PostManagementRepository;
-import com.system.backend.Repository.ProductRepository;
-import com.system.backend.Repository.UserRepository;
+import com.system.backend.Repository.*;
 import com.system.backend.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +22,15 @@ public class PostImplement implements PostService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private PostLikeRepository postLikeRepository;
+    @Autowired
+    private PostCommentRepository postCommentRepository;
+    @Autowired
     private PostManagementRepository postManagementRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ImgProductRepository imgProductRepository;
     public String getDateNow() {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -46,6 +51,8 @@ public class PostImplement implements PostService {
                     .title(postRequest.getTitle())
                     .content(postRequest.getContent())
                     .publishDate(postRequest.getPublishdate())
+                    .totalLike(0)
+                    .totalComment(0)
                     .image(postRequest.getImage())
                     .build();
             PostManagement postManagement = PostManagement.builder()
@@ -82,16 +89,70 @@ public class PostImplement implements PostService {
 
         PostDetail pExist = this.getPostHasFromUser(account, post_id);
         if (pExist != null) {
+            User user = userRepository.findUserByAccount(account);
+
+            // post_like
+            postLikeRepository.deleteLikeByPost_id(post_id);
+            //post_comment
+            postCommentRepository.deleteCommentByPost_id(post_id);
             //post_management
             postManagementRepository.deletePostManagementByPost_id(post_id);
             //post_detail
             postDetailRepository.deletePostDetailByPost_id(post_id);
+
             mess = "Xoa thanh cong";
         } else{
             mess = "post not exist";
         }
         return mess;
     }
+
+    @Override
+    public String deleteDataByStaff(Integer post_id) {
+        String mess = "";
+            // post_like
+            postLikeRepository.deleteLikeByPost_id(post_id);
+            //post_comment
+            postCommentRepository.deleteCommentByPost_id(post_id);
+            //post_management
+            postManagementRepository.deletePostManagementByPost_id(post_id);
+            //post_detail
+            postDetailRepository.deletePostDetailByPost_id(post_id);
+            mess = "Xoa thanh cong";
+        return mess;
+    }
+
+
+    @Override
+    public String clearDataFromUser(String account) {
+        String message = "";
+        User user = userRepository.findUserByAccount(account);
+        if (user != null) {
+            //img-product
+            List<Product> productList = productRepository.findProductsByUser_id(user.getUser_id());
+
+            for (Product p: productList){
+                imgProductRepository.deleteAllByProduct_id(p.getProduct_id());
+                productRepository.delete(p);
+            }
+            //product
+
+            // post_like
+            postLikeRepository.deleteLikeByUser_id(user.getUser_id());
+            //post_comment
+            postCommentRepository.deleteCommentByUser_id(user.getUser_id());
+            //post_management
+            postManagementRepository.deletePostManagementByUser_id(user.getUser_id());
+            //post_detail
+            postDetailRepository.deletePostDetailByUser_id(user.getUser_id());
+            message = "Cleared";
+        } else{
+            message = "Not found account";
+        }
+        return message;
+
+    }
+
     @Override
     public String updatePost(String account, Integer post_id, PostRequest postRequest) {
         String mess = "";
@@ -134,6 +195,22 @@ public class PostImplement implements PostService {
         }
         return listConvert;
     }
+
+    @Override
+    public List<PostResponse> getAllPostsByAccount(String account) {
+        List<PostDetail> list = new ArrayList<>();
+        List<PostResponse> listConvert = new ArrayList<>();
+        //User user = userRepository.findUserByAccount(account);
+
+        list = postDetailRepository.findPostByAccount(account);
+        for (PostDetail p:
+                list) {
+            listConvert.add(convertPostToPostResponse(p));
+        }
+
+        return listConvert;
+    }
+
     public PostResponse convertPostToPostResponse(PostDetail postDetail){
         if(postDetail == null){
             return PostResponse.builder().build();
@@ -144,11 +221,16 @@ public class PostImplement implements PostService {
                 .post_id(postDetail.getPost_id())
                 .user_id(postDetail.getUser().getUser_id())
                 .account(postDetail.getUser().getAccount())
+                .total_like(postDetail.getTotalLike())
+                .total_comment(postDetail.getTotalComment())
                 .user_name(postDetail.getUser().getFirst_name() + " " + postDetail.getUser().getLast_name())
                 .title(postDetail.getTitle())
                 .content(postDetail.getContent())
                 .publishdate(postDetail.getPublishDate())
-                .img(postDetail.getImage())
+                .image(postDetail.getImage())
                 .build();
     }
+
+
+
 }

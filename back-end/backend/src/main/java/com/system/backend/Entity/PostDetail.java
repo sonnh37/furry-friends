@@ -40,6 +40,8 @@ public class PostDetail {
 
     @Column(name = "[total_like]")
     private Integer totalLike;
+    @Column(name = "[total_comment]")
+    private Integer totalComment;
 
     // getters and setters
 }
