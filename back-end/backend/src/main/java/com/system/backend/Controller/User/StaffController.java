@@ -4,9 +4,8 @@ import com.system.backend.Dto.User.UserResponse;
 import com.system.backend.Dto.User.UserUpdateRequest;
 import com.system.backend.Entity.PostManagement;
 import com.system.backend.Entity.User;
-import com.system.backend.Service.PostManagementService;
-import com.system.backend.Service.PostService;
-import com.system.backend.Service.UserService;
+import com.system.backend.Repository.ProductRepository;
+import com.system.backend.Service.*;
 import com.system.backend.util.Link;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +23,10 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
     private PostService postService;
     @Autowired
     private PostManagementService postManagementService;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private TokenService tokenService;
 
     //get one user
     @GetMapping(Link.USER.STAFFCRUD.GET)
@@ -57,15 +60,16 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
             UserResponse user = userService.getMemberById(user_id);
             if(user.getAccount() != null){
                 String mess = "";
+                tokenService.deleteTokenByUser_id(user_id);
+                postService.clearDataFromUser(user.getAccount());
                 for(PostManagement postManagement1: postManagement){
                     mess = postService.deleteDataByStaff(postManagement1.getPostDetail().getPost_id());
                 }
+
                 //String mess = postService.clearDataFromUser(user.getAccount());
-                if(mess == "Xoa thanh cong"){
-                    message = userService.deleteMemberById(user_id);
-                } else{
-                    message = "xoa post that bai";
-                }
+
+                message = userService.deleteMemberById(user_id);
+
             } else{
                 message = "account loi";
             }

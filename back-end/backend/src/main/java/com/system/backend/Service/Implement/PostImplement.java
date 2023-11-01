@@ -110,46 +110,33 @@ public class PostImplement implements PostService {
     @Override
     public String deleteDataByStaff(Integer post_id) {
         String mess = "";
-            // post_like
-            postLikeRepository.deleteLikeByPost_id(post_id);
-            //post_comment
-            postCommentRepository.deleteCommentByPost_id(post_id);
-            //post_management
-            postManagementRepository.deletePostManagementByPost_id(post_id);
-            //post_detail
-            postDetailRepository.deletePostDetailByPost_id(post_id);
-            mess = "Xoa thanh cong";
+        // post_like
+        postLikeRepository.deleteLikeByPost_id(post_id);
+        //post_comment
+        postCommentRepository.deleteCommentByPost_id(post_id);
+        //post_management
+        postManagementRepository.deletePostManagementByPost_id(post_id);
+        //post_detail
+        postDetailRepository.deletePostDetailByPost_id(post_id);
+        mess = "Xoa thanh cong";
         return mess;
     }
 
 
     @Override
-    public String clearDataFromUser(String account) {
-        String message = "";
+    public void clearDataFromUser(String account) {
         User user = userRepository.findUserByAccount(account);
         if (user != null) {
             //img-product
             List<Product> productList = productRepository.findProductsByUser_id(user.getUser_id());
 
-            for (Product p: productList){
-                imgProductRepository.deleteAllByProduct_id(p.getProduct_id());
-                productRepository.delete(p);
+            if(productList != null){
+                for (Product p : productList) {
+                    imgProductRepository.deleteAllByProduct_id(p.getProduct_id());
+                    productRepository.delete(p);
+                }
             }
-            //product
-
-            // post_like
-            postLikeRepository.deleteLikeByUser_id(user.getUser_id());
-            //post_comment
-            postCommentRepository.deleteCommentByUser_id(user.getUser_id());
-            //post_management
-            postManagementRepository.deletePostManagementByUser_id(user.getUser_id());
-            //post_detail
-            postDetailRepository.deletePostDetailByUser_id(user.getUser_id());
-            message = "Cleared";
-        } else{
-            message = "Not found account";
         }
-        return message;
 
     }
 
