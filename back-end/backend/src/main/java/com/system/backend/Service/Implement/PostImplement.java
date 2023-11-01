@@ -68,6 +68,50 @@ public class PostImplement implements PostService {
 
         return mess;
     }
+    private PostDetail getPostHasFromUser(String account, Integer post_id){
+        User user = userRepository.findUserByAccount(account);
+        PostDetail postDetail = null;
+        if(user != null){
+            postDetail = postDetailRepository.findPostsByUser_idAndPost_id(post_id, user.getUser_id());
+        }
+        return postDetail;
+    }
+    @Override
+    public String deletePost(String account, Integer post_id) {
+        String mess = "";
+
+        PostDetail pExist = this.getPostHasFromUser(account, post_id);
+        if (pExist != null) {
+            //post_management
+            postManagementRepository.deletePostManagementByPost_id(post_id);
+            //post_detail
+            postDetailRepository.deletePostDetailByPost_id(post_id);
+            mess = "Xoa thanh cong";
+        } else{
+            mess = "post not exist";
+        }
+        return mess;
+    }
+    @Override
+    public String updatePost(String account, Integer post_id, PostRequest postRequest) {
+        String mess = "";
+        PostDetail pExist = this.getPostHasFromUser(account, post_id);
+        if (pExist != null) {
+            updatePostDetail(pExist, postRequest);
+            mess = "Cap nhat thanh cong";
+        } else{
+            mess = "post not exist";
+        }
+        return mess;
+    }
+    public void updatePostDetail(PostDetail pExist, PostRequest postRequest){
+        pExist.setTitle(postRequest.getTitle());
+        pExist.setContent(postRequest.getContent());
+        pExist.setPublishDate(getDateNow());
+        pExist.setImage(postRequest.getImg());
+
+        postDetailRepository.save(pExist);
+    }
 
     @Override
     public PostResponse getPost(Integer post_id) {

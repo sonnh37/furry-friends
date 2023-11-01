@@ -24,13 +24,13 @@ public class Product {
     @JoinColumn(name = "[user_id]", referencedColumnName = "[user_id]")
     private User user;
 
-    @Column(name = "[product_name]")
+    @Column(name = "[product_name]",  columnDefinition = "nvarchar(255)")
     private String product_name;
 
     @Column(name = "[price]")
     private Float price;
 
-    @Column(name = "[description]")
+    @Column(name = "[description]", columnDefinition = "nvarchar(3000)")
     private String description;
 
     @Column(name = "[date]")
@@ -39,10 +39,10 @@ public class Product {
     @Column(name = "[phone]")
     private String phone;
 
-    @Column(name = "[title]")
+    @Column(name = "[title]", columnDefinition = "nvarchar(255)")
     private String title;
 
-    @Column(name = "address")
+    @Column(name = "address", columnDefinition = "nvarchar(255)")
     private String address;
 
     @Column(name = "status")

@@ -25,16 +25,16 @@ public class PostDetail {
     @JoinColumn(name = "[user_id]", nullable = false, referencedColumnName = "[user_id]")
     private User user;
 
-    @Column(name = "[title]")
+    @Column(name = "[title]", columnDefinition = "nvarchar(255)")
     private String title;
 
-    @Column(name = "[content]")
+    @Column(name = "[content]" , columnDefinition = "nvarchar(3000)")
     private String content;
 
     @Column(name = "[publishdate]")
     private String publishDate;
 
-    @Column(name = "[image]")
+    @Column(name = "[image]" , columnDefinition = "varchar(max)")
     private String image;
 
 

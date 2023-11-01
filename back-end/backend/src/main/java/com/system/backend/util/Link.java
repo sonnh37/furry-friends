@@ -49,10 +49,11 @@ public class Link {
         public static class POSTCRUD{
             public static final String GETALLL = "/getALL";
             public static final String GET = "/one/{post_id}";
-            public static final String PUT = "/{account}-{product_id}";
-            public static final String DELETE = "/{account}-{product_id}";
+            public static final String PUT = "/{account}-{post_id}";
+            public static final String DELETE = "/{account}-{post_id}";
             public static final String POST = "/{account}";
         }
+
 
 
     }

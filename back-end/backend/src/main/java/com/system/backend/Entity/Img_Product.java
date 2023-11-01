@@ -23,8 +23,8 @@ public class Img_Product {
     @JoinColumn(name = "[product_id]", referencedColumnName = "[product_id]")
     private Product product;
 
-    @Lob
-    @Column(name = "src" )
+
+    @Column(name = "src" , columnDefinition = "varchar(max)")
     private String src;
 
 

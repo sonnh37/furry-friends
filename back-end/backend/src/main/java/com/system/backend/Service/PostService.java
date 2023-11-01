@@ -11,4 +11,6 @@ public interface PostService {
     String insertPost(String account, PostRequest postRequest);
     PostResponse getPost(Integer product_id);
     List<PostResponse> getAllPosts();
+    String deletePost(String account, Integer post_id);
+    String updatePost(String account, Integer post_id, PostRequest postRequest);
 }

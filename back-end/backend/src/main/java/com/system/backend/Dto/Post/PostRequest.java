@@ -15,6 +15,7 @@ public class PostRequest {
     private Integer user_id;
 
     private String title;
+    @Lob
     private String content;
     private String publishdate;
     @Lob

@@ -31,6 +31,22 @@ public class PostController {
         PostResponse postResponse = postService.getPost(post_id);
         return ResponseEntity.ok(postResponse);
     }
+    @PutMapping(Link.USER.POSTCRUD.PUT)
+    public String updatePost(@PathVariable String account,
+                                @PathVariable Integer post_id,
+                                @RequestBody PostRequest postRequest)
+    {
+        String mess = postService.updatePost(account,post_id,postRequest);
+        return mess;
+    }
+
+    @DeleteMapping(Link.USER.POSTCRUD.DELETE)
+    public String deletePost(@PathVariable String account,
+                                @PathVariable Integer post_id)
+    {
+        String mess = postService.deletePost(account,post_id);
+        return mess;
+    }
     @PostMapping(Link.USER.POSTCRUD.POST)
     public String addPost(
             @PathVariable String account, @RequestBody PostRequest postRequest){
