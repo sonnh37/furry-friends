@@ -97,7 +97,9 @@ public class PostImplement implements PostService {
         // convert List<Img_Product> to List<String>
 
         return PostResponse.builder()
+                .post_id(postDetail.getPost_id())
                 .user_id(postDetail.getUser().getUser_id())
+                .account(postDetail.getUser().getAccount())
                 .user_name(postDetail.getUser().getFirst_name() + " " + postDetail.getUser().getLast_name())
                 .title(postDetail.getTitle())
                 .content(postDetail.getContent())

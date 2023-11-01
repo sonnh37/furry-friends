@@ -32,7 +32,7 @@ public class PostController {
         return ResponseEntity.ok(postResponse);
     }
     @PostMapping(Link.USER.POSTCRUD.POST)
-    public String addProduct(
+    public String addPost(
             @PathVariable String account, @RequestBody PostRequest postRequest){
         String mess = postService.insertPost(account,postRequest);
         return mess;

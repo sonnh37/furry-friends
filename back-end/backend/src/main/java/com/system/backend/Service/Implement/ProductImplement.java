@@ -237,6 +237,7 @@ public class ProductImplement implements ProductService {
         return ProductResponse.builder()
                 .product_id(product.getProduct_id())
                 .user_id(product.getUser().getUser_id())
+                .account(product.getUser().getAccount())
                 .user_name(product.getUser().getFirst_name() + " " + product.getUser().getLast_name())
                 .product_name(product.getProduct_name())
                 .price(product.getPrice())

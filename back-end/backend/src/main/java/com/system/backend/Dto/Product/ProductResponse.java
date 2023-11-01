@@ -26,4 +26,5 @@ public class ProductResponse {
     private String title;
     private String address;
     private boolean status;
+    private String account;
 }

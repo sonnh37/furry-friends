@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 @NoArgsConstructor
 @Builder
 public class PostResponse {
+    private Integer post_id;
     private Integer user_id;
     private String user_name;
     private String title;
@@ -19,4 +20,5 @@ public class PostResponse {
     private String publishdate;
     @Lob
     private String img;
+    private String account;
 }
