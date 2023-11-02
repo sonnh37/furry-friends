@@ -67,7 +67,7 @@ public class Link {
             public static final String GETALLL = "/getALL/{post_id}";
             public static final String GET = "/one/{post_id}";
             public static final String PUT = "/{account}-{post_id}";
-            public static final String DELETE = "/{account}-{post_id}";
+            public static final String DELETE = "/{post_id}-{comment_id}";
             public static final String POST = "/{account}-{post_id}";
         }
 

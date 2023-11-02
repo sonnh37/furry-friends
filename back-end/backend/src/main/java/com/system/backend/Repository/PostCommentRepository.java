@@ -19,6 +19,9 @@ public interface PostCommentRepository extends JpaRepository<PostComment, Intege
     @Query("DELETE FROM PostComment post WHERE post.postDetail.post_id  = :post_id AND post.user.user_id = :user_id ")
     void deleteCommentByPost_idAndUser_id(@Param("post_id") Integer post_id, @Param("user_id") Integer user_id);
     @Modifying
+    @Query("DELETE FROM PostComment post WHERE post.commentID = :comment_id")
+    void deleteCommentByComment_id(@Param("comment_id") Integer comment_id);
+    @Modifying
     @Query("DELETE FROM PostComment post WHERE post.postDetail.post_id  = :post_id ")
     void deleteCommentByPost_id(@Param("post_id") Integer post_id);
     @Modifying

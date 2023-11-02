@@ -26,10 +26,12 @@ public class PostCommentController {
         return mess;
     }
     @DeleteMapping(Link.USER.POST_CMT_CRUD.DELETE)
-    public String deleteComment(@PathVariable String account,
-                             @PathVariable Integer post_id)
+    public String deleteComment(@PathVariable Integer post_id,
+                                @PathVariable Integer comment_id
+
+    )
     {
-        String mess = postCommentService.deleteComment(account,post_id);
+        String mess = postCommentService.deleteCommentByPostAndCommentId(post_id, comment_id);
         return mess;
     }
     @GetMapping(Link.USER.POST_CMT_CRUD.GETALLL)

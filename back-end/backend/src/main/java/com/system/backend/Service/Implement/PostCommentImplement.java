@@ -84,6 +84,23 @@ public class PostCommentImplement implements PostCommentService {
         return mess;
     }
     @Override
+    public String deleteCommentByPostAndCommentId(Integer post_id, Integer comment_id) {
+        String mess = "";
+        PostDetail pExist = postDetailRepository.findPostByPost_Id(post_id); // post của owner post
+        if (pExist != null) {
+            postCommentRepository.deleteCommentByComment_id(comment_id);
+            List<PostComment> postCommentList = new ArrayList<>();
+            postCommentList = postCommentRepository.findAll();
+            pExist.setTotalComment(postCommentList.size());
+            postDetailRepository.save(pExist);
+            mess = "Xoa thanh cong";
+        } else{
+            mess = "post not exist";
+        }
+        return mess;
+    }
+
+    @Override
     public List<PostCommentResponse> getAllCommentByPost_id(Integer post_id) {
         List<PostComment> list = new ArrayList<>();
         List<PostCommentResponse> listConvert = new ArrayList<>();
