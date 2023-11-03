@@ -28,7 +28,7 @@ public class PostComment {
     @JoinColumn(name = "[user_id]", nullable = false, referencedColumnName = "[user_id]")
     private User user;
 
-    @Column(name = "[comment]")
+    @Column(name = "[comment]", columnDefinition = "nvarchar(255)")
     private String comment;
 
     @Column(name = "[publish_date_comment]")

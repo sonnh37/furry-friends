@@ -107,7 +107,7 @@ public class PostCommentImplement implements PostCommentService {
     public List<PostCommentResponse> getAllCommentByPost_id(Integer post_id) {
         List<PostComment> list = new ArrayList<>();
         List<PostCommentResponse> listConvert = new ArrayList<>();
-        list = postCommentRepository.findAll();
+        list = postCommentRepository.findCommentByPost_id(post_id);
         for (PostComment p:
                 list) {
             listConvert.add(convertRequestToResponse(p));
