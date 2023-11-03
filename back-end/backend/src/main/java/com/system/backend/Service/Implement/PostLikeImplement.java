@@ -1,10 +1,7 @@
 package com.system.backend.Service.Implement;
 
 import com.system.backend.Dto.Post.PostRequest;
-import com.system.backend.Entity.PostDetail;
-import com.system.backend.Entity.PostLike;
-import com.system.backend.Entity.PostManagement;
-import com.system.backend.Entity.User;
+import com.system.backend.Entity.*;
 import com.system.backend.Repository.PostDetailRepository;
 import com.system.backend.Repository.PostLikeRepository;
 import com.system.backend.Repository.PostManagementRepository;
@@ -13,6 +10,9 @@ import com.system.backend.Service.PostLikeService;
 import com.system.backend.Service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PostLikeImplement  implements PostLikeService {
@@ -51,7 +51,10 @@ public class PostLikeImplement  implements PostLikeService {
                         .build();
                 postLikeRepository.save(postLike);
                 // tang 1 like trong totallike
-                postDetail.setTotalLike(postDetail.getTotalLike() + 1);
+                // cap nhat số cmt
+                List<PostLike> postLikeList = new ArrayList<>();
+                postLikeList = postLikeRepository.findLikeByPost_id(post_id);
+                postDetail.setTotalLike(postLikeList.size());
                 postDetailRepository.save(postDetail);
 
                 mess = "Them like thanh cong";
@@ -75,14 +78,16 @@ public class PostLikeImplement  implements PostLikeService {
     public String deleteLike(String account, Integer post_id) {
         String mess = "";
 
-        PostDetail pExist = this.getPostHasFromUser(account, post_id);
-        if (pExist != null) {
+        PostDetail postDetail = this.getPostHasFromUser(account, post_id);
+        if (postDetail != null) {
             User user = userRepository.findUserByAccount(account);
             //xoa like cua postLike dua theo account va post_id
             postLikeRepository.deleteLikeByPost_idAndUser_id(post_id, user.getUser_id());
             // tang 1 like trong totallike
-            pExist.setTotalLike(pExist.getTotalLike() - 1);
-            postDetailRepository.save(pExist);
+            List<PostLike> postLikeList = new ArrayList<>();
+            postLikeList = postLikeRepository.findLikeByPost_id(post_id);
+            postDetail.setTotalLike(postLikeList.size());
+            postDetailRepository.save(postDetail);
             mess = "Unlike thanh cong";
         } else{
             mess = "post not exist";

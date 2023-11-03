@@ -41,17 +41,19 @@ public class PostCommentImplement implements PostCommentService {
                     postCommentRequest.setComment("");
                 }
                 PostComment postComment = PostComment.builder()
-                        .user(u)
+                        .user(u) // người comment
                         .comment(postCommentRequest.getComment())
                         .postDetail(postDetail)
                         .publishDateComment(getDateNow())
                         .build();
                 postCommentRepository.save(postComment);
-                // tang 1 like trong totallike
-                postDetail.setTotalComment(postDetail.getTotalComment() + 1);
+                // cap nhat số cmt
+                List<PostComment> postCommentList = new ArrayList<>();
+                postCommentList = postCommentRepository.findCommentByPost_id(post_id);
+                postDetail.setTotalComment(postCommentList.size());
                 postDetailRepository.save(postDetail);
 
-                mess = "Them comment thanh cong";
+                mess = "Them thanh cong";
             } else{
                 mess = "Nguoi dung khong ton tai hoac post khong ton tai";
             }
@@ -75,6 +77,7 @@ public class PostCommentImplement implements PostCommentService {
             //xoa like cua postLike dua theo account va post_id
             postCommentRepository.deleteCommentByPost_idAndUser_id(post_id, user.getUser_id());
             // tang 1 like trong totallike
+
             pExist.setTotalComment(pExist.getTotalComment() - 1);
             postDetailRepository.save(pExist);
             mess = "Unlike thanh cong";
@@ -90,7 +93,7 @@ public class PostCommentImplement implements PostCommentService {
         if (pExist != null) {
             postCommentRepository.deleteCommentByComment_id(comment_id);
             List<PostComment> postCommentList = new ArrayList<>();
-            postCommentList = postCommentRepository.findAll();
+            postCommentList = postCommentRepository.findCommentByPost_id(post_id);
             pExist.setTotalComment(postCommentList.size());
             postDetailRepository.save(pExist);
             mess = "Xoa thanh cong";

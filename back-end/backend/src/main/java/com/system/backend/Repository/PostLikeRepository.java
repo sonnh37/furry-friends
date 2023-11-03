@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @EnableJpaRepositories
 @Transactional
@@ -26,4 +27,6 @@ public interface PostLikeRepository extends JpaRepository<PostLike, Integer> {
     void deleteLikeByUser_id(@Param("user_id") Integer user_id);
     @Query("SELECT post FROM PostLike post WHERE post.postDetail.post_id  = :post_id AND post.user.user_id = :user_id ")
     PostLike findLikeByPost_idAndUser_id(@Param("post_id") Integer post_id, @Param("user_id") Integer user_id);
+    @Query("SELECT post FROM PostLike post WHERE post.postDetail.post_id  = :post_id")
+    List<PostLike> findLikeByPost_id(@Param("post_id") Integer post_id);
 }

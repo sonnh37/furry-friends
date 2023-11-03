@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @EnableJpaRepositories
 @Repository
@@ -30,4 +31,6 @@ public interface PostCommentRepository extends JpaRepository<PostComment, Intege
 
     @Query("SELECT post FROM PostComment post WHERE post.postDetail.post_id  = :post_id AND post.user.user_id = :user_id ")
     PostLike findCommentByPost_idAndUser_id(@Param("post_id") Integer post_id, @Param("user_id") Integer user_id);
+    @Query("SELECT post FROM PostComment post WHERE post.postDetail.post_id  = :post_id")
+    List<PostComment> findCommentByPost_id(@Param("post_id") Integer post_id);
 }
