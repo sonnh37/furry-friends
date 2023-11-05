@@ -60,6 +60,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/login").permitAll()
                 .antMatchers("/api/v1/register").permitAll()
                 .antMatchers("/api/v1/user/admin/addadmin").permitAll()
+                .antMatchers("/api/v1/user/products/getAll").permitAll()
+                .antMatchers("/api/v1/user/products/getSearch").permitAll()
+                .antMatchers("/api/v1/user/products/one/{product_id}").permitAll()
+
+                .antMatchers("/api/v1/user/posts/getALL").permitAll()
+                .antMatchers("/api/v1/user/posts/one/{post_id}").permitAll()
+                .antMatchers("/api/v1/user/posts/getSearch").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .logout()

@@ -177,6 +177,17 @@ public class ProductImplement implements ProductService {
         }
         return listConvert;
     }
+    @Override
+    public List<ProductResponse> getProductsBySearch(String q) {
+        List<Product> list = new ArrayList<>();
+        List<ProductResponse> listConvert = new ArrayList<>();
+        list = productRepository.findProductsByTitle(q);
+        for (Product p:
+                list) {
+            listConvert.add(convertProdductToProductResponse(p));
+        }
+        return listConvert;
+    }
 
     @Override
     public List<ProductResponse> getProducts(String account) {

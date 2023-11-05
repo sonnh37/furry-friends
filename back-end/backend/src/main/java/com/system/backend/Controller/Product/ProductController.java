@@ -21,6 +21,12 @@ public class ProductController {
     @Autowired
     //djt mem ay
     private ProductService productService;
+    @GetMapping(Link.USER.PRODUCTCRUD.GETBYSEARCH)
+    public ResponseEntity<List<ProductResponse>> getBySearch(@RequestParam(required = false) String q)
+    {
+        List<ProductResponse> list = productService.getProductsBySearch(q);
+        return ResponseEntity.ok(list);
+    }
 
     @GetMapping(Link.USER.PRODUCTCRUD.GETALLL)
     public ResponseEntity<List<ProductResponse>> getAllProducts()

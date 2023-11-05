@@ -12,6 +12,7 @@ public interface ProductService {
     String deleteProduct(String account, Integer product_id);
     String updateProduct(String account, Integer product_id, ProductRequest productRequest);
     List<ProductResponse> getAllProducts();
+    List<ProductResponse> getProductsBySearch(String q);
     List<ProductResponse> getProducts(String account);
     ProductResponse getProductFromUser(String account, Integer product_id);
     ProductResponse getProduct(Integer product_id);
