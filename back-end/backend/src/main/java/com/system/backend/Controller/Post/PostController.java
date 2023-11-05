@@ -25,6 +25,12 @@ public class PostController {
         List<PostResponse> list = postService.getAllPosts();
         return ResponseEntity.ok(list);
     }
+    @GetMapping(Link.USER.POSTCRUD.GETBYSEARCH)
+    public ResponseEntity<List<PostResponse>> getPostBySearch(@RequestParam String q)
+    {
+        List<PostResponse> list = postService.getPostBySearch(q);
+        return ResponseEntity.ok(list);
+    }
     @GetMapping(Link.USER.POSTCRUD.GETALLLBYACCOUNT)
     public ResponseEntity<List<PostResponse>> getAllPostByAccount(@PathVariable String account)
     {

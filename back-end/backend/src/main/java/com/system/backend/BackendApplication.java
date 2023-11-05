@@ -14,18 +14,18 @@ import java.util.stream.Stream;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class BackendApplication {
-	@Autowired
-	private RoleRepository repository;
-//
-	@PostConstruct
-	public void initRoles(){
-		List<Role> roles = Stream.of(
-				new Role(null, "member"),
-				new Role(null, "staff"),
-				new Role(null, "admin")
-		).collect(Collectors.toList());
-		repository.saveAll(roles);
-	}
+//	@Autowired
+//	private RoleRepository repository;
+////
+//	@PostConstruct
+//	public void initRoles(){
+//		List<Role> roles = Stream.of(
+//				new Role(null, "member"),
+//				new Role(null, "staff"),
+//				new Role(null, "admin")
+//		).collect(Collectors.toList());
+//		repository.saveAll(roles);
+//	}
 //	@PostConstruct
 //	public void initUsers() {
 //		List<User> users = Stream.of(

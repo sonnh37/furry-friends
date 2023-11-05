@@ -21,8 +21,8 @@ public interface PostDetailRepository extends JpaRepository<PostDetail, Integer>
     PostDetail findPostByPost_Id(@Param("post_id") Integer post_id);
     @Query("SELECT p FROM PostDetail p WHERE p.user.account = :account")
     List<PostDetail> findPostByAccount(@Param("account") String account);
-    @Query("SELECT p FROM Product p WHERE p.user.user_id = :user_id")
-    List<Product> findProductsByUser_id(@Param("user_id") Integer user_id);
+    @Query("SELECT p FROM PostDetail p WHERE UPPER(p.title) LIKE CONCAT('%',:title,'%')")
+    List<PostDetail> findPostsByTitle(@Param("title") String title);
     @Query("SELECT p FROM PostDetail p WHERE p.user.user_id = :user_id AND p.post_id = :post_id")
     PostDetail findPostsByUser_idAndPost_id(@Param("post_id") Integer post_id,
                                                @Param("user_id") Integer user_id);
