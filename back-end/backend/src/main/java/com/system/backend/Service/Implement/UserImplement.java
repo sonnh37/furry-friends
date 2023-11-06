@@ -226,7 +226,7 @@ public class UserImplement implements UserService {
         if(user == null){
             user = new User();
         }
-        if(user.getRole().getRole_id() == 1){
+        if(user.getRole().getRole_id() == 1 && user.getRole().getRole_id() == 2){
             userResponse = convertUserToUserResponse(user, user.getRole().getRole_id());
         }
         return userResponse;
