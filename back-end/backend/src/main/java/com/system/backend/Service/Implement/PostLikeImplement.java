@@ -70,7 +70,7 @@ public class PostLikeImplement  implements PostLikeService {
         User user = userRepository.findUserByAccount(account);
         PostDetail postDetail = null;
         if(user != null){
-            postDetail = postDetailRepository.findPostsByUser_idAndPost_id(post_id, user.getUser_id());
+            postDetail = postDetailRepository.findPostByPost_Id(post_id);
         }
         return postDetail;
     }
@@ -81,8 +81,10 @@ public class PostLikeImplement  implements PostLikeService {
         PostDetail postDetail = this.getPostHasFromUser(account, post_id);
         if (postDetail != null) {
             User user = userRepository.findUserByAccount(account);
+
             //xoa like cua postLike dua theo account va post_id
             postLikeRepository.deleteLikeByPost_idAndUser_id(post_id, user.getUser_id());
+            System.out.println(post_id + ", "+ user.getUser_id());
             // tang 1 like trong totallike
             List<PostLike> postLikeList = new ArrayList<>();
             postLikeList = postLikeRepository.findLikeByPost_id(post_id);
