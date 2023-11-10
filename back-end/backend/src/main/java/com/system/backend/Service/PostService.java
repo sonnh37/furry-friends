@@ -15,6 +15,6 @@ public interface PostService {
     List<PostResponse> getAllPostsByAccount(String account);
     String deletePost(String account, Integer post_id);
     String deleteDataByStaff(Integer post_id);
-    void clearDataFromUser(String account);
+
     String updatePost(String account, Integer post_id, PostRequest postRequest);
 }

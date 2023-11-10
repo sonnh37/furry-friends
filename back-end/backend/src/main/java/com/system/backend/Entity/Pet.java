@@ -27,7 +27,7 @@ public class Pet {
 
     @Column(name = "[pet_price]")
     private Float pet_price;
-    @Column(name = "[development_stage]")
+    @Column(name = "[development_stage]", columnDefinition = "nvarchar(255)")
     private String development_stage;
 
     @Column(name = "[description]", columnDefinition = "nvarchar(3000)")
@@ -39,6 +39,8 @@ public class Pet {
     @Column(name = "[phone]")
     private String phone;
 
+    @Column(name = "[type]", columnDefinition = "nvarchar(255)")
+    private String type;
     @Column(name = "[title]", columnDefinition = "nvarchar(255)")
     private String title;
 
@@ -48,6 +50,6 @@ public class Pet {
     @Column(name = "status")
     private boolean status;
 
-    @OneToMany(mappedBy = "product")
-    private List<Img_Product> img_productList;
+    @OneToMany(mappedBy = "pet")
+    private List<Img_Pet> img_petList;
 }

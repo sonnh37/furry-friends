@@ -27,6 +27,10 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
     private ProductService productService;
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private PetService petService;
+    @Autowired
+    private ClearUserService clearUserService;
 
     //get one user
     @GetMapping(Link.USER.STAFFCRUD.GET)
@@ -61,7 +65,7 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
             if(user.getAccount() != null){
                 String mess = "";
                 tokenService.deleteTokenByUser_id(user_id);
-                postService.clearDataFromUser(user.getAccount());
+                clearUserService.clearDataFromUser(user.getAccount());
                 for(PostManagement postManagement1: postManagement){
                     mess = postService.deleteDataByStaff(postManagement1.getPostDetail().getPost_id());
                 }

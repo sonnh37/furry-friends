@@ -39,7 +39,6 @@ public class Link {
             public static final String GETBYSEARCH = "/getSearch";
             public static final String GETALLL = "/getAll";
             public static final String GET = "/one/{product_id}";
-            public static final String GETONEFROMUSER = "/one/{account}-{product_id}";
             public static final String GETALLFROMUSER = "/{account}";
             public static final String PUT = "/{account}-{product_id}";
             public static final String DELETE = "/{account}-{product_id}";
@@ -71,6 +70,20 @@ public class Link {
             public static final String PUT = "/{account}-{post_id}";
             public static final String DELETE = "/{post_id}-{comment_id}";
             public static final String POST = "/{account}-{post_id}";
+        }
+
+        public static final String  PET = "/user/pets";
+        public static class PET_CRUD{
+            public static final String GETBYSEARCH = "/getSearch";
+            public static final String GETALLL = "/getAll";
+            public static final String GET = "/one/{pet_id}";
+            public static final String GETTYPE = "/type/{type}";
+            public static final String GETALLFROMUSER = "/{account}";
+            public static final String PUT = "/{account}-{pet_id}";
+
+            public static final String DELETE = "/{account}-{pet_id}";
+            public static final String POST = "/{account}";
+
         }
 
 

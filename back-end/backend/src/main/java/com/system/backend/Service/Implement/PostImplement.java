@@ -123,22 +123,7 @@ public class PostImplement implements PostService {
     }
 
 
-    @Override
-    public void clearDataFromUser(String account) {
-        User user = userRepository.findUserByAccount(account);
-        if (user != null) {
-            //img-product
-            List<Product> productList = productRepository.findProductsByUser_id(user.getUser_id());
 
-            if(productList != null){
-                for (Product p : productList) {
-                    imgProductRepository.deleteAllByProduct_id(p.getProduct_id());
-                    productRepository.delete(p);
-                }
-            }
-        }
-
-    }
 
     @Override
     public String updatePost(String account, Integer post_id, PostRequest postRequest) {
