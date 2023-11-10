@@ -1,10 +1,7 @@
 package com.system.backend.Service.Implement;
 import com.system.backend.Dto.User.*;
-import com.system.backend.Entity.Token;
-import com.system.backend.Entity.TokenType;
-import com.system.backend.Entity.User;
-import com.system.backend.Repository.TokenRepository;
-import com.system.backend.Repository.UserRepository;
+import com.system.backend.Entity.*;
+import com.system.backend.Repository.*;
 import com.system.backend.Service.UserService;
 import com.system.backend.util.JwtUtil;
 import lombok.var;
@@ -31,6 +28,22 @@ public class UserImplement implements UserService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private TokenRepository tokenRepository;
+    @Autowired
+    private PostDetailRepository postDetailRepository;
+    @Autowired
+    private PostLikeRepository postLikeRepository;
+    @Autowired
+    private PostCommentRepository postCommentRepository;
+    @Autowired
+    private PostManagementRepository postManagementRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ImgProductRepository imgProductRepository;
+    @Autowired
+    private PetRepository petRepository;
+    @Autowired
+    private ImgPetRepository imgPetRepository;
 
     @Override
     public String createToken(UserAuthRequest authRequest) throws Exception  {
@@ -122,6 +135,56 @@ public class UserImplement implements UserService {
             return "tai khoan da ton tai!";
         }
         return userRepository.findUserByAccount(userExist.getAccount()).getUser_id().toString();
+    }
+
+    @Override
+    public String deletePostByStaff(Integer post_id) {
+        String mess = "";
+        PostDetail pExist = postDetailRepository.findPostByPost_Id(post_id);
+        if (pExist != null) {
+            // post_like
+            postLikeRepository.deleteLikeByPost_id(post_id);
+            //post_comment
+            postCommentRepository.deleteCommentByPost_id(post_id);
+            //post_management
+            postManagementRepository.deletePostManagementByPost_id(post_id);
+            //post_detail
+            postDetailRepository.deletePostDetailByPost_id(post_id);
+            mess = "Xoa thanh cong";
+        } else{
+            mess = "post not exist";
+        }
+        return mess;
+    }
+
+    @Override
+    public String deleteProductByStaff(Integer product_id) {
+        String mess = "";
+
+        Product pExist = productRepository.findProductByProduct_id(product_id);
+        if (pExist != null) {
+            imgProductRepository.deleteAllByProduct_id(pExist.getProduct_id());
+            productRepository.delete(pExist);
+            mess = "Xoa thanh cong";
+        } else{
+            mess = "product not exist";
+        }
+        return mess;
+    }
+
+    @Override
+    public String deletePetByStaff(Integer pet_id) {
+        String mess = "";
+
+        Pet pet = petRepository.findPetByPet_id(pet_id);
+        if (pet != null) {
+            imgPetRepository.deleteAllByPet_id(pet.getPet_id());
+            petRepository.delete(pet);
+            mess = "Xoa thanh cong";
+        } else{
+            mess = "pet not exist";
+        }
+        return mess;
     }
 
     private void revokeAllUserTokens(User user) {

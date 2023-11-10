@@ -14,15 +14,7 @@ import java.util.List;
 public class ClearUserImplement implements ClearUserService {
 
     @Autowired
-    private PostDetailRepository postDetailRepository;
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PostLikeRepository postLikeRepository;
-    @Autowired
-    private PostCommentRepository postCommentRepository;
-    @Autowired
-    private PostManagementRepository postManagementRepository;
     @Autowired
     private ProductRepository productRepository;
     @Autowired

@@ -23,6 +23,9 @@ public class Link {
             public static final String GET = "/singleuser/{user_id}";
             public static final String PUT = "/{user_id}";
             public static final String DELETE = "/{user_id}";
+            public static final String DELETEPOST = "/posts/{post_id}";
+            public static final String DELETEPRODUCT = "/products/{product_id}";
+            public static final String DELETEPET = "/pets/{pet_id}";
             //public static final String POST = "/users";
         }
         public static final String ADMIN = "/user/admin";

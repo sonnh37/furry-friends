@@ -27,6 +27,9 @@ public interface UserService {
     List<UserResponse> getAllStaff();
     String addStaff(UserRegisterRequest userRegisterRequest);
     String addAdmin(UserRegisterRequest userRegisterRequest);
+    String deletePostByStaff(Integer post_id);
+    String deleteProductByStaff(Integer product_id);
+    String deletePetByStaff(Integer pet_id);
 
 
 }

@@ -69,21 +69,34 @@ public class StaffController { //member(view users(getUsers), delete, update),pr
                 for(PostManagement postManagement1: postManagement){
                     mess = postService.deleteDataByStaff(postManagement1.getPostDetail().getPost_id());
                 }
-
-                //String mess = postService.clearDataFromUser(user.getAccount());
-
                 message = userService.deleteMemberById(user_id);
-
             } else{
                 message = "account loi";
             }
         } else {
             message = userService.deleteMemberById(user_id);
         }
-
-
         return message;
     }
 
+
+    @DeleteMapping(Link.USER.STAFFCRUD.DELETEPOST)
+    public String deletePostByStaff(@PathVariable Integer post_id) {
+        String message = "";
+        message = userService.deletePostByStaff(post_id);
+        return message;
+    }
+    @DeleteMapping(Link.USER.STAFFCRUD.DELETEPRODUCT)
+    public String deleteProductByStaff(@PathVariable Integer product_id) {
+        String message = "";
+        message = userService.deleteProductByStaff(product_id);
+        return message;
+    }
+    @DeleteMapping(Link.USER.STAFFCRUD.DELETEPET)
+    public String deletePetByStaff(@PathVariable Integer pet_id) {
+        String message = "";
+        message = userService.deletePetByStaff(pet_id);
+        return message;
+    }
 
 }
