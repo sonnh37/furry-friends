@@ -11,10 +11,12 @@ public interface PetService {
     String insertPet(String account, PetRequest PetRequest);
     String deletePet(String account, Integer pet_id);
     String updatePet(String account, Integer pet_id, PetRequest PetRequest);
-    List<PetResponse> getAllPets();
+    List<PetResponse> getAllPets_desc();
+    List<PetResponse> getAllPets_asc();
     List<PetResponse> getPetsBySearch(String q);
     List<PetResponse> getPets(String account);
-    List<PetResponse> getPetsByType(String type);
+    List<PetResponse> getPetsByType_desc(String type);
+    List<PetResponse> getPetsByType_asc(String type);
     PetResponse getPetFromUser(String account, Integer pet_id);
     PetResponse getPet(Integer pet_id);
 }

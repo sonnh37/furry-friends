@@ -31,19 +31,36 @@ public class PetController {
         List<PetResponse> list = petService.getPetsBySearch(q);
         return ResponseEntity.ok(list);
     }
-    @GetMapping(Link.USER.PET_CRUD.GETTYPE)
-    public ResponseEntity<List<PetResponse>> getByType(@PathVariable String type)
+
+    // moi nhat cua get type va get all
+    @GetMapping(Link.USER.PET_CRUD.GETTYPE_DESC)
+    public ResponseEntity<List<PetResponse>> getByType_desc(@PathVariable String type)
     {
-        List<PetResponse> list = petService.getPetsByType(type);
+        List<PetResponse> list = petService.getPetsByType_desc(type);
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping(Link.USER.PET_CRUD.GETALLL)
-    public ResponseEntity<List<PetResponse>> getAllPets()
+    @GetMapping(Link.USER.PET_CRUD.GETALLL_DESC)
+    public ResponseEntity<List<PetResponse>> getAllPets_desc()
     {
-        List<PetResponse> list = petService.getAllPets();
+        List<PetResponse> list = petService.getAllPets_desc();
         return ResponseEntity.ok(list);
     }
+     // cu nhat cua get type va get all
+    @GetMapping(Link.USER.PET_CRUD.GETTYPE_ASC)
+    public ResponseEntity<List<PetResponse>> getByType_asc(@PathVariable String type)
+    {
+        List<PetResponse> list = petService.getPetsByType_asc(type);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(Link.USER.PET_CRUD.GETALLL_ASC)
+    public ResponseEntity<List<PetResponse>> getAllPets_asc()
+    {
+        List<PetResponse> list = petService.getAllPets_asc();
+        return ResponseEntity.ok(list);
+    }
+
 
 
     @GetMapping(Link.USER.PET_CRUD.GETALLFROMUSER)

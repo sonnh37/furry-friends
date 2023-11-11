@@ -83,9 +83,12 @@ public class Link {
         public static final String  PET = "/user/pets";
         public static class PET_CRUD{
             public static final String GETBYSEARCH = "/getSearch";
-            public static final String GETALLL = "/getAll";
+            public static final String GETALLL_DESC = "/getAll_desc";
+            public static final String GETTYPE_DESC = "/type_desc/{type}";
+            public static final String GETALLL_ASC = "/getAll_asc";
+            public static final String GETTYPE_ASC = "/type_asc/{type}";
             public static final String GET = "/one/{pet_id}";
-            public static final String GETTYPE = "/type/{type}";
+
             public static final String GETALLFROMUSER = "/{account}";
             public static final String PUT = "/{account}-{pet_id}";
 

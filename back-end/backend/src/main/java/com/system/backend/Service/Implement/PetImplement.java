@@ -144,10 +144,21 @@ public class PetImplement implements PetService {
     }
 
     @Override
-    public List<PetResponse> getAllPets() {
+    public List<PetResponse> getAllPets_desc() {
         List<Pet> list = new ArrayList<>();
         List<PetResponse> listConvert = new ArrayList<>();
-        list = petRepository.findAll();
+        list = petRepository.findAllSORT_DESC();
+        for (Pet p:
+                list) {
+            listConvert.add(convertPetToPetResponse(p));
+        }
+        return listConvert;
+    }
+    @Override
+    public List<PetResponse> getAllPets_asc() {
+        List<Pet> list = new ArrayList<>();
+        List<PetResponse> listConvert = new ArrayList<>();
+        list = petRepository.findAllSORT_ASC();
         for (Pet p:
                 list) {
             listConvert.add(convertPetToPetResponse(p));
@@ -183,14 +194,25 @@ public class PetImplement implements PetService {
     }
 
     @Override
-    public List<PetResponse> getPetsByType(String type) {
+    public List<PetResponse> getPetsByType_desc(String type) {
         List<Pet> list = new ArrayList<>();
         List<PetResponse> listConvert = new ArrayList<>();
-        list = petRepository.findPetsByType(type);
+        list = petRepository.findPetsByTypeSORT_DESC(type);
         for (Pet p:
                 list) {
             listConvert.add(convertPetToPetResponse(p));
             }
+        return listConvert;
+    }
+    @Override
+    public List<PetResponse> getPetsByType_asc(String type) {
+        List<Pet> list = new ArrayList<>();
+        List<PetResponse> listConvert = new ArrayList<>();
+        list = petRepository.findPetsByTypeSORT_ASC(type);
+        for (Pet p:
+                list) {
+            listConvert.add(convertPetToPetResponse(p));
+        }
         return listConvert;
     }
 
