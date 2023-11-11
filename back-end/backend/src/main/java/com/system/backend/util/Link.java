@@ -39,8 +39,10 @@ public class Link {
         public static final String PRODUCT = "/user/products";
 
         public static class PRODUCTCRUD{
-            public static final String GETBYSEARCH = "/getSearch";
-            public static final String GETALLL = "/getAll";
+            public static final String GETBYSEARCH_DESC = "/getSearch_desc";
+            public static final String GETALLL_DESC = "/getAll_desc";
+            public static final String GETBYSEARCH_ASC = "/getSearch_asc";
+            public static final String GETALLL_ASC = "/getAll_asc";
             public static final String GET = "/one/{product_id}";
             public static final String GETALLFROMUSER = "/{account}";
             public static final String PUT = "/{account}-{product_id}";

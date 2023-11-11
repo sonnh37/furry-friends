@@ -19,33 +19,61 @@ import java.util.List;
 @RequestMapping(Link.API_ROOT + Link.USER.PRODUCT)
 public class ProductController {
     @Autowired
-    //djt mem ay
     private ProductService productService;
-    @GetMapping(Link.USER.PRODUCTCRUD.GETBYSEARCH)
-    public ResponseEntity<List<ProductResponse>> getBySearch(@RequestParam(required = false) String q)
+    //sort desc
+    @GetMapping(Link.USER.PRODUCTCRUD.GETBYSEARCH_DESC)
+    public ResponseEntity<List<ProductResponse>> getBySearch_desc(@RequestParam(required = false) String q)
     {
-        List<ProductResponse> list = productService.getProductsBySearch(q);
+        List<ProductResponse> list = productService.getProductsBySearchSORT_DESC(q);
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping(Link.USER.PRODUCTCRUD.GETALLL)
-    public ResponseEntity<List<ProductResponse>> getAllProducts()
+    @GetMapping(Link.USER.PRODUCTCRUD.GETALLL_DESC)
+    public ResponseEntity<List<ProductResponse>> getAllProducts_desc()
     {
-        List<ProductResponse> list = productService.getAllProducts();
+        List<ProductResponse> list = productService.getAllProductsSORT_DESC();
         return ResponseEntity.ok(list);
     }
+    //sort asc
+    @GetMapping(Link.USER.PRODUCTCRUD.GETBYSEARCH_ASC)
+    public ResponseEntity<List<ProductResponse>> getBySearch_asc(@RequestParam(required = false) String q)
+    {
+        List<ProductResponse> list = productService.getProductsBySearchSORT_ASC(q);
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping(Link.USER.PRODUCTCRUD.GETALLL_ASC)
+    public ResponseEntity<List<ProductResponse>> getAllProducts_asc()
+    {
+        List<ProductResponse> list = productService.getAllProductsSORT_ASC();
+        return ResponseEntity.ok(list);
+    }
+    // -------------------------------------------------------------
+
+
+
+
+    // view list product desc
     @GetMapping(Link.USER.PRODUCTCRUD.GETALLFROMUSER)
-    public ResponseEntity<List<ProductResponse>> getAllProductFromUser(@PathVariable String account)
+    public ResponseEntity<List<ProductResponse>> getAllProductFromUser_desc(@PathVariable String account)
     {
         List<ProductResponse> listFromUser = productService.getProducts(account);
         return ResponseEntity.ok(listFromUser);
     }
+    // view product detail
     @GetMapping(Link.USER.PRODUCTCRUD.GET)
     public ResponseEntity<ProductResponse> getProductFromUser( @PathVariable Integer product_id )
     {
         ProductResponse productResponse = productService.getProduct(product_id);
         return ResponseEntity.ok(productResponse);
     }
+
+
+
+
+
+
+
 
     @PutMapping(Link.USER.PRODUCTCRUD.PUT)
     public String updateProduct(@PathVariable String account,

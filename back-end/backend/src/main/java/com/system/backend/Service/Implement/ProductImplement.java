@@ -164,10 +164,10 @@ public class ProductImplement implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> getAllProducts() {
+    public List<ProductResponse> getAllProductsSORT_DESC() {
         List<Product> list = new ArrayList<>();
         List<ProductResponse> listConvert = new ArrayList<>();
-        list = productRepository.findAll();
+        list = productRepository.findAllSORT_DESC();
         for (Product p:
              list) {
             listConvert.add(convertProdductToProductResponse(p));
@@ -175,10 +175,32 @@ public class ProductImplement implements ProductService {
         return listConvert;
     }
     @Override
-    public List<ProductResponse> getProductsBySearch(String q) {
+    public List<ProductResponse> getProductsBySearchSORT_DESC(String q) {
         List<Product> list = new ArrayList<>();
         List<ProductResponse> listConvert = new ArrayList<>();
-        list = productRepository.findProductsByTitle(q);
+        list = productRepository.findProductsByTitleSORT_DESC(q);
+        for (Product p:
+                list) {
+            listConvert.add(convertProdductToProductResponse(p));
+        }
+        return listConvert;
+    }
+    @Override
+    public List<ProductResponse> getAllProductsSORT_ASC() {
+        List<Product> list = new ArrayList<>();
+        List<ProductResponse> listConvert = new ArrayList<>();
+        list = productRepository.findAllSORT_ASC();
+        for (Product p:
+                list) {
+            listConvert.add(convertProdductToProductResponse(p));
+        }
+        return listConvert;
+    }
+    @Override
+    public List<ProductResponse> getProductsBySearchSORT_ASC(String q) {
+        List<Product> list = new ArrayList<>();
+        List<ProductResponse> listConvert = new ArrayList<>();
+        list = productRepository.findProductsByTitleSORT_ASC(q);
         for (Product p:
                 list) {
             listConvert.add(convertProdductToProductResponse(p));
@@ -192,7 +214,7 @@ public class ProductImplement implements ProductService {
         List<ProductResponse> listConvert = new ArrayList<>();
        User u = getProductExistFromUser(account);
        if(u!=null){
-           list = productRepository.findProductsByUser_id(u.getUser_id());
+           list = productRepository.findProductsByUser_idSORT_DESC(u.getUser_id());
            for (Product p:
                    list) {
                listConvert.add(convertProdductToProductResponse(p));
