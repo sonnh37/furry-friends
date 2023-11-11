@@ -52,8 +52,11 @@ public class Link {
         public static final String  POSTUP = "/user/posts";
 
         public static class POSTCRUD{
-            public static final String GETBYSEARCH = "/getSearch";
-            public static final String GETALLL = "/getALL";
+            public static final String GETBYSEARCH_DESC = "/getSearch_desc";
+            public static final String GETALLL_DESC = "/getALL_desc";
+
+            public static final String GETBYSEARCH_ASC = "/getSearch_asc";
+            public static final String GETALLL_ASC = "/getALL_asc";
             public static final String GETALLLBYACCOUNT = "/getALL/{account}";
             public static final String GET = "/one/{post_id}";
             public static final String PUT = "/{account}-{post_id}";

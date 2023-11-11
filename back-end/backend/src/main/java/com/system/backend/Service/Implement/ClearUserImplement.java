@@ -32,7 +32,7 @@ public class ClearUserImplement implements ClearUserService {
         User user = userRepository.findUserByAccount(account);
         if (user != null) {
             //img-product
-            List<Product> productList = productRepository.findProductsByUser_id(user.getUser_id());
+            List<Product> productList = productRepository.findProductsByUser_idSORT_DESC(user.getUser_id());
 
             if(productList != null){
                 for (Product p : productList) {

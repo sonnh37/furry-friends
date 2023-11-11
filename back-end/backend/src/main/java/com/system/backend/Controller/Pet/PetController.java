@@ -44,6 +44,8 @@ public class PetController {
         List<PetResponse> list = petService.getAllPets();
         return ResponseEntity.ok(list);
     }
+
+
     @GetMapping(Link.USER.PET_CRUD.GETALLFROMUSER)
     public ResponseEntity<List<PetResponse>> getAllPetFromUser(@PathVariable String account)
     {

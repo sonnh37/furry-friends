@@ -10,8 +10,14 @@ import java.util.List;
 public interface PostService {
     String insertPost(String account, PostRequest postRequest);
     PostResponse getPost(Integer product_id);
-    List<PostResponse> getAllPosts();
-    List<PostResponse> getPostBySearch(String q);
+    List<PostResponse> getAllPosts_desc();
+    List<PostResponse> getPostBySearch_desc(String q);
+
+    List<PostResponse> getAllPosts_asc();
+    List<PostResponse> getPostBySearch_asc(String q);
+
+
+
     List<PostResponse> getAllPostsByAccount(String account);
     String deletePost(String account, Integer post_id);
     String deleteDataByStaff(Integer post_id);

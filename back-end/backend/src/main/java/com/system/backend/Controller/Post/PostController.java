@@ -18,19 +18,37 @@ import java.util.List;
 public class PostController {
     @Autowired
     private PostService postService;
+    // getall searchbytitle, desc
+    @GetMapping(Link.USER.POSTCRUD.GETALLL_DESC)
+    public ResponseEntity<List<PostResponse>> getAllPost_desc()
+    {
+        List<PostResponse> list = postService.getAllPosts_desc();
+        return ResponseEntity.ok(list);
+    }
+    @GetMapping(Link.USER.POSTCRUD.GETBYSEARCH_DESC)
+    public ResponseEntity<List<PostResponse>> getPostBySearch_desc(@RequestParam String q)
+    {
+        List<PostResponse> list = postService.getPostBySearch_desc(q);
+        return ResponseEntity.ok(list);
+    }
 
-    @GetMapping(Link.USER.POSTCRUD.GETALLL)
-    public ResponseEntity<List<PostResponse>> getAllPost()
+    // getall searchbytitle, asc
+    @GetMapping(Link.USER.POSTCRUD.GETALLL_ASC)
+    public ResponseEntity<List<PostResponse>> getAllPost_asc()
     {
-        List<PostResponse> list = postService.getAllPosts();
+        List<PostResponse> list = postService.getAllPosts_asc();
         return ResponseEntity.ok(list);
     }
-    @GetMapping(Link.USER.POSTCRUD.GETBYSEARCH)
-    public ResponseEntity<List<PostResponse>> getPostBySearch(@RequestParam String q)
+    @GetMapping(Link.USER.POSTCRUD.GETBYSEARCH_ASC)
+    public ResponseEntity<List<PostResponse>> getPostBySearch_ascS(@RequestParam String q)
     {
-        List<PostResponse> list = postService.getPostBySearch(q);
+        List<PostResponse> list = postService.getPostBySearch_asc(q);
         return ResponseEntity.ok(list);
     }
+
+
+
+
     @GetMapping(Link.USER.POSTCRUD.GETALLLBYACCOUNT)
     public ResponseEntity<List<PostResponse>> getAllPostByAccount(@PathVariable String account)
     {

@@ -157,10 +157,10 @@ public class PostImplement implements PostService {
     }
 
     @Override
-    public List<PostResponse> getAllPosts() {
+    public List<PostResponse> getAllPosts_desc() {
         List<PostDetail> list = new ArrayList<>();
         List<PostResponse> listConvert = new ArrayList<>();
-        list = postDetailRepository.findAll();
+        list = postDetailRepository.findAllSORT_DESC();
         for (PostDetail p:
                 list) {
             listConvert.add(convertPostToPostResponse(p));
@@ -168,10 +168,34 @@ public class PostImplement implements PostService {
         return listConvert;
     }
     @Override
-    public List<PostResponse> getPostBySearch(String q) {
+    public List<PostResponse> getPostBySearch_desc(String q) {
         List<PostDetail> list = new ArrayList<>();
         List<PostResponse> listConvert = new ArrayList<>();
-        list = postDetailRepository.findPostsByTitle(q);
+        list = postDetailRepository.findPostsByTitleSORT_DESC(q);
+        for (PostDetail p:
+                list) {
+            listConvert.add(convertPostToPostResponse(p));
+        }
+        return listConvert;
+    }
+
+
+    @Override
+    public List<PostResponse> getAllPosts_asc() {
+        List<PostDetail> list = new ArrayList<>();
+        List<PostResponse> listConvert = new ArrayList<>();
+        list = postDetailRepository.findAllSORT_ASC();
+        for (PostDetail p:
+                list) {
+            listConvert.add(convertPostToPostResponse(p));
+        }
+        return listConvert;
+    }
+    @Override
+    public List<PostResponse> getPostBySearch_asc(String q) {
+        List<PostDetail> list = new ArrayList<>();
+        List<PostResponse> listConvert = new ArrayList<>();
+        list = postDetailRepository.findPostsByTitleSORT_ASC(q);
         for (PostDetail p:
                 list) {
             listConvert.add(convertPostToPostResponse(p));
