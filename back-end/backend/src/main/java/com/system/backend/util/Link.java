@@ -7,7 +7,15 @@ public class Link {
     public static final String REGISTER = "/register";
     public static class USER{
         public static final String MEMBER = "/user/member";
+        public static final String STATISTIC = "/user/statistic";
+        public static class STATISTICCRUD{
 
+            public static final String STATISTICPRODUCT = "/statisticProduct";
+            public static final String STATISTICPOST = "/statisticPost";
+            public static final String STATISTICPOSTLIKE = "/statisticPostLike";
+            public static final String STATISTICPOSTCOMMENT = "/statisticPostComment";
+            public static final String STATISTICUSER = "/statisticUser";
+        }
         public static class MEMBERCRUD{
 
             public static final String GET = "/singleuser/{account}";
