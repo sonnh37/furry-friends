@@ -15,6 +15,7 @@ public class Link {
             public static final String STATISTICPOSTLIKE = "/statisticPostLike";
             public static final String STATISTICPOSTCOMMENT = "/statisticPostComment";
             public static final String STATISTICUSER = "/statisticUser";
+            public static final String STATISTICPET = "/statisticPet";
         }
         public static class MEMBERCRUD{
 
