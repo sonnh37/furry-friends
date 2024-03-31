@@ -1,0 +1,21 @@
+*GitHub:
++ Chưa kết nối:
+	git config --global user.name "<?>"
+	git config --global user.email "<?>"
+	git config --list (check)
+	-> này ghi r qa thư mục mới khỏi cần ghi lại
+	--exist--
++ Đã kết nối:
+	
+Note: Click vào kho lưu trữ các file mà đã lưu bằng git clone:
+	- add thêm:
+	git clone <link> -b <branch> ( lấy tất cả file github về kho máy )
+	git add . ( bỏ hết file vào box để chuẩn bị chuyển đi ) - vd: git add abc.html ( bỏ 1 file ..)
+	git commit -m"<comment>" ( comment: dán nhãn tên cho box )
+	git push origin <branch> - ( đẩy tất cả file máy lên kho github ) 
+	
+	- update từ kho github về máy:
+	git pull origin <branch> - ( update kho github về kho máy )
+
+Ít dùng:
+	git checkout <brand>	
