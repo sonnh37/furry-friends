@@ -1,0 +1,172 @@
+.container1 {
+    margin: 0;
+    padding: 0;
+    display: flex;
+
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    width: 100%;
+}
+
+.container {
+    width: 40%;
+    margin: 0% 0 5% 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.box1 {
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 2px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.box-header {
+
+
+    height: 100%;
+
+}
+.post{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+     margin-bottom: 10px;
+}
+
+.navbar {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    font-family: Arial;
+    justify-content: space-between;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+    float: left;
+    overflow: hidden;
+    flex: 1;
+    white-space: nowrap;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    /* Important for vertical align on mobile phones */
+    margin: 0;
+    /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+    background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.box {
+    display: flex;
+text-decoration: none;
+color: black;
+    gap: 2px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.box img {
+    flex: 1;
+    width: 100%;
+    height: auto;
+    max-height: 100px;
+}
+
+.info {
+    flex: 2;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.price {
+    color: red;
+}
+
+.IntersectBox {
+    width: 100%;
+    padding: 0 !important;
+    min-height: unset;
+}
+
+.box2 {
+    display: flex;
+    margin: 1px 0;
+    justify-content: center;
+    padding: 12px 0;
+    flex-wrap: wrap;
+}
+
+.button-btn {
+    display: inline;
+    margin: 6px;
+
+}
+
+.button-btn button {
+    background-color: white;
+
+}

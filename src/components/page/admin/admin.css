@@ -1,0 +1,10 @@
+.home{
+    width: 100%;
+}
+
+.box1{
+    width: 80%;
+    display: flex;
+    justify-content: right;
+    padding-left: 130px;
+}

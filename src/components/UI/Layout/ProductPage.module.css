@@ -1,0 +1,169 @@
+.body-container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    /* Canh giữa theo chiều ngang */
+    flex-direction: column;
+    min-height: 100vh;
+    /* Chiều cao tối thiểu của trang (100% chiều cao viewport) */
+    background-color: #f0f0f0;
+    width: 100%;
+}
+.price{
+    color: red;
+}
+
+.container2 {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* Hiển thị các box theo chiều dọc */
+
+    height: 100%;
+
+    justify-content: space-between;
+}
+
+
+.box-body1 {
+
+    padding: 20px;
+    /* Khoảng cách bên trong box */
+    display: flex;
+    flex-direction: column;
+    /* Hiển thị phần trên và dưới theo chiều dọc */
+    height: 100%;
+    margin: 20px 0;
+    background-color: white;
+}
+
+.top-body1 {
+    height: 70%;
+}
+
+li {
+    list-style: none;
+}
+
+/* --------------------slide-------------------------- */
+.slider {
+    padding: 20px 0;
+    height: 90%;
+}
+
+.slider-content {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+
+
+/* Slider js */
+
+.below-body1 {
+    height: 30%;
+    /* Phần dưới chiếm 20% chiều cao của box1 */
+    display: flex;
+    flex-direction: column;
+    /* Hiển thị phần dưới theo chiều dọc */
+
+}
+
+.top-bl-bd1 {
+    padding-left: 20px;
+    height: 30%;
+    margin-bottom: 10px;
+}
+
+h2 {
+
+    margin-bottom: 20px;
+    /* Khoảng cách dưới tiêu đề */
+}
+
+.category-container {
+    height: 70%;
+    display: flex;
+    justify-content: space-between;
+    /* Cách đều các category */
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng của category container */
+}
+
+.category {
+
+    width: calc(25% - 10px);
+    /* Chiếm 25% chiều rộng của category container, trừ 10px là khoảng cách giữa các category */
+    text-align: center;
+    /* Căn giữa nội dung trong category */
+    align-items: center;
+}
+
+.category img {
+
+    height: 74px;
+    width: 60px;
+
+}
+
+.category a {
+    text-decoration: none;
+    color: black;
+}
+
+.top-body2 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+
+    padding-top: 0;
+}
+.haha{
+    display: grid
+}
+.listing-box {
+    display: flex;
+    flex-wrap: wrap;
+    /* Cho phép các bài đăng bên trong box xuống hàng khi không đủ chiều rộng */
+}
+
+.listing {
+    width: 25%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: black;
+}
+
+.listing img {
+
+    height: 166px;
+    width: 166px;
+}
+
+.post {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+margin-bottom: 10px;
+}
+
+.listing h3 {
+    font-size: 18px;
+}
+
+.listing p {
+    font-size: 16px;
+
+}
+
+.listing:hover {
+    background-color: #7c867e;
+    /* Màu nền khi hover */
+}
