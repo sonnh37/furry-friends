@@ -1,0 +1,159 @@
+.container2 {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    width: 100%;
+}
+
+.container {
+    width: 40%;
+    margin: 3% 0% 5% 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-height: 100vh;
+
+}
+
+.box1 {
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 2px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.box-header {
+
+
+    height: 100%;
+
+}
+
+.navbar {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    font-family: Arial;
+    justify-content: space-between;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+    float: left;
+    overflow: hidden;
+    flex: 1;
+}
+
+/* Dropdown button */
+
+.navbar .dropdown:hover
+ { width: 50%;
+    background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+
+
+.box {
+    display: flex;
+  
+    gap: 2px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.box img {
+    flex: 1;
+    width: 100%;
+    height: auto;
+    max-height: 100px;
+}
+
+.info {
+    flex: 2;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.price {
+    color: red;
+}
+
+.IntersectBox {
+    width: 100%;
+    padding: 0 !important;
+    min-height: unset;
+}
+
+.box2 {
+    display: flex;
+    margin: 1px 0;
+    justify-content: center;
+    padding: 12px 0;
+    flex-wrap: wrap;
+}
+
+.button-btn {
+    display: inline;
+    margin: 6px;
+
+}
+
+.button-btn button {
+    background-color: white;
+
+}
+
+.delete-modal{
+
+    position: fixed; /* Đặt thành vị trí cố định */
+left: 40%   ;
+    width: 300px; /* Chiều rộng 100% của trang */
+    height: 200px; /* Chiều cao 100% của trang */
+    background: #ccc; /* Một màu nền mờ để tạo hiệu ứng tối */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; 
+}
+.cancel-yes{
+display: flex;
+justify-content: center;
+    padding: 20px;
+    border-radius: 5px;
+ 
+}
+.cancel-yes button{
+    width: 50%;
+}
+
+.btn{
+    text-decoration: none;
+    color: black;
+}
+
+.button-e-d{
+    display: grid;
+    height: 50%;
+}
