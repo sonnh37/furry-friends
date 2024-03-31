@@ -7,16 +7,16 @@
 
 .lp-slideshow {
   width: 100%;
-  height: 350px;
+height: 450px;
 }
 
 .lp-slideshow > .container {
   position: relative;
   margin: auto;
   width: 100%;
-  
+  height: 400px;
 }
-
+   
 .lp-slideshow > .container > .slide {
   width: 100%;
   height: 60%;

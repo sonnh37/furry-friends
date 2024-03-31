@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../../layout/Navbar'
+import NavbarPost from '../../layout/NavbarPost'
 import Footer from '../../layout/Footer'
 import PostViewDetail from '../../layout/PostViewDetail'
 
@@ -9,7 +9,7 @@ export default function PostDetail() {
 
     return (
         <div>
-            <Navbar />
+            <NavbarPost />
             <PostViewDetail />
             <Footer />
         </div>

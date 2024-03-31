@@ -9,27 +9,32 @@ function Register() {
   const [user, setUser] = useState({
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     phone: "",
     address: "",
     birth: "",
-    age: "",
     sex: "",
-    role: "member"
+    account: "",
   })
-  const { email, password, firstName, lastName, phone, address, birth, age, sex } = user
+  const { account,password, email, first_name, last_name, phone,birth, sex, address } = user
 
   const onInputChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value })
   }
 
   const onSubmit = async (event) => {
+
+    if(!account || !user.password || !user.email || !user.first_name || !user.last_name || !user.phone || !user.birth || !user.sex || !user.address){
+
+      alert("Điền đủ thông tin")
+      return
+    }
     event.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/v1/user/save", user);
+      await axios.post("http://localhost:8080/api/v1/register", user);
       alert("User registation Successfully");
-      navigate("/")
+      navigate("/login")
     } catch (err) {
       alert(err);
     }
@@ -46,18 +51,18 @@ function Register() {
         <div className={RegisterCSS['submit']}>
           <div className={RegisterCSS['form-group_1']}>
             <input type="text"
-              name="lastName"
+              name="last_name"
               className={RegisterCSS['form-input']} placeholder="Họ"
-              value={lastName}
+              value={last_name}
               onChange={onInputChange}
             />
           </div>
           <div><p>Và</p></div>
           <div className={RegisterCSS['form-group_1']}>
             <input type="text"
-              name="firstName"
+              name="first_name"
               className={RegisterCSS['form-input']} placeholder="Tên"
-              value={firstName}
+              value={first_name}
               onChange={onInputChange}
             />
           </div>
@@ -73,18 +78,7 @@ function Register() {
             />
           </div>
         </div>
-        <div className={RegisterCSS['submit_1']} >
-          <div className={RegisterCSS['form-group']}>
-            <i className="fa fa-age"></i>
-            <input type="number"
-              name="age"
-              className={RegisterCSS['form-input']} placeholder="Tuổi"
-              value={age}
-              onChange={onInputChange}
-            />
-          </div>
-        </div>
-
+  
         <div className={RegisterCSS['submit_1']} >
           <div className={RegisterCSS['form-group']}>
             <i className="fa fa-envelope"></i>
@@ -92,6 +86,17 @@ function Register() {
               name="email"
               className={RegisterCSS['form-input']} placeholder="Email"
               value={email}
+              onChange={onInputChange}
+            />
+          </div>
+        </div>
+        <div className={RegisterCSS['submit_1']} >
+          <div className={RegisterCSS['form-group']}>
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <input type="string"
+              name="account"
+              className={RegisterCSS['form-input']} placeholder="Account"
+              value={account}
               onChange={onInputChange}
             />
           </div>
@@ -127,25 +132,25 @@ function Register() {
         <div className={RegisterCSS['submit_1']} >
           <div className={RegisterCSS['form-group_2']}>
             <div className={RegisterCSS['form-group_2_gender']} >
-              <label for="gender">Giới tính:</label>
+              <label for="gender">Giới tính: </label>
 
               <div className={RegisterCSS['from-check']}>
                 <input type="radio"
                   name="sex"
                   className="from-check-input"
-                  value="male"
-                  checked={sex === "male"} // Kiểm tra nếu sex là male thì checked
+                  value="Nam"
+                  checked={sex === "Nam"} // Kiểm tra nếu sex là male thì checked
                   onChange={onInputChange}
                 />
                 <label for="" className="from-check-label">Nam</label>
               </div>
 
-              <div className="from-check">
+              <div className={RegisterCSS['from-check']}>
                 <input type="radio"
                   name="sex"
                   className="from-check-input"
-                  value="female"
-                  checked={sex === "female"} // Kiểm tra nếu sex là female thì checked
+                  value="Nữ"
+                  checked={sex === "Nữ"} // Kiểm tra nếu sex là female thì checked
                   onChange={onInputChange}
                 />
                 <label for="" className="from-check-label">Nữ</label>
@@ -165,29 +170,10 @@ function Register() {
             />
           </div>
         </div>
-        {/* <div className="submit_1">
-          <div className="form-group">
-            <i className="fa fa-user"></i>
-            <input type="text" name="" className="form-input" placeholder="Tài khoản" />
-          </div>
-        </div> */}
-
-        {/* <div className="submit_1">
-          <div className="form-group">
-            <i className="fa fa-key"></i>
-            <input type="password" className="form-input" placeholder="Xác nhận mật khẩu" />
-            <div id="eye_1">
-              <i className="fa fa-eye"></i>
-            </div>
-          </div>
-        </div> */}
+        
         <div className={RegisterCSS['submit_check']}>
-          <input type="checkbox" name="checkbox" id="check1" />
-          <div>
-            Bằng việc đăng ký, bạn đồng ý với <span className={RegisterCSS['form_B']}>Điều khoản</span> sử dụng và
-            <span className={RegisterCSS['text_B']} >Chính sách</span>
-            bảo mật của <span className={RegisterCSS['text_B']} >Dog & Cat</span>
-          </div>
+     
+         
         </div>
         <div className={RegisterCSS['submit_1']} >
           <input type="submit" value="Đăng ký" className={RegisterCSS['form-submit']} />

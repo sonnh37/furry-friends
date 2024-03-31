@@ -1,9 +1,13 @@
+
+
+
 .wrapper{
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    background-image: url('https://static.chotot.com/storage/marketplace/login-background.webp') ;
+ background-size: contain;
 }
 .form-login{
     max-width: 400px;

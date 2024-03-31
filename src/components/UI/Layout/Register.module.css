@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    background-image: url('https://static.chotot.com/storage/marketplace/login-background.webp') ;
+    background-size: contain;
 }
 .form-login{
     max-width: 600px;
@@ -49,6 +50,7 @@
     margin-top: 5px;
     margin-left: 150px;
     display: flex; 
+ 
 }
 .form-group_1{
     margin-left: 40px;
@@ -81,6 +83,11 @@
     outline: 0;
     color: #000000;
     flex-grow: 1;
+}
+.from-check{
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
 }
 .form-input::placeholder{
     color: hsl(0, 0%, 21%);

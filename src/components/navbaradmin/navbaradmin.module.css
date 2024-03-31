@@ -1,0 +1,65 @@
+/* Navbar.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  
+}
+
+.navbar {
+    height: 100vh;
+    width: 120px;
+    background-color: #ffba00;
+    position: fixed;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    color: white;
+}
+
+.navbar img {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+.quick-menu {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 20px;
+    color: black;
+    font-size: medium;
+}
+
+.quick-menu button {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: #ffba00;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.quick-menu button:hover {
+    background-color: #777;
+}
+
+.quick-menu button.active {
+    background-color: red; /* Màu xám khác khi nút được chọn */
+}
+
+.LogOut a{
+   
+    text-decoration: none;
+    color: white;
+}
+.Iconimage{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.Iconimage img {
+    display: flex;
+    align-items: center;
+}

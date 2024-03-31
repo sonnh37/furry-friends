@@ -10,6 +10,9 @@
     background-color: #f0f0f0;
     width: 100%;
 }
+.price{
+    color: red;
+}
 
 .container2 {
     width: 60%;
@@ -68,7 +71,6 @@ li {
     flex-direction: column;
     /* Hiển thị phần dưới theo chiều dọc */
 
-
 }
 
 .top-bl-bd1 {
@@ -110,6 +112,7 @@ h2 {
 
 .category a {
     text-decoration: none;
+    color: black;
 }
 
 .top-body2 {
@@ -120,7 +123,9 @@ h2 {
 
     padding-top: 0;
 }
-
+.haha{
+    display: grid
+}
 .listing-box {
     display: flex;
     flex-wrap: wrap;
@@ -146,7 +151,7 @@ h2 {
     width: 100%;
     display: flex;
     justify-content: center;
-
+margin-bottom: 10px;
 }
 
 .listing h3 {

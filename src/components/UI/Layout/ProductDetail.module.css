@@ -173,9 +173,11 @@ background-color: white;
     width: 100%;
     display: flex;
     justify-content: center;
-
+margin-bottom: 10px;
 }
-
+.haha{
+    display: grid;
+}
 .listing h3 {
     font-size: 18px;
 }

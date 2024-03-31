@@ -4,10 +4,15 @@ import axios from "axios";
 import logo from "../../UI/Logo/logo.png";
 import LoginCSS from "../../UI/Layout/Login.module.css";
 import React from "react";
+import Cookies from 'js-cookie';
+import jwtDecode from "jwt-decode";
+
+
+
 function Login() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        email: '',
+        account: '',
         password: '',
     });
 
@@ -22,20 +27,66 @@ function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:8080/api/v1/user/login", {
-                email: formData.email,
+            await axios.post("http://localhost:8080/api/v1/login", {
+                account: formData.account,
                 password: formData.password,
             }).then((res) => {
-                console.log(res.data);
+                // console.log(res.data); hiện token
 
-                if (res.data.message == "Email not exits") {
-                    alert("Email not exits");
+                if (res.data == "Account not exist") {
+                    alert("Account not exist");
                 }
-                else if (res.data.message == "Login Success") {
-                    navigate('/home');
-                }
-                else {
+
+                else if (res.data == "Password not match") {
                     alert("Incorrect Email and Password not match");
+                } else {
+                    navigate('/home');
+                    Cookies.set('jwtToken', res.data, { expires: 1 });
+                    const decodedToken = jwtDecode(res.data)
+                    const subValue = decodedToken.sub;
+                    Cookies.set('sub', subValue);
+                    if (subValue) {
+                        const jwtToken = Cookies.get('jwtToken');
+                        axios.interceptors.request.use(
+                            config => {
+                                config.headers.Authorization = `Bearer ${jwtToken}`;
+                                return config;
+                            },
+                            error => {
+                                return Promise.reject(error);
+                            }
+                        ); // truyen token---------------------------
+
+
+                        axios.get(`http://localhost:8080/api/v1/user/member/singleuser/allrole/${subValue}`)
+                            .then((response) => {
+                                // Kiểm tra xem yêu cầu thành công và có dữ liệu `role_id` hay không
+                                if (response.status === 200 && response.data && response.data.role_id) {
+                                    const role_id = response.data.role_id;
+
+                                      console.log('role_id:', role_id);
+                                    Cookies.set('role', role_id, { expires: 1 })
+                                    if (role_id == '2' ) {
+                                        navigate('/staff');
+                                    } else if ( role_id =='3'){
+                                        navigate('/admin');
+                                    }
+
+                                } else {
+                                    // Xử lý trường hợp nếu không tìm thấy `role_id`
+                                    console.log('Không tìm thấy role_id trong dữ liệu phản hồi.');
+                                }
+                            })
+                            .catch((error) => {
+                                // Xử lý lỗi nếu yêu cầu thất bại
+                                console.error('Lỗi trong quá trình lấy dữ liệu role_id:', error);
+                            });
+
+                    }
+
+
+
+
                 }
             }, fail => {
                 console.error(fail); // Error!
@@ -57,9 +108,9 @@ function Login() {
                 <div className={LoginCSS['submit']} >
                     <div className={LoginCSS['form-group']} >
                         <i class="fa fa-user"></i>
-                        <input type="email"
-                            name="email" className={LoginCSS['form-input']} placeholder="Tài khoản"
-                            value={formData.email}
+                        <input type="text"
+                            name="account" className={LoginCSS['form-input']} placeholder="Tài khoản"
+                            value={formData.account}
                             onChange={handleChange}
                         />
                     </div>
@@ -86,7 +137,7 @@ function Login() {
                     <input type="submit" value="Đăng nhập" className={LoginCSS['form-submit']} />
                 </div>
                 <div>
-                    <p className={LoginCSS['text_2']} >Bạn chưa có tài khoản? 
+                    <p className={LoginCSS['text_2']} >Bạn chưa có tài khoản?
                         <span className={LoginCSS['text_span']}>
                             <a href="/register" > Tạo tài khoản mới</a>
                         </span>
@@ -94,47 +145,6 @@ function Login() {
                 </div>
             </form>
         </div>
-
-
-        /* <div>
-            <div class="container">
-                <div class="row">
-                    <h2>Login</h2>
-                    <hr />
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-
-                        <form onSubmit={handleSubmit}>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" name="email" placeholder="Enter Name"
-
-                                    value={formData.email}
-                                    onChange={handleChange}
-
-                                />
-
-                            </div>
-
-                            <div class="form-group">
-                                <label>password</label>
-                                <input type="password" class="form-control" name="password" placeholder="Enter Fee"
-
-                                    value={formData.password}
-                                    onChange={handleChange}
-
-                                />
-                            </div>
-                            <button type="submit" class="btn btn-primary" >Login</button>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-
-        </div> */
     );
 }
 

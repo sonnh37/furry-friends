@@ -1,15 +1,15 @@
 import React from 'react'
 
 import PostView from '../../layout/PostView'
-import Navbar from '../../layout/Navbar'
+import NavbarPost from '../../layout/NavbarPost'
 import Footer from '../../layout/Footer'
-
+import PostViewCSS from './Postview.module.css'
 export default function PostUpForm() {
 
 
     return (
-        <div>
-<Navbar/>
+        <div className={PostViewCSS['postview']}>
+              <NavbarPost/>
             <PostView />
             <Footer/>
         </div>
